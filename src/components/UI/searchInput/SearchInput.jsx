@@ -1,6 +1,6 @@
-import {  InputAdornment, styled, TextField } from "@mui/material";
 import { forwardRef } from "react";
 import { Search } from "@mui/icons-material"
+import { InputAdornment, styled, TextField } from "@mui/material";
 
 export const SearchInput = forwardRef(
   (
@@ -14,10 +14,7 @@ export const SearchInput = forwardRef(
     },
     ref
   ) => {
-
-   
-
-    return (
+   return (
       <StyledUiInput
         value={value}
         onChange={onChange}
@@ -51,19 +48,16 @@ export const SearchInput = forwardRef(
 
 const StyledUiInput = styled(TextField)(() => ({
   border: "1px solid  #D0D0D0",
-  width: "282px",
+  width: "100%",
   height: "32px",
   borderRadius: "8px",
 
   "&:hover": {
     border: "1px solid  #0079BF",
-
   },
 
   "&:active": {
     border: "1px solid  #919191",
-
-
   },
 
   "& input:-webkit-autofill, & input:-webkit-autofill:hover, & input:-webkit-autofill:focus, & input:-webkit-autofill:active": {
