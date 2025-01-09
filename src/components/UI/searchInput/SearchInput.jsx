@@ -2,7 +2,7 @@ import {  InputAdornment, styled, TextField } from "@mui/material";
 import { forwardRef } from "react";
 import { Search } from "@mui/icons-material"
 
-export const Input = forwardRef(
+export const SearchInput = forwardRef(
   (
     {
       value,
