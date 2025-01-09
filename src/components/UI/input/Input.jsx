@@ -1,8 +1,6 @@
-import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
-import { forwardRef, useState } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import SearchIcon from "@mui/icons-material/Search";
+import {  InputAdornment, styled, TextField } from "@mui/material";
+import { forwardRef } from "react";
+import { Search } from "@mui/icons-material"
 
 export const Input = forwardRef(
   (
@@ -11,46 +9,37 @@ export const Input = forwardRef(
       onChange,
       placeholder,
       type ,
-      iconStart,
       iconEnd,
-      error,
       ...props
     },
     ref
   ) => {
-    const [showPassword, setShowPassword] = useState(false);
 
-    const handleClick = () => setShowPassword(!showPassword);
-    const inputType =
-      type === "password" ? (showPassword ? "text" : "password") : type;
+   
 
     return (
       <StyledUiInput
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        type={inputType}
-        error={error}
+        type={type}
         fullWidth
         inputRef={ref}
         InputProps={{
           startAdornment:  ( 
             <InputAdornment position="start">
               <div style={{ cursor: "pointer" }}>
-                {iconStart && 
-                 <SearchIcon />}
+                { iconEnd ? null:
+                 <Search /> }
+                 
               </div>
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment position="end">
-              {type === "password" ? (
-                <IconButton onClick={handleClick} edge="end">
-                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                </IconButton>
-              ) : iconEnd ? (
-                <div style={{ cursor: "pointer" }}>{iconEnd}</div>
-              ) : iconEnd}
+              <div style={{ cursor: "pointer" }}>
+                {iconEnd} 
+              </div>
             </InputAdornment>
           ),
         }}
@@ -60,18 +49,21 @@ export const Input = forwardRef(
   }
 );
 
-const StyledUiInput = styled(TextField)(({ error }) => ({
-  border: `1px solid ${error ? "#D91212" : "#D0D0D0"}`,
+const StyledUiInput = styled(TextField)(() => ({
+  border: "1px solid  #D0D0D0",
   width: "282px",
   height: "32px",
   borderRadius: "8px",
 
   "&:hover": {
-    border: `1px solid ${error ? "#F91515" : "#0079BF"}`,
+    border: "1px solid  #0079BF",
+
   },
 
   "&:active": {
-    border: `1px solid ${error ? "#F91515" : "#919191"}`,
+    border: "1px solid  #919191",
+
+
   },
 
   "& input:-webkit-autofill, & input:-webkit-autofill:hover, & input:-webkit-autofill:focus, & input:-webkit-autofill:active": {
@@ -86,9 +78,12 @@ const StyledUiInput = styled(TextField)(({ error }) => ({
   "& input[type='search']::-webkit-search-cancel-button": {
     display: "none",
   },
+  "& .css-1umw9bq-MuiSvgIcon-root":{
+    marginTop:"5px "
+  },
 
   "& .MuiInputBase-input": {
     border: "none",
-    padding: "6px",
+    padding: "4px",
   },
 }));
