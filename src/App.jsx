@@ -1,4 +1,7 @@
-import React from "react";
 export const App = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h1>Task trackerr</h1>
+    </div>
+  );
 };
