@@ -31,7 +31,6 @@ import Up from "../assets/icons/up.svg";
 import Vector10 from "../assets/icons/vector10.svg";
 
 export const Icons = {
-  SecureIcon,
   AddMember,
   Calender,
   Cancel,
@@ -57,6 +56,7 @@ export const Icons = {
   Repeat,
   Right,
   Search,
+  SecureIcon,
   Selected,
   Settings,
   ToEdit,
