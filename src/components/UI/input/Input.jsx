@@ -2,22 +2,9 @@ import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { forwardRef, useState } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Search } from "@mui/icons-material";
 
 export const Input = forwardRef(
-  (
-    {
-      value,
-      onChange,
-      placeholder,
-      type,
-      isEndIcon,
-      disabled,
-      error,
-      ...props
-    },
-    ref
-  ) => {
+  ({ value, onChange, placeholder, type,  error, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -50,12 +37,6 @@ export const Input = forwardRef(
                   </IconButton>
                 </InputAdornment>
               )}
-
-              {isEndIcon && type !== "password" ? (
-                <InputAdornment position="end">
-                  <div style={{ cursor: "pointer"}}>{isEndIcon && <Search/>} </div>
-                </InputAdornment>
-              ) : null}
             </>
           ),
         }}
@@ -98,11 +79,11 @@ const StyleUiInput = styled(TextField)(({ error }) => ({
     marginTop: "5px",
   },
 
-  "& .MuiSvgIcon-root[data-testid='VisibilityIcon'], & .MuiSvgIcon-root[data-testid='VisibilityOffIcon']": {
+  "& .MuiSvgIcon-root[data-testid='VisibilityIcon'], & .MuiSvgIcon-root[data-testid='VisibilityOffIcon']":
+    {
       marginTop: "0px",
-  },
-  
- "& .MuiInputBase-input::placeholder": {
+    },
+  "& .MuiInputBase-input::placeholder": {
     color: "#AFAFAF",
   },
 }));
