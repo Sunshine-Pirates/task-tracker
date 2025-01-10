@@ -29,6 +29,8 @@ import Settings from "../assets/icons/settings.svg";
 import ToEdit from "../assets/icons/toedit.svg";
 import UpErrow from "../assets/icons/up.svg";
 import Vector10 from "../assets/icons/vector10.svg";
+import ChecboxSvg from "../assets/icons/сheckbox.svg";
+import StarSvg from "../assets/icons/star.svg";
 
 export const Icons = {
   AddMember,
@@ -62,4 +64,6 @@ export const Icons = {
   ToEdit,
   UpErrow,
   Vector10,
+  ChecboxSvg,
+  StarSvg,
 };
