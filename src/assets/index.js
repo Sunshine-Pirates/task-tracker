@@ -27,7 +27,7 @@ import Search from "../assets/icons/search.svg";
 import Selected from "../assets/icons/selected.svg";
 import Settings from "../assets/icons/settings.svg";
 import ToEdit from "../assets/icons/toedit.svg";
-import Up from "../assets/icons/up.svg";
+import UpErrow from "../assets/icons/up.svg";
 import Vector10 from "../assets/icons/vector10.svg";
 
 export const Icons = {
@@ -60,6 +60,6 @@ export const Icons = {
   Selected,
   Settings,
   ToEdit,
-  Up,
+  UpErrow,
   Vector10,
 };
