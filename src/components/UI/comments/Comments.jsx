@@ -1,33 +1,33 @@
 import { styled } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import { comments } from "../../../utils/constants/comments";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { Input } from "../input/Input";
+import { comments } from "../../../utils/constants/comments";
 
 export const Comments = () => {
-  const [сommentsVisible, setCommentsVisible] = useState(true);
+  const [commentsVisible, setCommentsVisible] = useState(false);
 
   const toggleCommentsVisibility = () => {
     setCommentsVisible((prev) => !prev);
   };
 
   return (
-    <StyledCommentsContainer>
+    <StyledCommentsContainer commentsVisible={commentsVisible}>
       <StyledSection>
         <p>Comments</p>
         <div onClick={toggleCommentsVisibility} style={{ cursor: "pointer" }}>
-          {сommentsVisible ? (
+          {commentsVisible ? (
             <KeyboardDoubleArrowUpIcon />
           ) : (
             <KeyboardDoubleArrowDownIcon />
           )}
         </div>
       </StyledSection>
-      <StyledContentWrapper>
-        {сommentsVisible && (
-          <StyledCommentsContent>
+      {commentsVisible && (
+        <>
+          <StyledContentWrapper>
             {comments.length > 0 ? (
               comments.map((comment) => (
                 <div key={comment.id}>
@@ -36,16 +36,16 @@ export const Comments = () => {
                     <StyledContainer>
                       <div>
                         <StyledName>{comment.name}</StyledName>
-                        <StyledComments>{comment.comment}</StyledComments>
+                        <StyledText>{comment.comment}</StyledText>
                       </div>
                       <article>
                         <StyledDate>{comment.date}</StyledDate>
-                        {comment.isMyComment ? (
+                        {comment.isMyComment && (
                           <StyledActions>
                             <p>Edit</p>
                             <p>Delete</p>
                           </StyledActions>
-                        ) : null}
+                        )}
                       </article>
                     </StyledContainer>
                   </StyledItem>
@@ -55,66 +55,56 @@ export const Comments = () => {
             ) : (
               <StyledNoComments>
                 Здесь пока пусто. Оставьте свой комментарий!
-              </StyledNoComments>
+            </StyledNoComments>
             )}
-          </StyledCommentsContent>
-        )}
-      </StyledContentWrapper>
-      <StyledFixedInput>
-        <StyledInput placeholder="Write a comment" />
-      </StyledFixedInput>
+          </StyledContentWrapper>
+          <StyledFixedInput>
+            <StyledInput placeholder="Write a comment" />
+          </StyledFixedInput>
+        </>
+      )}
     </StyledCommentsContainer>
   );
 };
 
-const StyledInput = styled(Input)(() => ({
-  height: "36px",
-  paddingTop: "2px",
-}));
-const StyledCommentsContainer = styled("div")(() => ({
+const StyledCommentsContainer = styled("div")(({ commentsVisible }) => ({
   width: "365px",
-  height: "520px",
+  height: commentsVisible ? "520px" : "50px",
   borderRadius: "8px",
   backgroundColor: "#F4F5F7",
   display: "flex",
   flexDirection: "column",
+  overflow: "hidden",
+  transition: "height 0.3s ease",
 }));
 
-const StyledContentWrapper = styled("div")(() => ({
-  flex: "1",
-  display: "flex",
-  flexDirection: "column",
-  overflowY: "hidden",
-}));
-
-const StyledCommentsContent = styled("div")(() => ({
-  flex: "1",
-  overflowY: "auto",
-}));
 const StyledSection = styled("section")(() => ({
-  position: "sticky",
-  top: "0",
-  backgroundColor: "#F4F5F7",
-  zIndex: 2,
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   padding: "14px",
+  backgroundColor: "#F4F5F7",
+  position: "sticky",
+  top: "0",
+  zIndex: 2,
   "& p": {
-    color: "#919191",
     fontSize: "14px",
+    color: "#919191",
   },
 }));
-const StyledComments = styled("p")(() => ({
-  fontSize: "14px",
-  color: "#919191",
+
+const StyledContentWrapper = styled("div")(() => ({
+  flex: 1,
+  overflowY: "auto",
+  display: "flex",
+  flexDirection: "column",
 }));
 
-const StyledFixedInput = styled("div")(() => ({
-  position: "sticky",
-  backgroundColor: "#F4F5F7",
-  padding: "8px 12px",
-  zIndex: 1,
+const StyledItem = styled("div")(() => ({
+  display: "flex",
+  alignItems: "flex-start",
+  gap: "8px",
+  padding: "16px 12px",
 }));
 
 const StyledImage = styled("img")(() => ({
@@ -123,29 +113,35 @@ const StyledImage = styled("img")(() => ({
   borderRadius: "50%",
 }));
 
-const StyledItem = styled("div")(() => ({
-  width: "340px",
-  display: "flex",
-  gap: "8px",
-  paddingLeft: "12px",
-  paddingTop: "16px",
-  paddingBottom: "16px",
-}));
-
 const StyledContainer = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "8px",
-
+  flex: 1,
   "& article": {
     display: "flex",
     justifyContent: "space-between",
   },
 }));
-const StyledActions = styled("main")(() => ({
+
+const StyledName = styled("p")(() => ({
+  fontSize: "14px",
+  color: "#111111",
+}));
+
+const StyledText = styled("p")(() => ({
+  fontSize: "14px",
+  color: "#919191",
+}));
+
+const StyledDate = styled("p")(() => ({
+  fontSize: "12px",
+  color: "#919191",
+}));
+
+const StyledActions = styled("div")(() => ({
   display: "flex",
   gap: "14px",
-
   "& p": {
     fontSize: "14px",
     color: "#919191",
@@ -158,17 +154,21 @@ const StyledActions = styled("main")(() => ({
   },
 }));
 
-const StyledName = styled("p")(() => ({
-  fontSize: "14px",
-  color: "#111111",
-}));
-
-const StyledDate = styled("p")(() => ({
-  fontSize: "12px",
-  color: "#919191",
-}));
 const StyledNoComments = styled("p")(() => ({
   textAlign: "center",
   marginTop: "20px",
   color: "#919191",
+}));
+
+const StyledFixedInput = styled("div")(() => ({
+  padding: "8px 12px",
+  backgroundColor: "#F4F5F7",
+  position: "sticky",
+  bottom: 0,
+  zIndex: 1,
+}));
+
+const StyledInput = styled(Input)(() => ({
+  height: "36px",
+  paddingTop: "2px",
 }));
