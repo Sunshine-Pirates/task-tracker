@@ -3,68 +3,74 @@ import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import { comments } from "../../../utils/constants/comments";
 import Divider from "@mui/material/Divider";
-import { SearchInput } from "../searchInput/SearchInput";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { Input } from "../input/Input";
 
 export const Comments = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const containerRef = useRef(null);
+  const [сommentsVisible, setCommentsVisible] = useState(true);
 
-  const handleScroll = () => {
-    if (containerRef.current) {
-      setIsScrolled(containerRef.current.scrollTop > 0);
-    }
+  const toggleCommentsVisibility = () => {
+    setCommentsVisible((prev) => !prev);
   };
 
   return (
-    <StyledCommentsContainer ref={containerRef} onScroll={handleScroll}>
+    <StyledCommentsContainer>
       <StyledSection>
         <p>Comments</p>
-        <div>
-          {isScrolled ? (
-            <KeyboardDoubleArrowDownIcon />
-          ) : (
+        <div onClick={toggleCommentsVisibility} style={{ cursor: "pointer" }}>
+          {сommentsVisible ? (
             <KeyboardDoubleArrowUpIcon />
+          ) : (
+            <KeyboardDoubleArrowDownIcon />
           )}
         </div>
       </StyledSection>
-      <StyledCommentsContent>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <div key={comment.id}>
-              <StyledItem>
-                <StyledImage src={comment.img} alt={comment.name} />
-                <StyledContainer>
-                  <div>
-                    <StyledName>{comment.name}</StyledName>
-                    <a>{comment.comment}</a>
-                  </div>
-                  <article>
-                    <StyledDate>{comment.date}</StyledDate>
-                    {comment.isMyComment ? (
-                      <StyledActions>
-                        <p>Edit</p>
-                        <p>Delete</p>
-                      </StyledActions>
-                    ) : null}
-                  </article>
-                </StyledContainer>
-              </StyledItem>
-              <Divider style={{ width: "333px", margin: "auto" }} />
-            </div>
-          ))
-        ) : (
-          <StyledNoComments>
-            Здесь пока пусто. Оставьте свой комментарий!
-          </StyledNoComments>
+      <StyledContentWrapper>
+        {сommentsVisible && (
+          <StyledCommentsContent>
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <div key={comment.id}>
+                  <StyledItem>
+                    <StyledImage src={comment.img} alt={comment.name} />
+                    <StyledContainer>
+                      <div>
+                        <StyledName>{comment.name}</StyledName>
+                        <StyledComments>{comment.comment}</StyledComments>
+                      </div>
+                      <article>
+                        <StyledDate>{comment.date}</StyledDate>
+                        {comment.isMyComment ? (
+                          <StyledActions>
+                            <p>Edit</p>
+                            <p>Delete</p>
+                          </StyledActions>
+                        ) : null}
+                      </article>
+                    </StyledContainer>
+                  </StyledItem>
+                  <Divider style={{ width: "333px", margin: "auto" }} />
+                </div>
+              ))
+            ) : (
+              <StyledNoComments>
+                Здесь пока пусто. Оставьте свой комментарий!
+              </StyledNoComments>
+            )}
+          </StyledCommentsContent>
         )}
-      </StyledCommentsContent>
+      </StyledContentWrapper>
       <StyledFixedInput>
-        <SearchInput placeholder="Write a comment" />
+        <StyledInput placeholder="Write a comment" />
       </StyledFixedInput>
     </StyledCommentsContainer>
   );
 };
+
+const StyledInput = styled(Input)(() => ({
+  height: "36px",
+  paddingTop: "2px",
+}));
 const StyledCommentsContainer = styled("div")(() => ({
   width: "365px",
   height: "520px",
@@ -72,12 +78,18 @@ const StyledCommentsContainer = styled("div")(() => ({
   backgroundColor: "#F4F5F7",
   display: "flex",
   flexDirection: "column",
-  position: "relative",
-  overflowY: "auto",
+}));
+
+const StyledContentWrapper = styled("div")(() => ({
+  flex: "1",
+  display: "flex",
+  flexDirection: "column",
+  overflowY: "hidden",
 }));
 
 const StyledCommentsContent = styled("div")(() => ({
   flex: "1",
+  overflowY: "auto",
 }));
 const StyledSection = styled("section")(() => ({
   position: "sticky",
@@ -88,18 +100,20 @@ const StyledSection = styled("section")(() => ({
   justifyContent: "space-between",
   alignItems: "center",
   padding: "14px",
-
   "& p": {
-    fontSize: "14px",
     color: "#919191",
+    fontSize: "14px",
   },
+}));
+const StyledComments = styled("p")(() => ({
+  fontSize: "14px",
+  color: "#919191",
 }));
 
 const StyledFixedInput = styled("div")(() => ({
   position: "sticky",
-  bottom: "0",
   backgroundColor: "#F4F5F7",
-  padding: "10px",
+  padding: "8px 12px",
   zIndex: 1,
 }));
 
@@ -126,10 +140,6 @@ const StyledContainer = styled("div")(() => ({
   "& article": {
     display: "flex",
     justifyContent: "space-between",
-  },
-  "& a": {
-    fontSize: "14px",
-    color: "#616161",
   },
 }));
 const StyledActions = styled("main")(() => ({
