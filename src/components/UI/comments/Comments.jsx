@@ -1,10 +1,9 @@
 import { styled } from "@mui/material";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import { Input } from "../input/Input";
 import { comments } from "../../../utils/constants/comments";
+import { Icons } from "../../../assets";
 
 export const Comments = () => {
   const [commentsVisible, setCommentsVisible] = useState(false);
@@ -19,9 +18,9 @@ export const Comments = () => {
         <p>Comments</p>
         <div onClick={toggleCommentsVisibility} style={{ cursor: "pointer" }}>
           {commentsVisible ? (
-            <KeyboardDoubleArrowUpIcon />
+            <Icons.KeyboardDoubleArrowUpIcon />
           ) : (
-            <KeyboardDoubleArrowDownIcon />
+            <Icons.KeyboardDoubleArrowUpIcon />
           )}
         </div>
       </StyledSection>
@@ -55,7 +54,7 @@ export const Comments = () => {
             ) : (
               <StyledNoComments>
                 Здесь пока пусто. Оставьте свой комментарий!
-            </StyledNoComments>
+              </StyledNoComments>
             )}
           </StyledContentWrapper>
           <StyledFixedInput>
