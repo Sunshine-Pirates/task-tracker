@@ -18,7 +18,7 @@ export const Comments = () => {
         <p>Comments</p>
         <div onClick={toggleCommentsVisibility} style={{ cursor: "pointer" }}>
           {commentsVisible ? (
-            <Icons.KeyboardDoubleArrowUpIcon />
+            <Icons.KeyboardDoubleArrowDownIcon />
           ) : (
             <Icons.KeyboardDoubleArrowUpIcon />
           )}
