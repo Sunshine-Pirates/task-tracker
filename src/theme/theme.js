@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 
-const theme = createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: "#FFFFFF",
@@ -25,5 +25,3 @@ const theme = createTheme({
     fontFamily: "Cera Pro",
   },
 });
-
-export default theme;

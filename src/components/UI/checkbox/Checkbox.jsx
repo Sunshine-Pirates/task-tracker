@@ -1,31 +1,19 @@
-import { IconButton } from "@mui/material";
-import checkbox from "../../../assets/icons/checkbox.svg";
-import checkboxLine from "../../../assets/icons/checkboxLine.svg";
-import Star from "../../../assets/icons/star.svg";
-import StarLine from "../../../assets/icons/starLine.svg";
+import { Checkbox as MUICheckbox } from "@mui/material";
 
-export const Checkbox = ({ type, checked, onClick }) => {
+export const Checkbox = ({
+  checked,
+  onChange,
+  checkedIcon,
+  uncheckedIcon,
+  ...props
+}) => {
   return (
-    <div>
-      {type === "checkbox" && (
-        <IconButton onClick={onClick}>
-          {checked ? (
-            <img src={checkbox} alt="checkbox" />
-          ) : (
-            <img src={checkboxLine} alt="checkboxLine" />
-          )}
-        </IconButton>
-      )}
-
-      {type === "star" && (
-        <IconButton onClick={onClick}>
-          {checked ? (
-            <img src={Star} alt="star" />
-          ) : (
-            <img src={StarLine} alt="starLine" />
-          )}
-        </IconButton>
-      )}
-    </div>
+    <MUICheckbox
+      checked={checked}
+      onChange={onChange}
+      icon={uncheckedIcon}
+      checkedIcon={checkedIcon}
+      {...props}
+    />
   );
 };
