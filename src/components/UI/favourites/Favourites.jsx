@@ -5,30 +5,28 @@ import { favourites } from "../../../utils/constants/favourite";
 
 export const Favourites = ({ open, handleClose }) => {
   return (
-    <div>
-      <StyledMenu open={open} onClose={handleClose}>
-        <p>Favourites</p>
-        {favourites.map((item) => (
-          <MenuItem key={item.id}>
-            {item.title === "Taigan" && item.text === "Workspaces" ? (
-              <div>
-                <p>{item.title}</p>
-                <StyledText>{item.text}</StyledText>
-              </div>
-            ) : (
-              <img src={item.image} alt={item.title} />
-            )}
-            {item.title !== "Taigan" || item.text !== "Workspaces" ? (
-              <div>
-                <p>{item.title}</p>
-                <StyledText>{item.text}</StyledText>
-              </div>
-            ) : null}
-            {item.favourite && <Icons.StarBlue />}
-          </MenuItem>
-        ))}
-      </StyledMenu>
-    </div>
+    <StyledMenu open={open} onClose={handleClose}>
+      <p>Favourites</p>
+      {favourites.map((item) => (
+        <MenuItem key={item.id}>
+          {item.title === "Taigan" && item.text === "Workspaces" ? (
+            <div>
+              <p>{item.title}</p>
+              <StyledText>{item.text}</StyledText>
+            </div>
+          ) : (
+            <img src={item.image} alt={item.title} />
+          )}
+          {item.title !== "Taigan" || item.text !== "Workspaces" ? (
+            <div>
+              <p>{item.title}</p>
+              <StyledText>{item.text}</StyledText>
+            </div>
+          ) : null}
+          {item.favourite ? <Icons.StarBlue /> : <Icons.StarLine />}
+        </MenuItem>
+      ))}
+    </StyledMenu>
   );
 };
 

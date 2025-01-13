@@ -32,6 +32,12 @@ import Plus from "../assets/icons/plus.svg";
 import StarBlue from "../assets/icons/starBlue.svg";
 import KeyboardDoubleArrowUpIcon from "../assets/icons/KeyboardDoubleArrowUpIcon.svg";
 import KeyboardDoubleArrowDownIcon from "../assets/icons/KeyboardDoubleArrowDownIcon.svg";
+import Checkbox from "../assets/icons/checkbox.svg";
+import CheckboxLine from "../assets/icons/checkboxLine.svg";
+import Star from "../assets/icons/star.svg";
+import StarLine from "../assets/icons/starLine.svg";
+import Radio from "../assets/icons/radio.svg";
+import RadioLine from "../assets/icons/radioLine.svg";
 
 export const Icons = {
   KeyboardDoubleArrowDownIcon,
@@ -68,4 +74,10 @@ export const Icons = {
   ToEdit,
   Up,
   Vector10,
+  Checkbox,
+  CheckboxLine,
+  Star,
+  StarLine,
+  Radio,
+  RadioLine,
 };
