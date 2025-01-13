@@ -29,6 +29,15 @@ import ToEdit from "../assets/icons/toedit.svg";
 import Up from "../assets/icons/up.svg";
 import Vector10 from "../assets/icons/vector10.svg";
 import Plus from "../assets/icons/plus.svg";
+import Checkbox from "../assets/icons/checkbox.svg";
+import CheckboxLine from "../assets/icons/checkboxLine.svg";
+import Star from "../assets/icons/star.svg";
+import StarLine from "../assets/icons/starLine.svg";
+import Radio from "../assets/icons/radio.svg";
+import RadioLine from "../assets/icons/radioLine.svg";
+import Success from "../assets/icons/success.svg";
+import Error from "../assets/icons/error.svg";
+import Warning from "../assets/icons/warning.svg";
 
 export const Icons = {
   SecureIcon,
@@ -62,4 +71,13 @@ export const Icons = {
   ToEdit,
   Up,
   Vector10,
+  Checkbox,
+  CheckboxLine,
+  Star,
+  StarLine,
+  Radio,
+  RadioLine,
+  Success,
+  Error,
+  Warning,
 };
