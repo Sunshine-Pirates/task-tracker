@@ -4,7 +4,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export const Input = forwardRef(
-  ({ value, onChange, placeholder, type,  error, ...props }, ref) => {
+  ({ value, onChange, placeholder, type, error, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword(!showPassword);
