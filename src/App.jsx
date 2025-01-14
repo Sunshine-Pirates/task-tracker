@@ -16,7 +16,7 @@ export const App = () => {
   };
   return (
     <div>
-      <button onClick={handleSuccess}>Show Success Snackbar</button>
+      <button onClick={handleSuccess}>Show Success r</button>
       <button onClick={handleError}>Show Error Snackbar</button>
       <button onClick={handleWarning}>Show Warning Snackbar</button>
     </div>
