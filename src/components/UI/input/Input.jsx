@@ -1,7 +1,6 @@
 import { IconButton, InputAdornment, styled, TextField } from "@mui/material";
 import { forwardRef, useState } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { Icons } from "../../../assets";
 
 export const Input = forwardRef(
   ({ value, onChange, placeholder, type, error, ...props }, ref) => {
@@ -33,7 +32,7 @@ export const Input = forwardRef(
                       cursor: "pointer",
                     }}
                   >
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    {showPassword ? <Icons.IconShow /> : <Icons.IconDontShow />}
                   </IconButton>
                 </InputAdornment>
               )}
@@ -75,14 +74,6 @@ const StyleUiInput = styled(TextField)(({ error }) => ({
     padding: "4px 16px",
   },
 
-  "& .MuiSvgIcon-root": {
-    marginTop: "5px",
-  },
-
-  "& .MuiSvgIcon-root[data-testid='VisibilityIcon'], & .MuiSvgIcon-root[data-testid='VisibilityOffIcon']":
-    {
-      marginTop: "0px",
-    },
   "& .MuiInputBase-input::placeholder": {
     color: "#AFAFAF",
   },

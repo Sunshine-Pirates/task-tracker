@@ -4,24 +4,29 @@ import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import { Icons } from "../../assets";
 
+// Контекст Snackbar
 const SnackbarContext = createContext();
 
+// Стили для кастомного Snackbar
 const CustomAlert = styled(MuiAlert)(({ severity }) => {
   const colors = {
     success: {
       border: "1px solid #a7d7a9",
       backgroundColor: "#eafaf1",
-      color: "#218905",
+      messageColor: "#218905",
+      descriptionColor: "#71C559",
     },
     error: {
       border: "1px solid #f28b82",
       backgroundColor: "#fdecea",
-      color: "#D91212",
+      messageColor: "#D91212",
+      descriptionColor: "#E77A7A",
     },
     warning: {
       border: "1px solid #ffd666",
       backgroundColor: "#fff8e1",
-      color: "#EB8900",
+      messageColor: "#EB8900",
+      descriptionColor: "#EDA034",
     },
   };
 
@@ -33,35 +38,54 @@ const CustomAlert = styled(MuiAlert)(({ severity }) => {
     fontWeight: "400",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
     display: "flex",
+    position: "relative",
     "& .custom-icon": {
       marginTop: "3px",
     },
-    animation: "fadeIn 0.3s, fadeOut 0.3s 2.7s",
-    "@keyframes fadeIn": {
-      "0%": { opacity: 0, transform: "translateY(-20px)" },
-      "100%": { opacity: 1, transform: "translateY(0)" },
+    "& .message": {
+      color: colors[severity].messageColor,
     },
-    "@keyframes fadeOut": {
-      "0%": { opacity: 1, transform: "translateY(0)" },
-      "100%": { opacity: 0, transform: "translateY(-20px)" },
+    "& .description": {
+      color: colors[severity].descriptionColor,
+      fontSize: "16px",
+    },
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      height: "4px",
+      width: "100%",
+      backgroundColor: colors[severity].messageColor,
+      animation: "progressBar 3s linear forwards",
+    },
+    animation: "slideIn 0.5s, slideOut 0.5s 2.5s",
+    "@keyframes slideIn": {
+      "0%": { opacity: 0, transform: "translateX(100%)" },
+      "100%": { opacity: 1, transform: "translateX(0)" },
+    },
+    "@keyframes slideOut": {
+      "0%": { opacity: 1, transform: "translateX(0)" },
+      "100%": { opacity: 0, transform: "translateX(100%)" },
+    },
+    "@keyframes progressBar": {
+      "0%": { width: "100%" },
+      "100%": { width: "0%" },
     },
   };
 });
 
+// Провайдер Snackbar
 export const SnackbarProvider = ({ children }) => {
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    severity: "info",
-    message: "",
-    description: "",
-  });
+  const [snackbars, setSnackbars] = useState([]);
 
   const showSnackbar = useCallback((severity, message, description = "") => {
-    setSnackbar({ open: true, severity, message, description });
+    const id = Date.now(); // Уникальный ID
+    setSnackbars((prev) => [...prev, { id, severity, message, description }]);
   }, []);
 
-  const hideSnackbar = useCallback(() => {
-    setSnackbar((prev) => ({ ...prev, open: false }));
+  const hideSnackbar = useCallback((id) => {
+    setSnackbars((prev) => prev.filter((snackbar) => snackbar.id !== id));
   }, []);
 
   const getCustomIcon = (severity) => {
@@ -80,29 +104,35 @@ export const SnackbarProvider = ({ children }) => {
   return (
     <SnackbarContext.Provider value={{ showSnackbar }}>
       {children}
-      <MuiSnackbar
-        open={snackbar.open}
-        autoHideDuration={3000}
-        onClose={hideSnackbar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <CustomAlert
-          severity={snackbar.severity}
-          onClose={hideSnackbar}
-          icon={getCustomIcon(snackbar.severity)}
+      {snackbars.map((snackbar, index) => (
+        <MuiSnackbar
+          key={snackbar.id}
+          open
+          autoHideDuration={3000}
+          onClose={() => hideSnackbar(snackbar.id)}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          style={{
+            top: `${index * 70}px`, // Смещение каждого Snackbar вниз
+            transition: "top 0.3s",
+          }}
         >
-          <div>{snackbar.message}</div>
-          {snackbar.description && (
-            <div style={{ fontSize: "16px", fontWeight: "normal" }}>
-              {snackbar.description}
-            </div>
-          )}
-        </CustomAlert>
-      </MuiSnackbar>
+          <CustomAlert
+            severity={snackbar.severity}
+            onClose={() => hideSnackbar(snackbar.id)}
+            icon={getCustomIcon(snackbar.severity)}
+          >
+            <div className="message">{snackbar.message}</div>
+            {snackbar.description && (
+              <div className="description">{snackbar.description}</div>
+            )}
+          </CustomAlert>
+        </MuiSnackbar>
+      ))}
     </SnackbarContext.Provider>
   );
 };
 
+// Хук для использования Snackbar
 export const UseSnackbar = () => {
   const context = useContext(SnackbarContext);
   if (!context) {

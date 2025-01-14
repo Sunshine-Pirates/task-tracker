@@ -29,6 +29,9 @@ import ToEdit from "../assets/icons/toedit.svg";
 import Up from "../assets/icons/up.svg";
 import Vector10 from "../assets/icons/vector10.svg";
 import Plus from "../assets/icons/plus.svg";
+import StarBlue from "../assets/icons/starBlue.svg";
+import KeyboardDoubleArrowUpIcon from "../assets/icons/KeyboardDoubleArrowUpIcon.svg";
+import KeyboardDoubleArrowDownIcon from "../assets/icons/KeyboardDoubleArrowDownIcon.svg";
 import Checkbox from "../assets/icons/checkbox.svg";
 import CheckboxLine from "../assets/icons/checkboxLine.svg";
 import Star from "../assets/icons/star.svg";
@@ -40,6 +43,9 @@ import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
 
 export const Icons = {
+  KeyboardDoubleArrowDownIcon,
+  KeyboardDoubleArrowUpIcon,
+  StarBlue,
   SecureIcon,
   AddMember,
   Calender,
