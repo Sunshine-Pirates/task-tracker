@@ -4,11 +4,14 @@ import "./index.css";
 import { App } from "./App";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme/theme";
+import { SnackbarProvider } from "./utils/snackBar/snackBar";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <SnackbarProvider>
+        <App />
+      </SnackbarProvider>
     </ThemeProvider>
   </StrictMode>
 );
