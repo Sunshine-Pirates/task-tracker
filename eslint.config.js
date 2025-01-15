@@ -93,6 +93,7 @@ export default [
           bracketSpacing: true,
         },
       ],
+      "react/prop-types": "off",
     },
   },
   {
