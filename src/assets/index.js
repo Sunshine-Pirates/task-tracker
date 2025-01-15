@@ -45,8 +45,10 @@ import PlusWhite from "../assets/icons/Vector (3).svg";
 import SelectIcon from "../assets/icons/Vector (5).svg";
 import SelectIconTwo from "../assets/icons/Vector (6).svg";
 import PlusGray from "../assets/icons/PlusGray.svg";
+import Menu from "../assets/icons/menu.svg";
 
 export const Icons = {
+  Menu,
   PlusGray,
   SelectIconTwo,
   SelectIcon,

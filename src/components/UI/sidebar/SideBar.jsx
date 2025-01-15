@@ -3,67 +3,47 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 import { Icons } from "../../../assets";
 import { styled } from "@mui/material";
+import { WorkspaceList } from "./WorkspaceList";
+import { CollapsedSideBar } from "./CollapsedSideBar";
 
 export const SideBar = () => {
   const [open] = useState(true);
   const [showTitles, setShowTitles] = useState(false);
-  const [value, setValue] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const handleSelectIconClick = () => {
     setShowTitles((prev) => !prev);
   };
-  const handleClick = () => {
-    setValue((prev) => !prev);
+  const toggleDrawer = () => {
+    setIsCollapsed((prev) => !prev);
   };
-  const workspaces = [
-    "Accounting",
-    "LMS",
-    "Accounting",
-    "LMS",
-    "Accounting",
-    "LMS",
-  ];
-  const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
-  const newValue = [
-    {
-      id: 1,
-      icon: <Icons.Collapse />,
-      text: "Boards",
-      plusIcon: false,
-    },
-    {
-      id: 1,
-      icon: <Icons.AddMember />,
-      text: "Participants",
-      plusIcon: true,
-    },
-    {
-      id: 1,
-      icon: <Icons.Settings />,
-      text: "Setting",
-      plusIcon: false,
-    },
-  ];
 
-  return (
-    <StyledDrawer anchor="left" open={open} variant="persistent">
+  const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
+
+  return isCollapsed ? (
+    <CollapsedSideBar toggleDrawer={toggleDrawer} isCollapsed={isCollapsed} />
+  ) : (
+    <StyledDrawer
+      anchor="left"
+      open={open}
+      variant="persistent"
+      isCollapsed={isCollapsed}
+    >
       <StyledHeader>
         <section>
           <Icons.Vector />
           <p>LMS</p>
         </section>
-        <StyledIconButton>
+        <StyledIconButton onClick={toggleDrawer}>
           <Icons.MenuItem />
         </StyledIconButton>
       </StyledHeader>
-      <Divider sx={{ width: "170px", margin: "0 auto" }} />
+      <StyledDivider />
       <List>
         <StyledContainer>
           <StyledBoards>
@@ -72,9 +52,9 @@ export const SideBar = () => {
           </StyledBoards>
           <StyledCOntainerIcons>
             <Icons.PlusWhite />
-            <IconButton onClick={handleSelectIconClick}>
+            <div onClick={handleSelectIconClick}>
               {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
-            </IconButton>
+            </div>
           </StyledCOntainerIcons>
         </StyledContainer>
 
@@ -90,7 +70,7 @@ export const SideBar = () => {
           </StyledList>
         )}
 
-        <Divider sx={{ width: "170px", margin: "0 auto" }} />
+        <StyledDivider />
         <StyledWrapper>
           <Container>
             <section>
@@ -118,56 +98,8 @@ export const SideBar = () => {
           </StyledSettings>
         </StyledWrapper>
       </List>
-      <Divider sx={{ width: "170px", margin: "0 auto" }} />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <Icons.GraphicIcon />
-            </ListItemIcon>
-            <ListItemText primary="Workspaces" />
-            <IconButton size="small">
-              <Icons.PlusGray />
-            </IconButton>
-          </ListItemButton>
-        </ListItem>
-
-        {workspaces.map((workspace, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Avatar sx={{ bgcolor: "#2CB107", width: 27, height: 27 }}>
-                  {workspace.charAt(0)}
-                </Avatar>
-              </ListItemIcon>
-              <ListItemText primary={workspace} />
-              <IconButton onClick={handleClick}>
-                {value ? <Icons.Up /> : <Icons.Down />}
-              </IconButton>
-            </ListItemButton>
-          </ListItem>
-        ))}
-        {value && (
-          <ListItem>
-            {newValue.map((item) => (
-              <ListItemIcon key={item.id} disablePadding>
-                <ListItemButton>
-                  <IconButton>{item.icon}</IconButton>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-                {item.plusIcon ? <Icons.Plus /> : null}
-              </ListItemIcon>
-            ))}
-          </ListItem>
-        )}
-
-        <ListItem disablePadding>
-          <ListItemButton style={{ display: "flex", gap: "12px" }}>
-            <Icons.Down />
-            <ListItemText primary="Show more" style={{ color: "#909090" }} />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      <StyledDivider />
+      <WorkspaceList />
     </StyledDrawer>
   );
 };
@@ -175,8 +107,6 @@ export const SideBar = () => {
 const StyledList = styled(List)(() => ({
   paddingLeft: "54px",
   paddingBottom: "20px",
-  background:
-    "linear-gradient(90deg, rgba(248,248,248,0.6) 0%, rgba(248,248,248,0.6) 100%)",
 }));
 
 const StyledListItem = styled(ListItem)(() => ({
@@ -232,7 +162,7 @@ const StyledHeader = styled("div")(() => ({
 const StyledIconButton = styled("div")(() => ({
   width: "40px",
   height: "40px",
-  background: "linear-gradient(to left, #F8F8F899 40%, transparent 60%)",
+  background: "linear-gradient(to left, #F8F8F899 40%, transparent 40%)",
   borderRadius: "0px 8px 8px 0px",
   position: "fixed",
   top: "20px",
@@ -243,7 +173,7 @@ const StyledIconButton = styled("div")(() => ({
   alignItems: "center",
 }));
 
-const StyledContainer = styled(ListItemButton)(() => ({
+const StyledContainer = styled("div")(() => ({
   width: "227px",
   height: "37px",
   background:
@@ -258,6 +188,7 @@ const StyledContainer = styled(ListItemButton)(() => ({
 }));
 const StyledBoards = styled("div")(() => ({
   display: "flex",
+  alignItems: "center",
   gap: "14px",
 }));
 const StyledCOntainerIcons = styled("div")(() => ({
@@ -286,4 +217,9 @@ const StyledWrapper = styled("div")(() => ({
   flexDirection: "column",
   gap: "16px",
   margin: "20px 40px",
+  cursor: "pointer",
+}));
+const StyledDivider = styled(Divider)(() => ({
+  width: "170px",
+  margin: "0 auto",
 }));
