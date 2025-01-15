@@ -81,43 +81,43 @@ export const WorkspaceList = () => {
 };
 
 const ContainerList = styled("div")(() => ({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  "& section": {
     display: "flex",
-    gap: "8px",
-  },
-}));
-
-const StyledWrapperList = styled("div")(() => ({
-  width: "170px",
-  display: "flex",
-  flexDirection: "column",
-  gap: "16px",
-  margin: "0 auto",
-  cursor: "pointer",
-  paddingTop: "21px",
-}));
-
-const StyledShow = styled("div")(() => ({
-  display: "flex",
-  gap: "12px",
-}));
-
-const StyledNewValueList = styled("div")(() => ({
-  width: "135px",
-  display: "flex",
-  alignItems: "center",
-  marginLeft: "30px",
-  gap: "14px",
-  "& section": {
+    justifyContent: "space-between",
+    alignItems: "center",
+    "& section": {
+      display: "flex",
+      gap: "0.5rem", // 8px
+    },
+  }));
+  
+  const StyledWrapperList = styled("div")(() => ({
+    width: "10.625rem", // 170px
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem", // 16px
+    margin: "0 auto",
+    cursor: "pointer",
+    paddingTop: "1.3125rem", // 21px
+  }));
+  
+  const StyledShow = styled("div")(() => ({
+    display: "flex",
+    gap: "0.75rem", // 12px
+  }));
+  
+  const StyledNewValueList = styled("div")(() => ({
+    width: "8.4375rem", // 135px
     display: "flex",
     alignItems: "center",
-
-    "& p": {
-      color: "#919191",
-      fontSize: "14px",
+    marginLeft: "1.875rem", // 30px
+    gap: "0.875rem", // 14px
+    "& section": {
+      display: "flex",
+      alignItems: "center",
+  
+      "& p": {
+        color: "#919191",
+        fontSize: "0.875rem", // 14px
+      },
     },
-  },
-}));
+  }));
