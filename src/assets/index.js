@@ -38,8 +38,22 @@ import Star from "../assets/icons/star.svg";
 import StarLine from "../assets/icons/starLine.svg";
 import Radio from "../assets/icons/radio.svg";
 import RadioLine from "../assets/icons/radioLine.svg";
+import Vector from "../assets/icons/Vector.svg";
+import MenuItem from "../assets/icons/Typography Icon.svg";
+import VectorTwo from "../assets/icons/Vector (2).svg";
+import PlusWhite from "../assets/icons/Vector (3).svg";
+import SelectIcon from "../assets/icons/Vector (5).svg";
+import SelectIconTwo from "../assets/icons/Vector (6).svg";
+import PlusGray from "../assets/icons/PlusGray.svg";
 
 export const Icons = {
+  PlusGray,
+  SelectIconTwo,
+  SelectIcon,
+  PlusWhite,
+  VectorTwo,
+  MenuItem,
+  Vector,
   KeyboardDoubleArrowDownIcon,
   KeyboardDoubleArrowUpIcon,
   StarBlue,
