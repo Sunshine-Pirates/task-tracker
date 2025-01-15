@@ -4,27 +4,22 @@ import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import { Icons } from "../../assets";
 
-// Контекст Snackbar
 const SnackbarContext = createContext();
 
-// Стили для кастомного Snackbar
 const CustomAlert = styled(MuiAlert)(({ severity }) => {
   const colors = {
     success: {
-      border: "1px solid #a7d7a9",
-      backgroundColor: "#eafaf1",
+      border: "1px solid #2CB107",
       messageColor: "#218905",
       descriptionColor: "#71C559",
     },
     error: {
-      border: "1px solid #f28b82",
-      backgroundColor: "#fdecea",
+      border: "1px solid #D91212",
       messageColor: "#D91212",
       descriptionColor: "#E77A7A",
     },
     warning: {
-      border: "1px solid #ffd666",
-      backgroundColor: "#fff8e1",
+      border: "1px solid #EB8900",
       messageColor: "#EB8900",
       descriptionColor: "#EDA034",
     },
@@ -37,8 +32,9 @@ const CustomAlert = styled(MuiAlert)(({ severity }) => {
     fontSize: "18px",
     fontWeight: "400",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
-    display: "flex",
     position: "relative",
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
     "& .custom-icon": {
       marginTop: "3px",
     },
@@ -75,12 +71,11 @@ const CustomAlert = styled(MuiAlert)(({ severity }) => {
   };
 });
 
-// Провайдер Snackbar
 export const SnackbarProvider = ({ children }) => {
   const [snackbars, setSnackbars] = useState([]);
 
   const showSnackbar = useCallback((severity, message, description = "") => {
-    const id = Date.now(); // Уникальный ID
+    const id = Date.now();
     setSnackbars((prev) => [...prev, { id, severity, message, description }]);
   }, []);
 
@@ -104,17 +99,13 @@ export const SnackbarProvider = ({ children }) => {
   return (
     <SnackbarContext.Provider value={{ showSnackbar }}>
       {children}
-      {snackbars.map((snackbar, index) => (
+      {snackbars.map((snackbar) => (
         <MuiSnackbar
           key={snackbar.id}
           open
           autoHideDuration={3000}
           onClose={() => hideSnackbar(snackbar.id)}
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          style={{
-            top: `${index * 70}px`, // Смещение каждого Snackbar вниз
-            transition: "top 0.3s",
-          }}
         >
           <CustomAlert
             severity={snackbar.severity}
@@ -132,7 +123,6 @@ export const SnackbarProvider = ({ children }) => {
   );
 };
 
-// Хук для использования Snackbar
 export const UseSnackbar = () => {
   const context = useContext(SnackbarContext);
   if (!context) {
