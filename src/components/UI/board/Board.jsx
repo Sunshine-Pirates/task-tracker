@@ -7,22 +7,22 @@ import Foto3 from "../../../assets/images/Rectangle 56.png";
 export const Board = () => {
   const colors = [
     {
-      bg: "",
+      bg: "red",
     },
     {
-      bg: "",
+      bg: "green",
     },
     {
-      bg: "",
+      bg: "yellow",
     },
     {
-      bg: "",
+      bg: "blue",
     },
     {
-      bg: "",
+      bg: "purple",
     },
     {
-      bg: "",
+      bg: "grey",
     },
   ];
 
@@ -51,7 +51,7 @@ export const Board = () => {
           </TextBlock>
           <ColorsBlock>
             {colors.map((item) => (
-              <div>{item.bg}</div>
+              <StyleColor bg={item.bg}></StyleColor>
             ))}
           </ColorsBlock>
         </Block>
@@ -115,7 +115,10 @@ const ColorsBlock = styled("div")(() => ({
   div: {
     width: "59px",
     height: "31px",
-    backgroundColor: "red",
     borderRadius: "8px",
   },
+}));
+
+const StyleColor = styled("div")(({ bg }) => ({
+  backgroundColor: bg,
 }));
