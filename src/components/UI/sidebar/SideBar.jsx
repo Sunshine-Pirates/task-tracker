@@ -105,8 +105,8 @@ export const SideBar = () => {
 };
 
 const StyledList = styled(List)(() => ({
-  paddingLeft: "3.375rem", // 54px
-  paddingBottom: "1.25rem", // 20px
+  paddingLeft: "3.375rem",
+  paddingBottom: "1.25rem",
 }));
 
 const StyledListItem = styled(ListItem)(() => ({
@@ -114,10 +114,10 @@ const StyledListItem = styled(ListItem)(() => ({
   color: "#919191",
 
   "& .css-1h3em7e-MuiButtonBase-root-MuiListItemButton-root": {
-    width: "10.8125rem", // 173px
-    height: "2.25rem", // 36px
-    borderTopRightRadius: "1.5rem", // 24px
-    borderBottomRightRadius: "1.5rem", // 24px
+    width: "10.8125rem",
+    height: "2.25rem",
+    borderTopRightRadius: "1.5rem",
+    borderBottomRightRadius: "1.5rem",
   },
 
   "&::before": {
@@ -126,19 +126,19 @@ const StyledListItem = styled(ListItem)(() => ({
     left: 0,
     top: 0,
     bottom: 0,
-    borderLeft: "0.0625rem solid #E0E0E0", // 1px
+    borderLeft: "0.0625rem solid #E0E0E0",
   },
 }));
 const StyledDrawer = styled(Drawer)(() => ({
   "& .MuiDrawer-paper": {
-    width: "15.625rem", // 250px
+    width: "15.625rem",
     borderRight: "none",
     background:
       "linear-gradient(90deg, rgba(248,248,248,0.6) 0%, rgba(248,248,248,0.6) 100%)",
   },
 
   "& .css-cokf1l-MuiListItemIcon-root": {
-    paddingLeft: "1.125rem", // 18px
+    paddingLeft: "1.125rem",
   },
 }));
 
@@ -148,25 +148,25 @@ const StyledHeader = styled("div")(() => ({
   "& section": {
     display: "flex",
     justifyContent: "center",
-    gap: "0.75rem", // 12px
-    paddingLeft: "2.5rem", // 40px
-    paddingTop: "1.9375rem", // 31px
-    paddingBottom: "1.4375rem", // 23px
+    gap: "0.75rem",
+    paddingLeft: "2.5rem",
+    paddingTop: "1.9375rem",
+    paddingBottom: "1.4375rem",
     "& p": {
-      fontSize: "1.125rem", // 18px
+      fontSize: "1.125rem",
       fontWeight: "500",
     },
   },
 }));
 
 const StyledIconButton = styled("div")(() => ({
-  width: "2.5rem", // 40px
-  height: "2.5rem", // 40px
+  width: "2.5rem",
+  height: "2.5rem",
   background: "linear-gradient(to left, #F8F8F899 40%, transparent 40%)",
-  borderRadius: "0px 0.5rem 0.5rem 0px", // 0px 8px 8px 0px
+  borderRadius: "0px 0.5rem 0.5rem 0px",
   position: "fixed",
-  top: "1.25rem", // 20px
-  left: "14.125rem", // 226px
+  top: "1.25rem",
+  left: "14.125rem",
   zIndex: "10",
   display: "flex",
   justifyContent: "center",
@@ -174,52 +174,52 @@ const StyledIconButton = styled("div")(() => ({
 }));
 
 const StyledContainer = styled("div")(() => ({
-  width: "14.1875rem", // 227px
-  height: "2.3125rem", // 37px
+  width: "14.1875rem",
+  height: "2.3125rem",
   background:
     "linear-gradient(90deg, rgba(58,104,131,0.6) 0%, rgba(58,104,131,0.6) 100%)",
   color: "#FFFFFF",
-  paddingLeft: "2.5rem", // 40px
-  marginBottom: "0.75rem", // 12px
+  paddingLeft: "2.5rem",
+  marginBottom: "0.75rem",
   display: "flex",
   justifyContent: "space-around",
-  borderTopRightRadius: "1.5rem", // 24px
-  borderBottomRightRadius: "1.5rem", // 24px
+  borderTopRightRadius: "1.5rem",
+  borderBottomRightRadius: "1.5rem",
 }));
 const StyledBoards = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
-  gap: "0.875rem", // 14px
+  gap: "0.875rem",
 }));
 const StyledCOntainerIcons = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
-  gap: "0.4375rem", // 7px
+  gap: "0.4375rem",
 }));
 const Container = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
-  gap: "1.875rem", // 30px
+  gap: "1.875rem",
   "& section": {
     display: "flex",
-    gap: "0.75rem", // 12px
+    gap: "0.75rem",
   },
 }));
 const StyledSettings = styled("div")(() => ({
   display: "flex",
-  gap: "0.75rem", // 12px
+  gap: "0.75rem",
 }));
 
 const StyledWrapper = styled("div")(() => ({
-  width: "10.4375rem", // 167px
-  height: "5.875rem", // 94px
+  width: "10.4375rem",
+  height: "5.875rem",
   display: "flex",
   flexDirection: "column",
-  gap: "1rem", // 16px
-  margin: "1.25rem 2.5rem", // 20px 40px
+  gap: "1rem",
+  margin: "1.25rem 2.5rem",
   cursor: "pointer",
 }));
 const StyledDivider = styled(Divider)(() => ({
-  width: "10.625rem", // 170px
+  width: "10.625rem",
   margin: "0 auto",
 }));
