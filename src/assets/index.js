@@ -46,6 +46,9 @@ import SelectIcon from "../assets/icons/Vector (5).svg";
 import SelectIconTwo from "../assets/icons/Vector (6).svg";
 import PlusGray from "../assets/icons/PlusGray.svg";
 import Menu from "../assets/icons/menu.svg";
+import Success from "../assets/icons/success.svg";
+import Error from "../assets/icons/error.svg";
+import Warning from "../assets/icons/warning.svg";
 
 export const Icons = {
   Menu,
@@ -96,4 +99,7 @@ export const Icons = {
   StarLine,
   Radio,
   RadioLine,
+  Success,
+  Error,
+  Warning,
 };
