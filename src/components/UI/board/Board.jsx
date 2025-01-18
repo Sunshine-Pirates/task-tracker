@@ -3,60 +3,80 @@ import { Input } from "../input/Input";
 import Foto1 from "../../../assets/images/Rectangle 54.png";
 import Foto2 from "../../../assets/images/Rectangle 55.png";
 import Foto3 from "../../../assets/images/Rectangle 56.png";
+import { useState } from "react";
 
 export const Board = () => {
+  const [openImage, setOpenImage] = useState(false);
+
+  const handleOpenImage = () => {
+    setOpenImage((prev) => !prev);
+  };
+
   const colors = [
     {
-      bg: "red",
+      bg: "#CBCBCB",
     },
     {
-      bg: "green",
+      bg: "#B04632",
     },
     {
-      bg: "yellow",
+      bg: "#519839",
     },
     {
-      bg: "blue",
+      bg: "#D29034",
     },
     {
-      bg: "purple",
+      bg: "#89609E",
     },
     {
-      bg: "grey",
+      bg: "#005C92",
     },
   ];
 
   return (
-    <MainContainer>
-      <h6>Create new board</h6>
-      <BgStyle>
-        <Input placeholder="Board title*" />
-        <p>Add background</p>
-        <Block>
-          <TextBlock>
-            <p>Photo</p>
-            <a href="#">See more</a>
-          </TextBlock>
+    <div>
+      <MainContainer>
+        <h6>Create new board</h6>
+        <BgStyle>
+          <Input placeholder="Board title*" />
+          <p>Add background</p>
+          <Block>
+            <TextBlock>
+              <p>Photo</p>
+              <StyleP onClick={handleOpenImage}>See more</StyleP>
+            </TextBlock>
+
+            <ImageBlock>
+              <img src={Foto1} alt="" />
+              <img src={Foto2} alt="" />
+              <img src={Foto3} alt="" />
+            </ImageBlock>
+          </Block>
+
+          <Block>
+            <TextBlock>
+              <p>Colors</p>
+              <StyleP>See more</StyleP>
+            </TextBlock>
+            <ColorsBlock>
+              {colors.map((item) => (
+                <StyleColor bg={item.bg}></StyleColor>
+              ))}
+            </ColorsBlock>
+          </Block>
+        </BgStyle>
+      </MainContainer>
+
+      {openImage && (
+        <div>
           <ImageBlock>
             <img src={Foto1} alt="" />
             <img src={Foto2} alt="" />
             <img src={Foto3} alt="" />
           </ImageBlock>
-        </Block>
-
-        <Block>
-          <TextBlock>
-            <p>Colors</p>
-            <a href="#">See more</a>
-          </TextBlock>
-          <ColorsBlock>
-            {colors.map((item) => (
-              <StyleColor bg={item.bg}></StyleColor>
-            ))}
-          </ColorsBlock>
-        </Block>
-      </BgStyle>
-    </MainContainer>
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -87,10 +107,6 @@ const TextBlock = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
   fontSize: "14px",
-
-  a: {
-    color: "#919191",
-  },
 }));
 
 const ImageBlock = styled("div")(() => ({
@@ -121,4 +137,9 @@ const ColorsBlock = styled("div")(() => ({
 
 const StyleColor = styled("div")(({ bg }) => ({
   backgroundColor: bg,
+}));
+
+const StyleP = styled("p")(() => ({
+  textDecoration: "underline",
+  cursor: "pointer",
 }));
