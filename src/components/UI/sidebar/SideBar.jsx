@@ -7,14 +7,22 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { Icons } from "../../../assets";
-import { styled } from "@mui/material";
+import { IconButton, styled } from "@mui/material";
 import { WorkspaceList } from "./WorkspaceList";
 import { CollapsedSideBar } from "./CollapsedSideBar";
+import { workspaces } from "../../../utils/constants/workspaces";
 
 export const SideBar = () => {
   const [open] = useState(true);
   const [showTitles, setShowTitles] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleShowToggle = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
+  const visibleWorkspaces = isExpanded ? workspaces : workspaces.slice(0, 6);
 
   const handleSelectIconClick = () => {
     setShowTitles((prev) => !prev);
@@ -22,11 +30,19 @@ export const SideBar = () => {
   const toggleDrawer = () => {
     setIsCollapsed((prev) => !prev);
   };
+  const title = "LMS";
 
   const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
 
   return isCollapsed ? (
-    <CollapsedSideBar toggleDrawer={toggleDrawer} isCollapsed={isCollapsed} />
+    <CollapsedSideBar
+      toggleDrawer={toggleDrawer}
+      isCollapsed={isCollapsed}
+      title={title}
+      isExpanded={isExpanded}
+      handleShowToggle={handleShowToggle}
+      visibleWorkspaces={visibleWorkspaces}
+    />
   ) : (
     <StyledDrawer
       anchor="left"
@@ -37,73 +53,86 @@ export const SideBar = () => {
       <StyledHeader>
         <section>
           <Icons.Vector />
-          <p>LMS</p>
+          <p>{title}</p>
         </section>
         <StyledIconButton onClick={toggleDrawer}>
           <Icons.MenuItem />
         </StyledIconButton>
       </StyledHeader>
       <StyledDivider />
-      <List>
-        <StyledContainer>
-          <StyledBoards>
+      <StyledContainer>
+        <StyledBoards>
+          <IconButton>
             <Icons.VectorTwo />
-            <p>Boards</p>
-          </StyledBoards>
-          <StyledCOntainerIcons>
-            <Icons.PlusWhite />
-            <div onClick={handleSelectIconClick}>
-              {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
-            </div>
-          </StyledCOntainerIcons>
-        </StyledContainer>
+          </IconButton>
+          <p>Boards</p>
+        </StyledBoards>
+        <StyledCOntainerIcons>
+          <Icons.PlusWhite />
+          <div onClick={handleSelectIconClick}>
+            {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
+          </div>
+        </StyledCOntainerIcons>
+      </StyledContainer>
 
-        {showTitles && (
-          <StyledList>
-            {titles.map((title, index) => (
-              <StyledListItem key={index} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={title} />
-                </ListItemButton>
-              </StyledListItem>
-            ))}
-          </StyledList>
-        )}
+      {showTitles && (
+        <StyledList>
+          {titles.map((item, index) => (
+            <StyledListItem key={index} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </StyledListItem>
+          ))}
+        </StyledList>
+      )}
 
-        <StyledDivider />
-        <StyledWrapper>
-          <Container>
-            <section>
-              <Icons.Group />
-              <p>All issues</p>
-            </section>
-            <Typography variant="body2" color="textSecondary">
-              (267)
-            </Typography>
-          </Container>
-
-          <Container>
-            <section>
-              <Icons.Members />
-              <p>Participants</p>
-            </section>
-            <Typography variant="body2" color="textSecondary">
-              (7)
-            </Typography>
-          </Container>
-
-          <StyledSettings>
-            <Icons.Settings />
-            <p>Setting</p>
-          </StyledSettings>
-        </StyledWrapper>
-      </List>
       <StyledDivider />
-      <WorkspaceList />
+      <StyledWrapper>
+        <Container>
+          <section>
+            <IconButton>
+              <Icons.Group />
+            </IconButton>
+            <p>All issues</p>
+          </section>
+          <StyledNumber variant="body2" color="textSecondary">
+            (267)
+          </StyledNumber>
+        </Container>
+
+        <Container>
+          <section>
+            <IconButton>
+              <Icons.Members />
+            </IconButton>
+            <p>Participants</p>
+          </section>
+          <StyledNumber variant="body2" color="textSecondary">
+            (7)
+          </StyledNumber>
+        </Container>
+
+        <StyledSettings>
+          <IconButton>
+            <Icons.Settings />
+          </IconButton>
+          <p>Setting</p>
+        </StyledSettings>
+      </StyledWrapper>
+      <StyledDivider />
+      <WorkspaceList
+        isExpanded={isExpanded}
+        handleShowToggle={handleShowToggle}
+        visibleWorkspaces={visibleWorkspaces}
+      />
     </StyledDrawer>
   );
 };
 
+const StyledNumber = styled(Typography)(() => ({
+  paddingBottom: "5px",
+}));
 const StyledList = styled(List)(() => ({
   paddingLeft: "3.375rem",
   paddingBottom: "1.25rem",
@@ -132,13 +161,12 @@ const StyledListItem = styled(ListItem)(() => ({
 const StyledDrawer = styled(Drawer)(() => ({
   "& .MuiDrawer-paper": {
     width: "15.625rem",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
     borderRight: "none",
     background:
       "linear-gradient(90deg, rgba(248,248,248,0.6) 0%, rgba(248,248,248,0.6) 100%)",
-  },
-
-  "& .css-cokf1l-MuiListItemIcon-root": {
-    paddingLeft: "1.125rem",
   },
 }));
 
@@ -197,27 +225,45 @@ const StyledCOntainerIcons = styled("div")(() => ({
   gap: "0.4375rem",
 }));
 const Container = styled("div")(() => ({
+  width: "190px",
   display: "flex",
   justifyContent: "center",
-  gap: "1.875rem",
+  alignItems: "center",
+  gap: "1.900rem",
+  borderTopRightRadius: "1.5rem",
+  borderBottomRightRadius: "1.5rem",
+  "& p": {
+    paddingTop: "6px",
+  },
+
   "& section": {
     display: "flex",
-    gap: "0.75rem",
+  },
+  "&:hover": {
+    background: "#3A68831A",
+    transition: "background-color 0.3s ease",
   },
 }));
 const StyledSettings = styled("div")(() => ({
   display: "flex",
-  gap: "0.75rem",
+  paddingLeft: "10px",
+  borderTopRightRadius: "1.5rem",
+  borderBottomRightRadius: "1.5rem",
+  "& p": {
+    paddingTop: "7px",
+  },
+  "&:hover": {
+    background: "#3A68831A",
+    transition: "background-color 0.3s ease",
+  },
 }));
 
 const StyledWrapper = styled("div")(() => ({
-  width: "10.4375rem",
-  height: "5.875rem",
+  height: "94px",
   display: "flex",
   flexDirection: "column",
-  gap: "1rem",
-  margin: "1.25rem 2.5rem",
   cursor: "pointer",
+  margin: "0 auto",
 }));
 const StyledDivider = styled(Divider)(() => ({
   width: "10.625rem",
