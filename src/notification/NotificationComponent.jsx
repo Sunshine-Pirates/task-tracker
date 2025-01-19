@@ -104,6 +104,7 @@ export const NotificationComponent = () => {
                     </DetailsMassage>
                     <TextContainer>
                       <Typography variant="body2" marginTop="5px">
+                        {notification.name}
                         {notification.text}
                       </Typography>
                       <TimeText>{notification.time}</TimeText>
