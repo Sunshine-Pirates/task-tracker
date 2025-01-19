@@ -35,6 +35,7 @@ import Star from "../assets/icons/star.svg";
 import StarLine from "../assets/icons/starLine.svg";
 import Radio from "../assets/icons/radio.svg";
 import RadioLine from "../assets/icons/radioLine.svg";
+import TimeClock from "../assets/icons/timeclock.svg";
 
 export const Icons = {
   SecureIcon,
@@ -74,4 +75,5 @@ export const Icons = {
   StarLine,
   Radio,
   RadioLine,
+  TimeClock,
 };
