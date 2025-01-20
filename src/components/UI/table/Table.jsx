@@ -75,7 +75,7 @@ const StyledTableContainer = styled(TableContainer)(() => ({
   "& caption": {
     fontSize: "20px",
     fontWeight: "500",
-    LineWeight: "25.14px",
+    lineHeight: "25.14px",
     color: "#0D0D0D",
     margin: "20px",
   },
