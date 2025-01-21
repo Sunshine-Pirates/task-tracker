@@ -3,38 +3,34 @@ import { Input } from "../input/Input";
 import Foto1 from "../../../assets/images/Rectangle 54.png";
 import Foto2 from "../../../assets/images/Rectangle 55.png";
 import Foto3 from "../../../assets/images/Rectangle 56.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { boardImage, colors } from "../../../utils/constants/general";
 
 export const Board = () => {
   const [openImage, setOpenImage] = useState(false);
+  const [selectedBackground, setSelectedBackground] = useState("");
+
+  // Устанавливаем фон для body
+  useEffect(() => {
+    if (selectedBackground) {
+      document.body.style.background = selectedBackground.includes("#")
+        ? selectedBackground
+        : `url(${selectedBackground}) no-repeat center center / cover`;
+      document.body.style.height = "100vh";
+      document.body.style.margin = "0";
+    }
+  }, [selectedBackground]);
 
   const handleOpenImage = () => {
     setOpenImage((prev) => !prev);
   };
 
-  const colors = [
-    {
-      bg: "#CBCBCB",
-    },
-    {
-      bg: "#B04632",
-    },
-    {
-      bg: "#519839",
-    },
-    {
-      bg: "#D29034",
-    },
-    {
-      bg: "#89609E",
-    },
-    {
-      bg: "#005C92",
-    },
-  ];
+  const handleSelectBackground = (background) => {
+    setSelectedBackground(background);
+  };
 
   return (
-    <div>
+    <MainBlock>
       <MainContainer>
         <h6>Create new board</h6>
         <BgStyle>
@@ -47,9 +43,15 @@ export const Board = () => {
             </TextBlock>
 
             <ImageBlock>
-              <img src={Foto1} alt="" />
-              <img src={Foto2} alt="" />
-              <img src={Foto3} alt="" />
+              {[Foto1, Foto2, Foto3].map((image, index) => (
+                <ImageWrapper
+                  key={index}
+                  isSelected={selectedBackground === image}
+                  onClick={() => handleSelectBackground(image)}
+                >
+                  <img src={image} alt="" />
+                </ImageWrapper>
+              ))}
             </ImageBlock>
           </Block>
 
@@ -59,8 +61,13 @@ export const Board = () => {
               <StyleP>See more</StyleP>
             </TextBlock>
             <ColorsBlock>
-              {colors.map((item) => (
-                <StyleColor bg={item.bg}></StyleColor>
+              {colors.map((item, index) => (
+                <ColorWrapper
+                  key={index}
+                  bg={item.bg}
+                  isSelected={selectedBackground === item.bg}
+                  onClick={() => handleSelectBackground(item.bg)}
+                />
               ))}
             </ColorsBlock>
           </Block>
@@ -68,15 +75,22 @@ export const Board = () => {
       </MainContainer>
 
       {openImage && (
-        <div>
-          <ImageBlock>
-            <img src={Foto1} alt="" />
-            <img src={Foto2} alt="" />
-            <img src={Foto3} alt="" />
-          </ImageBlock>
-        </div>
+        <ContainerModal>
+          <h1>Photo</h1>
+          <ImageModal>
+            {boardImage.map((item, index) => (
+              <ImageWrapper
+                key={index}
+                isSelected={selectedBackground === item.image}
+                onClick={() => handleSelectBackground(item.image)}
+              >
+                <img src={item.image} alt="" />
+              </ImageWrapper>
+            ))}
+          </ImageModal>
+        </ContainerModal>
       )}
-    </div>
+    </MainBlock>
   );
 };
 
@@ -127,19 +141,55 @@ const Block = styled("div")(() => ({
 const ColorsBlock = styled("div")(() => ({
   display: "flex",
   gap: "16px",
-
-  div: {
-    width: "59px",
-    height: "31px",
-    borderRadius: "8px",
-  },
-}));
-
-const StyleColor = styled("div")(({ bg }) => ({
-  backgroundColor: bg,
 }));
 
 const StyleP = styled("p")(() => ({
   textDecoration: "underline",
   cursor: "pointer",
+}));
+
+const ContainerModal = styled("div")(() => ({
+  width: "293px",
+  height: "480px",
+  backgroundColor: "white",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  borderRadius: "10px",
+
+  h1: {
+    fontSize: "16px",
+    fontWeight: "400",
+    padding: "16px",
+  },
+}));
+
+const MainBlock = styled("div")(() => ({
+  display: "flex",
+  gap: "50px",
+}));
+
+const ImageModal = styled("div")(() => ({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  gap: "8px",
+
+  img: {
+    width: "123px",
+  },
+}));
+
+const ImageWrapper = styled("div")(() => ({
+  position: "relative",
+  cursor: "pointer",
+}));
+
+const ColorWrapper = styled("div")(({ bg }) => ({
+  backgroundColor: bg,
+  width: "59px",
+  height: "31px",
+  borderRadius: "8px",
+  cursor: "pointer",
+  position: "relative",
 }));
