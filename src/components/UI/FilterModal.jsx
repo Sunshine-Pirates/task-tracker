@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { BaseModal } from "./BaseModal";
-import ClearIcon from "@mui/icons-material/Clear";
 import { IconButton } from "./IconButton";
 import { styled } from "@mui/material";
 import { Checkbox } from "./checkbox/Checkbox";
-import Button from "./Button";
+import { Button } from "./Button";
 import { Icons } from "../../assets";
 import { btn_data, filter_data } from "../../utils/constants/filterModalData";
 export const FilterModal = () => {
@@ -30,7 +29,7 @@ export const FilterModal = () => {
           <InnerHeaderStyle>
             Filter
             <IconButton onClick={() => setOpen((prev) => !prev)}>
-              <ClearIcon />
+              <Icons.Cancel />
             </IconButton>
           </InnerHeaderStyle>
         </StyledHeader>
@@ -70,6 +69,7 @@ export const FilterModal = () => {
                   />
                   <p>{item.title}</p>
                   <StyledButton
+                    variant={item.variant}
                     style={{
                       backgroundColor: item.backgrounColor,
                     }}
@@ -143,23 +143,13 @@ const StyledSpanTag = styled("span")(() => ({
   lineHeight: "17.6px",
 }));
 const StyledButton = styled(Button)(() => ({
-  width: "293px",
+  padding: "6px 253px 6px 16px",
   borderRadius: "6px",
   boxShadow: "none",
   color: "#FFFFFF",
   display: "flex",
   alignItems: "center",
   justifyContent: "start",
-  //   backgroundColor:
-  //     style.backgroundColor === "#61BD4F"
-  //       ? "#61BD4F"
-  //       : style.backgroundColor === "#EB8900"
-  //         ? "#EB8900"
-  //         : style.backgroundColor === "#0079BF"
-  //           ? "#0079BF"
-  //           : style.backgroundColor === "#EB5A46"
-  //             ? "#EB5A46"
-  //             : "none",
   "&:hover": {
     color: "#FFFFFF",
   },

@@ -1,6 +1,13 @@
 import { Button as MuiButton, styled } from "@mui/material";
 
-const Button = ({ children, disabled, variant, style, onClick, ...props }) => {
+export const Button = ({
+  children,
+  disabled,
+  variant,
+  style,
+  onClick,
+  ...props
+}) => {
   return (
     <StyledMuiButton
       onClick={onClick}
@@ -93,5 +100,3 @@ const StyledMuiButton = styled(MuiButton)(({
     },
   };
 });
-
-export default Button;
