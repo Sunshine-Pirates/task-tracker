@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { notificationsData } from "../utils/constants/notificationsData";
 import { Icons } from "../assets";
 import { styled } from "@mui/material/styles";
@@ -126,7 +126,7 @@ export const NotificationComponent = () => {
   );
 };
 
-const NotificationContainer = styled(Box)(({ theme }) => ({
+const NotificationContainer = styled(Box)(() => ({
   border: "1px solid #ccc",
   borderRadius: "10px",
   width: "353px",
@@ -134,21 +134,21 @@ const NotificationContainer = styled(Box)(({ theme }) => ({
   backgroundColor: "white",
 }));
 
-const NotificationDetails = styled(Box)(({ theme }) => ({
+const NotificationDetails = styled(Box)(() => ({
   borderRadius: "10px",
   width: "350px",
   padding: "10px",
   backgroundColor: "white",
 }));
 
-const Header = styled(Box)(({ theme }) => ({
+const Header = styled(Box)(() => ({
   display: "flex",
   justifyContent: "flex-end",
 }));
 
 const ListItemStyled = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== "read",
-})(({ theme, read }) => ({
+})(() => ({
   display: "flex",
   padding: "10px",
   borderBottom: "1px solid #ddd",
@@ -159,7 +159,7 @@ const DetailsMassage = styled("div")(() => ({
   gap: "10px",
 }));
 
-const Dot = styled("div")(({ theme }) => ({
+const Dot = styled("div")(() => ({
   width: "10px",
   height: "10px",
   borderRadius: "50%",
@@ -168,21 +168,21 @@ const Dot = styled("div")(({ theme }) => ({
   marginBottom: "55px",
 }));
 
-const BackButton = styled(Button)(({ theme }) => ({
+const BackButton = styled(Button)(() => ({
   backgroundColor: "#007bff",
   color: "#fff",
   borderRadius: "5px",
   padding: "3px 8px",
 }));
 
-const MarkAllButton = styled(Button)(({ theme }) => ({
+const MarkAllButton = styled(Button)(() => ({
   fontSize: "10px",
   textDecoration: "underline",
   color: "grey",
   marginLeft: "30px",
 }));
 
-const TimeText = styled(Typography)(({ theme }) => ({
+const TimeText = styled(Typography)(() => ({
   fontFamily: "unset",
   fontSize: "14px",
   color: "grey",
@@ -190,7 +190,7 @@ const TimeText = styled(Typography)(({ theme }) => ({
   marginTop: "5px",
 }));
 
-const IconContainer = styled(Box)(({ theme }) => ({
+const IconContainer = styled(Box)(() => ({
   width: "50px",
   height: "35px",
   backgroundColor: "#c2c4c1dd",
@@ -199,7 +199,7 @@ const IconContainer = styled(Box)(({ theme }) => ({
   marginTop: "10px",
 }));
 
-const ContentBox = styled(Box)(({ theme }) => ({
+const ContentBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "flex-start",
   gap: "15px",
@@ -212,11 +212,11 @@ const ProfileImage = styled("img")(() => ({
   height: "40px",
 }));
 
-const TextContainer = styled(Box)(({ theme }) => ({
+const TextContainer = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
 }));
 
-const ArrowButton = styled(IconButton)(({ theme }) => ({
+const ArrowButton = styled(IconButton)(() => ({
   marginLeft: "auto",
 }));
