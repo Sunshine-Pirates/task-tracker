@@ -1,21 +1,37 @@
 import { styled } from "@mui/material";
 import ProfileBanner from "../../assets/images/profile-banner.png";
-import Profilee from "../../assets/images/Ellipse 11.png";
-import { Icons } from "../../assets";
-import { Header } from "../../layout/Header";
 import { useState } from "react";
 import { ProfileForm } from "./ProfileForm";
 import { ProjectsList } from "./ProjectsList";
+import { Icons } from "../../assets";
+import { Header } from "../../layout/Header";
+import Profilee from "../../assets/images/Ellipse 11.png";
 
 export const Profile = () => {
   const [openProfile, setOpenProfile] = useState(false);
+  const [profileImage, setProfileImage] = useState(Profilee);
+
   const handleOpenProfile = (e) => {
     e.stopPropagation();
     setOpenProfile(true);
   };
+
   const handleClose = () => {
     setOpenProfile(false);
   };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setProfileImage(imageURL);
+    }
+  };
+  const handleRemoveImage = () => {
+    setProfileImage(Profilee);
+    setOpenProfile(false);
+  };
+
   return (
     <StlyedContainer>
       <div>
@@ -26,7 +42,7 @@ export const Profile = () => {
           </StyledImageProfile>
           <StyledSection>
             <div>
-              <img src={Profilee} alt="Profilee" />
+              <img src={profileImage} alt="Profile" />
               <StyledIcon onClick={handleOpenProfile}>
                 <Icons.Edit />
               </StyledIcon>
@@ -35,8 +51,17 @@ export const Profile = () => {
           </StyledSection>
           {openProfile ? (
             <StyledEdit>
-              <p>Change profile photo</p>
-              <p>Remove</p>
+              <label>
+                <input
+                  type="file"
+                  id="upload-photo"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  style={{ display: "none" }}
+                />
+                <p>Change profile photo</p>
+              </label>
+              <p onClick={handleRemoveImage}>Remove</p>
             </StyledEdit>
           ) : null}
         </StyledProfile>
@@ -52,35 +77,11 @@ export const Profile = () => {
     </StlyedContainer>
   );
 };
-const StyledItem = styled("div")(() => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "11px",
-  "& p": {
-    fontWeight: "500",
-    color: "#111111",
-  },
-}));
-const StyledText = styled("span")(() => ({
-  width: "19px",
-  height: "18px",
-  borderRadius: "16px",
-  backgroundColor: "#B2B2B2",
-  color: "white",
-  fontSize: "14px",
-  padding: "0 5px",
-}));
+
 const StlyedContainer = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "94px",
-}));
-const StyledContainerForm = styled("div")(() => ({
-  width: "746x",
-  paddingLeft: "100px",
-  display: "flex",
-  flexDirection: "column",
-  gap: "32px",
 }));
 const StyledProfile = styled("div")(() => ({
   padding: "16px 40px",
@@ -109,6 +110,8 @@ const StyledSection = styled("section")(() => ({
   "& img": {
     width: "141px",
     height: "auto",
+    borderRadius: "50%",
+    objectFit: "cover",
   },
   "& p": {
     color: "#0D0D0D",
@@ -142,4 +145,28 @@ const StyledEdit = styled("div")(() => ({
   padding: "16px 24px",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 12px rgba(0, 0, 0, 0.07)",
   cursor: "pointer",
+}));
+const StyledContainerForm = styled("div")(() => ({
+  paddingLeft: "100px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "32px",
+}));
+const StyledItem = styled("div")(() => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "11px",
+  "& p": {
+    fontWeight: "500",
+    color: "#111111",
+  },
+}));
+const StyledText = styled("span")(() => ({
+  width: "19px",
+  height: "18px",
+  borderRadius: "16px",
+  backgroundColor: "#B2B2B2",
+  color: "white",
+  fontSize: "14px",
+  padding: "0 5px",
 }));

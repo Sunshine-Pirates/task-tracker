@@ -20,7 +20,7 @@ const StyledProjectList = styled("div")(() => ({
   height: "320px",
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  gap: "1rem",
   flexWrap: "wrap",
 }));
 const StyledContainer = styled("div")(() => ({

@@ -1,9 +1,7 @@
-import { Profile } from "./components/profile/Profile";
-
 export const App = () => {
   return (
     <div>
-      <Profile />
+      <h1>Task Tracker</h1>
     </div>
   );
 };
