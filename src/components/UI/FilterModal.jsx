@@ -68,14 +68,16 @@ export const FilterModal = () => {
                     }
                   />
                   <p>{item.title}</p>
-                  <StyledButton
-                    variant={item.variant}
-                    style={{
-                      backgroundColor: item.backgrounColor,
-                    }}
-                  >
-                    {item.text}
-                  </StyledButton>
+                  {item.disabled ? null : (
+                    <StyledButton
+                      variant={item.variant}
+                      style={{
+                        backgroundColor: item.backgrounColor,
+                      }}
+                    >
+                      {item.text}
+                    </StyledButton>
+                  )}
                 </ListStyled>
               ))}
             </SecondStyledUnorderedList>
