@@ -9,7 +9,7 @@ export const IconButton = ({
   return (
     <StyledIconButton
       onClick={onClick}
-      customStyles={style}
+      customstyles={style}
       disabled={disabled}
       {...props}
     >
@@ -17,7 +17,7 @@ export const IconButton = ({
     </StyledIconButton>
   );
 };
-const StyledIconButton = styled(MuiIconButton)(({ customStyles }) => ({
+const StyledIconButton = styled(MuiIconButton)(({ customstyles }) => ({
   width: "auto",
   padding: "6px 16px",
   display: "flex",
@@ -28,15 +28,15 @@ const StyledIconButton = styled(MuiIconButton)(({ customStyles }) => ({
   fontSize: "14px",
   lineHeight: "17.6px",
   letterSpacing: "2%",
-  cursor: customStyles?.disabled ? "not-allowed" : "pointer",
-  backgroundColor: customStyles?.backgroundColor,
-  color: customStyles?.color,
+  cursor: customstyles?.disabled ? "not-allowed" : "pointer",
+  backgroundColor: customstyles?.backgroundColor,
+  color: customstyles?.color,
   "&:hover": {
-    backgroundColor: customStyles?.backgroundColor,
-    color: customStyles?.color,
+    backgroundColor: customstyles?.backgroundColor,
+    color: customstyles?.color,
   },
   "&:active": {
-    backgroundColor: customStyles?.backgroundColor,
-    color: customStyles?.color,
+    backgroundColor: customstyles?.backgroundColor,
+    color: customstyles?.color,
   },
 }));
