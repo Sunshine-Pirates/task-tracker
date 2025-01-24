@@ -103,13 +103,6 @@ const ButtonBoard = styled(Button)(() => ({
     color: "white",
   },
 }));
-const NotificationDetails = styled(Box)(() => ({
-  borderRadius: "10px",
-  width: "353px",
-  padding: "10px",
-  backgroundColor: "white",
-}));
-
 const Header = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
@@ -182,4 +175,4 @@ const TextContainer = styled(Box)(() => ({
 const TextReminder = styled(Typography)(() => ({
   fontSize: "16px",
   fontWeight: "500",
-})); 
+}))
