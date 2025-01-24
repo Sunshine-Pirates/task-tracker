@@ -2,14 +2,16 @@ import { useState } from "react";
 import { notificationsData } from "../utils/constants/notificationsData";
 import { Icons } from "../assets";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Button,
-  Typography,
-  List,
-  ListItem,
-  IconButton,
-} from "@mui/material";
+import { Box, Typography, List, ListItem } from "@mui/material";
+import Button from "../components/UI/Button";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3A6883",
+    },
+  },
+});
 
 export const NotificationComponent = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -54,12 +56,12 @@ export const NotificationComponent = () => {
   return (
     <Box>
       {!showNotifications ? (
-        <Button
-          onClick={() => setShowNotifications(true)}
-          startIcon={<Icons.Collapse />}
-        >
-          Boards
-        </Button>
+        <ThemeProvider theme={theme}>
+          <ButtonBoard onClick={() => setShowNotifications(true)}>
+            <Icons.LayoutIcon />
+            Boards
+          </ButtonBoard>
+        </ThemeProvider>
       ) : selectedNotification ? (
         <NotificationDetails>
           <Typography variant="h5">{selectedNotification.name}</Typography>
@@ -68,19 +70,14 @@ export const NotificationComponent = () => {
             <Typography>{selectedNotification.details}</Typography>
             <TimeText>{selectedNotification.time}</TimeText>
           </DetailsMassage>
-          <BackButton onClick={closeNotification}>Go Back</BackButton>
+          <Button onClick={closeNotification}>Go Back</Button>
         </NotificationDetails>
       ) : (
         <NotificationContainer>
           <Header>
-            <Typography variant="h8">
-              Notification
-              <MarkAllButton onClick={markAllAsRead}>
-                Mark as read
-              </MarkAllButton>
-            </Typography>
+            <Typography variant="h8"> Notification</Typography>
+            <Button onClick={markAllAsRead}> Mark as read </Button>
           </Header>
-
           <List>
             {notifications.map((notification, index) => (
               <ListItemStyled key={notification.id} read={notification.read}>
@@ -98,24 +95,21 @@ export const NotificationComponent = () => {
                           <img src="/src/assets/icons/timeclock.svg" alt="" />
                         </IconContainer>
                       )}
-                      <Typography variant="body1">
+                      <TextAndName variant="body1">
                         {notification.name}
-                      </Typography>
+                      </TextAndName>
                     </DetailsMassage>
                     <TextContainer>
-                      <Typography variant="body2" marginTop="5px">
-                        {notification.name}
+                      <TextReminder variant="body2" marginTop="5px">
                         {notification.text}
-                      </Typography>
-                      <TimeText>{notification.time}</TimeText>
+                        <TimeText>{notification.time}</TimeText>
+                      </TextReminder>
                     </TextContainer>
                   </Box>
 
-                  <ArrowButton
-                    onClick={() => openNotification(notification.id)}
-                  >
+                  <Button onClick={() => openNotification(notification.id)}>
                     <Icons.Right />
-                  </ArrowButton>
+                  </Button>
                 </ContentBox>
               </ListItemStyled>
             ))}
@@ -130,20 +124,43 @@ const NotificationContainer = styled(Box)(() => ({
   border: "1px solid #ccc",
   borderRadius: "10px",
   width: "353px",
-  padding: "20px",
+  height: "485",
   backgroundColor: "white",
 }));
 
+const ButtonBoard = styled(Button)(() => ({
+  display: "flex",
+  gap: "10px",
+  width: "245px",
+  height: "37px",
+  color: "#ffffff",
+  backgroundColor: "#3A6883",
+  fontWeight: "400",
+  "&:hover": {
+    backgroundColor: "#3A6883",
+    color: "white",
+  },
+}));
 const NotificationDetails = styled(Box)(() => ({
   borderRadius: "10px",
-  width: "350px",
+  width: "353px",
   padding: "10px",
   backgroundColor: "white",
 }));
 
 const Header = styled(Box)(() => ({
   display: "flex",
-  justifyContent: "flex-end",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginLeft: "30%",
+  Button: {
+    wight: "82px",
+    height: "18",
+    color: "grey",
+    fontSize: "14px",
+    fontWeight: "400",
+    textDecoration: "underline",
+  },
 }));
 
 const ListItemStyled = styled(ListItem, {
@@ -155,8 +172,15 @@ const ListItemStyled = styled(ListItem, {
 }));
 
 const DetailsMassage = styled("div")(() => ({
+  width: "100%",
   display: "flex",
   gap: "10px",
+}));
+const TextAndName = styled(Typography)(() => ({
+  display: "block",
+  width: "100%",
+  fontWeight: "400",
+  fontSize: "14px",
 }));
 
 const Dot = styled("div")(() => ({
@@ -168,20 +192,6 @@ const Dot = styled("div")(() => ({
   marginBottom: "55px",
 }));
 
-const BackButton = styled(Button)(() => ({
-  backgroundColor: "#007bff",
-  color: "#fff",
-  borderRadius: "5px",
-  padding: "3px 8px",
-}));
-
-const MarkAllButton = styled(Button)(() => ({
-  fontSize: "10px",
-  textDecoration: "underline",
-  color: "grey",
-  marginLeft: "30px",
-}));
-
 const TimeText = styled(Typography)(() => ({
   fontFamily: "unset",
   fontSize: "14px",
@@ -191,19 +201,17 @@ const TimeText = styled(Typography)(() => ({
 }));
 
 const IconContainer = styled(Box)(() => ({
-  width: "50px",
+  width: "35px",
   height: "35px",
   backgroundColor: "#c2c4c1dd",
   borderRadius: "50%",
   padding: "5px",
-  marginTop: "10px",
 }));
 
 const ContentBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "flex-start",
   gap: "15px",
-  width: "100%",
 }));
 
 const ProfileImage = styled("img")(() => ({
@@ -214,9 +222,10 @@ const ProfileImage = styled("img")(() => ({
 
 const TextContainer = styled(Box)(() => ({
   display: "flex",
-  flexDirection: "column",
+  width: "232px",
+  height: "100%",
 }));
-
-const ArrowButton = styled(IconButton)(() => ({
-  marginLeft: "auto",
+const TextReminder = styled(Typography)(() => ({
+  fontSize: "16px",
+  fontWeight: "500",
 }));
