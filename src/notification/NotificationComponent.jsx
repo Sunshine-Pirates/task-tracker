@@ -172,7 +172,8 @@ const TextContainer = styled(Box)(() => ({
   width: "232px",
   height: "100%",
 }));
+
 const TextReminder = styled(Typography)(() => ({
   fontSize: "16px",
   fontWeight: "500",
-}))
+}));
