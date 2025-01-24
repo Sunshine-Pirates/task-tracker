@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import { Box, Typography, List, ListItem } from "@mui/material";
 import Button from "../components/UI/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,15 +22,6 @@ export const NotificationComponent = () => {
       read: false,
     }))
   );
-  const [selectedNotification, setSelectedNotification] = useState(null);
-
-  const markAsRead = (id) => {
-    setNotifications((prevNotifications) =>
-      prevNotifications.map((notification) =>
-        notification.id === id ? { ...notification, read: true } : notification
-      )
-    );
-  };
 
   const markAllAsRead = () => {
     setNotifications((prevNotifications) =>
@@ -38,19 +30,6 @@ export const NotificationComponent = () => {
         read: true,
       }))
     );
-  };
-
-  const openNotification = (id) => {
-    const notification = notifications.find((n) => n.id === id);
-
-    if (notification) {
-      markAsRead(id);
-      setSelectedNotification(notification);
-    }
-  };
-
-  const closeNotification = () => {
-    setSelectedNotification(null);
   };
 
   return (
@@ -62,39 +41,23 @@ export const NotificationComponent = () => {
             Boards
           </ButtonBoard>
         </ThemeProvider>
-      ) : selectedNotification ? (
-        <NotificationDetails>
-          <Typography variant="h5">{selectedNotification.name}</Typography>
-          <Typography variant="h6">{selectedNotification.text}</Typography>
-          <DetailsMassage>
-            <Typography>{selectedNotification.details}</Typography>
-            <TimeText>{selectedNotification.time}</TimeText>
-          </DetailsMassage>
-          <Button onClick={closeNotification}>Go Back</Button>
-        </NotificationDetails>
       ) : (
         <NotificationContainer>
           <Header>
-            <Typography variant="h8"> Notification</Typography>
-            <Button onClick={markAllAsRead}> Mark as read </Button>
+            <Typography variant="h8">Notification</Typography>
+            <Button onClick={markAllAsRead}>Mark as read</Button>
           </Header>
           <List>
-            {notifications.map((notification, index) => (
+            {notifications.map((notification) => (
               <ListItemStyled key={notification.id} read={notification.read}>
                 {!notification.read && <Dot />}
                 <ContentBox>
                   <Box>
                     <DetailsMassage>
-                      {index < 2 ? (
-                        <ProfileImage
-                          src="/src/assets/images/ProfileImage.png"
-                          alt=""
-                        />
-                      ) : (
-                        <IconContainer>
-                          <img src="/src/assets/icons/timeclock.svg" alt="" />
-                        </IconContainer>
-                      )}
+                      <ProfileImage
+                        src="/src/assets/images/ProfileImage.png"
+                        alt=""
+                      />
                       <TextAndName variant="body1">
                         {notification.name}
                       </TextAndName>
@@ -106,8 +69,7 @@ export const NotificationComponent = () => {
                       </TextReminder>
                     </TextContainer>
                   </Box>
-
-                  <Button onClick={() => openNotification(notification.id)}>
+                  <Button>
                     <Icons.Right />
                   </Button>
                 </ContentBox>
@@ -200,14 +162,6 @@ const TimeText = styled(Typography)(() => ({
   marginTop: "5px",
 }));
 
-const IconContainer = styled(Box)(() => ({
-  width: "35px",
-  height: "35px",
-  backgroundColor: "#c2c4c1dd",
-  borderRadius: "50%",
-  padding: "5px",
-}));
-
 const ContentBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "flex-start",
@@ -228,4 +182,4 @@ const TextContainer = styled(Box)(() => ({
 const TextReminder = styled(Typography)(() => ({
   fontSize: "16px",
   fontWeight: "500",
-}));
+})); 
