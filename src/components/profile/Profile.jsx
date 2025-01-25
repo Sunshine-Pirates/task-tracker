@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ProfileForm } from "./ProfileForm";
 import { ProjectsList } from "./ProjectsList";
 import { Icons } from "../../assets";
-import { Header } from "../../layout/Header";
 import Profilee from "../../assets/images/Ellipse 11.png";
 
 export const Profile = () => {
@@ -35,7 +34,6 @@ export const Profile = () => {
   return (
     <StlyedContainer>
       <div>
-        <Header />
         <StyledProfile onClick={handleClose}>
           <StyledImageProfile>
             <p>Workspaces \</p> <p>Profile</p>
@@ -59,7 +57,7 @@ export const Profile = () => {
                   onChange={handleImageChange}
                   style={{ display: "none" }}
                 />
-                <p>Change profile photo</p>
+                <p style={{ cursor: "pointer" }}>Change profile photo</p>
               </label>
               <p onClick={handleRemoveImage}>Remove</p>
             </StyledEdit>
