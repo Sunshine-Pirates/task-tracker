@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { styled, keyframes } from "@mui/material";
 import { Input } from "../input/Input";
 import Foto1 from "../../../assets/images/Rectangle 54.png";
 import Foto2 from "../../../assets/images/Rectangle 55.png";
@@ -10,7 +10,6 @@ export const Board = () => {
   const [openImage, setOpenImage] = useState(false);
   const [selectedBackground, setSelectedBackground] = useState("");
 
-  // Устанавливаем фон для body
   useEffect(() => {
     if (selectedBackground) {
       document.body.style.background = selectedBackground.includes("#")
@@ -31,50 +30,52 @@ export const Board = () => {
 
   return (
     <MainBlock>
-      <MainContainer>
-        <h6>Create new board</h6>
-        <BgStyle>
-          <Input placeholder="Board title*" />
-          <p>Add background</p>
-          <Block>
-            <TextBlock>
-              <p>Photo</p>
-              <StyleP onClick={handleOpenImage}>See more</StyleP>
-            </TextBlock>
+      {!openImage && ( // Conditionally render the Board
+        <MainContainer>
+          <h6>Create new board</h6>
+          <BgStyle>
+            <Input placeholder="Board title*" />
+            <p>Add background</p>
+            <Block>
+              <TextBlock>
+                <p>Photo</p>
+                <StyleP onClick={handleOpenImage}>See more</StyleP>
+              </TextBlock>
 
-            <ImageBlock>
-              {[Foto1, Foto2, Foto3].map((image, index) => (
-                <ImageWrapper
-                  key={index}
-                  isSelected={selectedBackground === image}
-                  onClick={() => handleSelectBackground(image)}
-                >
-                  <img src={image} alt="" />
-                </ImageWrapper>
-              ))}
-            </ImageBlock>
-          </Block>
+              <ImageBlock>
+                {[Foto1, Foto2, Foto3].map((image, index) => (
+                  <ImageWrapper
+                    key={index}
+                    isSelected={selectedBackground === image}
+                    onClick={() => handleSelectBackground(image)}
+                  >
+                    <img src={image} alt="" />
+                  </ImageWrapper>
+                ))}
+              </ImageBlock>
+            </Block>
 
-          <Block>
-            <TextBlock>
-              <p>Colors</p>
-              <StyleP>See more</StyleP>
-            </TextBlock>
-            <ColorsBlock>
-              {colors.map((item, index) => (
-                <ColorWrapper
-                  key={index}
-                  bg={item.bg}
-                  isSelected={selectedBackground === item.bg}
-                  onClick={() => handleSelectBackground(item.bg)}
-                />
-              ))}
-            </ColorsBlock>
-          </Block>
-        </BgStyle>
-      </MainContainer>
+            <Block>
+              <TextBlock>
+                <p>Colors</p>
+                <StyleP>See more</StyleP>
+              </TextBlock>
+              <ColorsBlock>
+                {colors.map((item, index) => (
+                  <ColorWrapper
+                    key={index}
+                    bg={item.bg}
+                    isSelected={selectedBackground === item.bg}
+                    onClick={() => handleSelectBackground(item.bg)}
+                  />
+                ))}
+              </ColorsBlock>
+            </Block>
+          </BgStyle>
+        </MainContainer>
+      )}
 
-      {openImage && (
+      {openImage && ( // Conditionally render the Modal
         <ContainerModal>
           <h1>Photo</h1>
           <ImageModal>
@@ -94,12 +95,24 @@ export const Board = () => {
   );
 };
 
+const slideInFromRight = keyframes`
+  0% {
+    transform: translateX(100%); /* Start off-screen */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0); /* End at normal position */
+    opacity: 1;
+  }
+`;
+
 const MainContainer = styled("div")(() => ({
   width: "477px",
   height: "363px",
   backgroundColor: "white",
   borderRadius: "10px",
   padding: "16px 20px",
+  animation: `${slideInFromRight} 1s ease-out`, // Apply the animation for slide-in
 
   h6: {
     fontSize: "16px",
@@ -156,6 +169,7 @@ const ContainerModal = styled("div")(() => ({
   flexDirection: "column",
   alignItems: "center",
   borderRadius: "10px",
+  animation: `${slideInFromRight} 1s ease-out`, // Apply the animation for modal
 
   h1: {
     fontSize: "16px",
@@ -167,6 +181,10 @@ const ContainerModal = styled("div")(() => ({
 const MainBlock = styled("div")(() => ({
   display: "flex",
   gap: "50px",
+  position: "fixed",
+  top: "20px",
+  right: "20px",
+  zIndex: 1000,
 }));
 
 const ImageModal = styled("div")(() => ({
