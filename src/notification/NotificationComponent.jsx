@@ -3,7 +3,6 @@ import { notificationsData } from "../utils/constants/notificationsData";
 import { Icons } from "../assets";
 import { styled } from "@mui/material/styles";
 import { Box, Typography, List, ListItem } from "@mui/material";
-import Button from "../components/UI/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -22,6 +21,14 @@ export const NotificationComponent = () => {
       read: false,
     }))
   );
+
+  const markAsRead = (id) => {
+    setNotifications((prevNotifications) =>
+      prevNotifications.map((notification) =>
+        notification.id === id ? { ...notification, read: true } : notification
+      )
+    );
+  };
 
   const markAllAsRead = () => {
     setNotifications((prevNotifications) =>
@@ -44,12 +51,18 @@ export const NotificationComponent = () => {
       ) : (
         <NotificationContainer>
           <Header>
-            <Typography variant="h8">Notification</Typography>
-            <Button onClick={markAllAsRead}>Mark as read</Button>
+            <p>Notification</p>
+            <ButtonForMark onClick={markAllAsRead}>
+              Mark all as read
+            </ButtonForMark>
           </Header>
           <List>
             {notifications.map((notification) => (
-              <ListItemStyled key={notification.id} read={notification.read}>
+              <ListItemStyled
+                key={notification.id}
+                read={notification.read}
+                onClick={() => markAsRead(notification.id)}
+              >
                 {!notification.read && <Dot />}
                 <ContentBox>
                   <Box>
@@ -58,20 +71,22 @@ export const NotificationComponent = () => {
                         src="/src/assets/images/ProfileImage.png"
                         alt=""
                       />
-                      <TextAndName variant="body1">
+                      <TextAndName variant="body1" component="span">
                         {notification.name}
                       </TextAndName>
                     </DetailsMassage>
                     <TextContainer>
-                      <TextReminder variant="body2" marginTop="5px">
+                      <TextReminder component="div">
                         {notification.text}
-                        <TimeText>{notification.time}</TimeText>
+                        <TimeText component="span">
+                          {notification.time}
+                        </TimeText>
                       </TextReminder>
                     </TextContainer>
                   </Box>
-                  <Button>
+                  <ButtonForIcon>
                     <Icons.Right />
-                  </Button>
+                  </ButtonForIcon>
                 </ContentBox>
               </ListItemStyled>
             ))}
@@ -88,9 +103,10 @@ const NotificationContainer = styled(Box)(() => ({
   width: "353px",
   height: "485",
   backgroundColor: "white",
+  marginLeft: "30px",
 }));
 
-const ButtonBoard = styled(Button)(() => ({
+const ButtonBoard = styled("button")(() => ({
   display: "flex",
   gap: "10px",
   width: "245px",
@@ -98,32 +114,37 @@ const ButtonBoard = styled(Button)(() => ({
   color: "#ffffff",
   backgroundColor: "#3A6883",
   fontWeight: "400",
-  "&:hover": {
-    backgroundColor: "#3A6883",
-    color: "white",
-  },
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: "50px",
+  border: "1px solid #3A6883",
 }));
 const Header = styled(Box)(() => ({
   display: "flex",
+  gap: "20px",
   alignItems: "center",
-  justifyContent: "space-between",
-  marginLeft: "30%",
-  Button: {
-    wight: "82px",
-    height: "18",
-    color: "grey",
-    fontSize: "14px",
-    fontWeight: "400",
-    textDecoration: "underline",
-  },
+  justifyContent: "flex-end",
+  marginRight: "15px",
+}));
+
+const ButtonForMark = styled("button")(() => ({
+  wight: "82px",
+  height: "18",
+  color: "grey",
+  backgroundColor: "white",
+  border: "0px solid white",
+  fontSize: "14px",
+  fontWeight: "400",
+  textDecoration: "underline",
 }));
 
 const ListItemStyled = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== "read",
-})(() => ({
+})(({ read }) => ({
   display: "flex",
   padding: "10px",
   borderBottom: "1px solid #ddd",
+  backgroundColor: read ? "#f7f7f7" : "#fff",
 }));
 
 const DetailsMassage = styled("div")(() => ({
@@ -156,9 +177,17 @@ const TimeText = styled(Typography)(() => ({
 }));
 
 const ContentBox = styled(Box)(() => ({
+  width: "350px",
   display: "flex",
-  alignItems: "flex-start",
+  justifyContent: "space-between",
   gap: "15px",
+}));
+
+const ButtonForIcon = styled("button")(() => ({
+  display: "flex",
+  border: "0px solid",
+  backgroundColor: "white",
+  marginRight: "15px",
 }));
 
 const ProfileImage = styled("img")(() => ({
