@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 import ProfileBanner from "../../assets/images/profile-banner.png";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ProfileForm } from "./ProfileForm";
 import { ProjectsList } from "./ProjectsList";
 import { Icons } from "../../assets";
@@ -10,58 +10,71 @@ export const Profile = () => {
   const [openProfile, setOpenProfile] = useState(false);
   const [profileImage, setProfileImage] = useState(Profilee);
 
-  const handleOpenProfile = (e) => {
-    e.stopPropagation();
-    setOpenProfile(true);
-  };
-
-  const handleClose = () => {
-    setOpenProfile(false);
-  };
+  const fileInputRef = useRef(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageURL = URL.createObjectURL(file);
-      setProfileImage(imageURL);
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
+    handleCloseProfile();
   };
+
+  const handleEditClick = () => {
+    fileInputRef.current.click();
+  };
+
   const handleRemoveImage = () => {
     setProfileImage(Profilee);
     setOpenProfile(false);
   };
 
+  const handleToggleProfile = (e) => {
+    e.stopPropagation();
+    setOpenProfile(!openProfile);
+  };
+
+  const handleCloseProfile = () => {
+    setOpenProfile(false);
+  };
+
   return (
-    <StlyedContainer>
+    <StyledContainer onClick={handleCloseProfile}>
       <div>
-        <StyledProfile onClick={handleClose}>
+        <StyledProfile>
           <StyledImageProfile>
             <p>Workspaces \</p> <p>Profile</p>
           </StyledImageProfile>
           <StyledSection>
             <div>
               <img src={profileImage} alt="Profile" />
-              <StyledIcon onClick={handleOpenProfile}>
+              <StyledIcon onClick={handleToggleProfile}>
                 <Icons.Edit />
               </StyledIcon>
             </div>
             <p>Riko Rikovich</p>
           </StyledSection>
-          {openProfile ? (
-            <StyledEdit>
-              <label>
-                <input
-                  type="file"
-                  id="upload-photo"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  style={{ display: "none" }}
-                />
-                <p style={{ cursor: "pointer" }}>Change profile photo</p>
-              </label>
-              <p onClick={handleRemoveImage}>Remove</p>
+          {openProfile && (
+            <StyledEdit onClick={(e) => e.stopPropagation()}>
+              <p style={{ cursor: "pointer" }} onClick={handleEditClick}>
+                Change profile photo
+              </p>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{ display: "none" }}
+              />
+              <p style={{ cursor: "pointer" }} onClick={handleRemoveImage}>
+                Remove
+              </p>
             </StyledEdit>
-          ) : null}
+          )}
         </StyledProfile>
       </div>
       <StyledContainerForm>
@@ -72,14 +85,15 @@ export const Profile = () => {
         </StyledItem>
         <ProjectsList />
       </StyledContainerForm>
-    </StlyedContainer>
+    </StyledContainer>
   );
 };
 
-const StlyedContainer = styled("div")(() => ({
+const StyledContainer = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "94px",
+  position: "relative",
 }));
 const StyledProfile = styled("div")(() => ({
   padding: "16px 40px",
@@ -107,7 +121,7 @@ const StyledSection = styled("section")(() => ({
   justifyContent: "center",
   "& img": {
     width: "141px",
-    height: "auto",
+    height: "141px",
     borderRadius: "50%",
     objectFit: "cover",
   },
@@ -129,11 +143,11 @@ const StyledIcon = styled("section")(() => ({
 const StyledEdit = styled("div")(() => ({
   width: "207px",
   height: "86px",
-  backgroundColor: "#ffff",
+  backgroundColor: "#FFFFFF",
   borderRadius: "12px",
   zIndex: 100,
   position: "absolute",
-  top: "14.500rem",
+  top: "14.5rem",
   left: "12rem",
   display: "flex",
   flexDirection: "column",
