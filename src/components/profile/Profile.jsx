@@ -1,10 +1,10 @@
 import { styled } from "@mui/material";
 import ProfileBanner from "../../assets/images/profile-banner.png";
 import { useState, useRef } from "react";
-import { ProfileForm } from "./ProfileForm";
 import { ProjectsList } from "./ProjectsList";
 import { Icons } from "../../assets";
 import Profilee from "../../assets/images/Ellipse 11.png";
+import { ProfileForm } from "./ProfileForm";
 
 export const Profile = () => {
   const [openProfile, setOpenProfile] = useState(false);

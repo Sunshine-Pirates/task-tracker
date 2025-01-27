@@ -1,7 +1,7 @@
 import { styled } from "@mui/material";
 import { Input } from "../UI/input/Input";
-import Button from "../UI/Button";
 import { useForm } from "react-hook-form";
+import { Button } from "../UI/Button";
 
 export const ProfileForm = () => {
   const {
