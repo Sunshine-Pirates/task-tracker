@@ -3,8 +3,33 @@ import { Icons } from "../assets";
 import { Input } from "../components/UI/input/Input";
 import { Button } from "../components/UI/Button";
 import ImageSignUp from "../assets/images/SigIn.png";
+import { useForm } from "react-hook-form";
 
 export const SignIn = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const formValue = watch();
+
+  const handleInputChange = (name, value) => {
+    setValue(name, value, { shouldValidate: true });
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <StyledContainerLogo>
@@ -28,14 +53,54 @@ export const SignIn = () => {
               <Icons.Google />
             </StyledGoogle>
             <p style={{ color: "#919191", textAlign: "center" }}>or</p>
-            <StyledForm>
-              <StyledInput placeholder="example@gmail.com" />
-              <StyledInput placeholder="Password" type="password" />
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+              <StyledContainerMessage>
+                <StyledInput
+                  type="email"
+                  placeholder="example@gmail.com"
+                  value={formValue.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  {...register("email", {
+                    required: "Email обязателен для заполнения",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Введите корректный email",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <ErrorMessage>{errors.email.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerMessages>
+                <StyledContainerMessage>
+                  <StyledInput
+                    type="password"
+                    placeholder="Password"
+                    value={formValue.password}
+                    onChange={(e) =>
+                      handleInputChange("password", e.target.value)
+                    }
+                    {...register("password", {
+                      required: "Пароль обязателен для заполнения",
+                      minLength: {
+                        value: 6,
+                        message: "Пароль должен содержать минимум 6 символов",
+                      },
+                    })}
+                  />
+                  {errors.password && (
+                    <ErrorMessage>{errors.password.message}</ErrorMessage>
+                  )}
+                </StyledContainerMessage>
+                <StyledTitle>Forgot password?</StyledTitle>
+              </StyledContainerMessages>
+              <StyledButton variant="cancel" type="submit">
+                Log In
+              </StyledButton>
             </StyledForm>
-            <StyledTitle>Forgot password?</StyledTitle>
           </StyledContainerr>
           <StyledContainerSignUp>
-            <StyledButton variant="cancel">Log In</StyledButton>
             <span>
               Not a member?
               <StyledNavigate href="#">Sign up now</StyledNavigate>{" "}
@@ -47,6 +112,20 @@ export const SignIn = () => {
     </Container>
   );
 };
+const StyledContainerMessage = styled("div")(() => ({
+  height: "54px",
+  display: "flex",
+  flexDirection: "column",
+}));
+const StyledContainerMessages = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+}));
+const ErrorMessage = styled("span")(() => ({
+  color: "red",
+  fontSize: "13px",
+  paddingLeft: "3px",
+}));
 const StyledTitle = styled("p")(() => ({
   textAlign: "end",
   fontSize: "14px",
@@ -129,7 +208,7 @@ const StyledText = styled("p")(() => ({
 const StyledForm = styled("form")(() => ({
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  alignItems: "center",
 }));
 const StyledInput = styled(Input)(() => ({
   width: "321px",
@@ -141,6 +220,7 @@ const StyledButton = styled(Button)(() => ({
   height: "34px",
   backgroundColor: "#0079BF",
   color: "#FFFFFF",
+  marginTop: "30px",
 }));
 const StyledContainerr = styled("div")(() => ({
   display: "flex",

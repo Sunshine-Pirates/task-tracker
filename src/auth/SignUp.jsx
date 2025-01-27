@@ -4,8 +4,36 @@ import { Input } from "../components/UI/input/Input";
 import { Checkbox } from "../components/UI/checkbox/Checkbox";
 import { Button } from "../components/UI/Button";
 import ImageSignUp from "../assets/images/SigIn.png";
+import { useForm } from "react-hook-form";
 
 export const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      name: "",
+      surname: "",
+      email: "",
+      password: "",
+      repeatPassword: "",
+    },
+  });
+
+  const formValue = watch();
+
+  const handleInputChange = (name, value) => {
+    setValue(name, value, { shouldValidate: true });
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <StyledContainerLogo>
@@ -29,35 +57,136 @@ export const SignUp = () => {
               <Icons.Google />
             </StyledGoogle>
             <p style={{ color: "#919191", textAlign: "center" }}>or</p>
-            <StyledForm>
-              <StyledInput placeholder="Name" />
-              <StyledInput placeholder="Surname" />
-              <StyledInput placeholder="example@gmail.com" />
-              <StyledInput placeholder="Password" type="password" />
-              <StyledInput placeholder="Repeat password" type="password" />
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+              <StyledContainerMessage>
+                <StyledInput
+                  placeholder="Name"
+                  value={formValue.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  {...register("name", {
+                    required: "Имя обязательно для заполнения",
+                    minLength: {
+                      value: 2,
+                      message: "Имя должно быть не менее 2 символов",
+                    },
+                  })}
+                />
+                {errors.name && (
+                  <ErrorMessage>{errors.name.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerMessage>
+                <StyledInput
+                  placeholder="Surname"
+                  value={formValue.surname}
+                  onChange={(e) => handleInputChange("surname", e.target.value)}
+                  {...register("surname", {
+                    required: "Фамилия обязательна для заполнения",
+                    minLength: {
+                      value: 2,
+                      message: "Фамилия должна быть не менее 2 символов",
+                    },
+                  })}
+                />
+                {errors.surname && (
+                  <ErrorMessage>{errors.surname.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerMessage>
+                <StyledInput
+                  type="email"
+                  placeholder="example@gmail.com"
+                  value={formValue.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  {...register("email", {
+                    required: "Email обязателен для заполнения",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Введите корректный email",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <ErrorMessage>{errors.email.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerMessage>
+                <StyledInput
+                  type="password"
+                  placeholder="Password"
+                  value={formValue.password}
+                  onChange={(e) =>
+                    handleInputChange("password", e.target.value)
+                  }
+                  {...register("password", {
+                    required: "Пароль обязателен для заполнения",
+                    minLength: {
+                      value: 6,
+                      message: "Пароль должен содержать минимум 6 символов",
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <ErrorMessage>{errors.password.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerMessage>
+                <StyledInput
+                  type="password"
+                  placeholder="Repeat password"
+                  value={formValue.repeatPassword}
+                  onChange={(e) =>
+                    handleInputChange("repeatPassword", e.target.value)
+                  }
+                  {...register("repeatPassword", {
+                    required: "Подтверждение пароля обязательно",
+                    validate: (value) =>
+                      value === formValue.password || "Пароли не совпадают",
+                  })}
+                />
+                {errors.repeatPassword && (
+                  <ErrorMessage>{errors.repeatPassword.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerSignUp>
+                <StyledWrapper>
+                  <Checkbox
+                    checkedIcon={<Icons.Checkbox />}
+                    uncheckedIcon={<Icons.CheckboxLine />}
+                  />
+                  <div>
+                    <p>Creating an account means you’re okay with our </p>
+                    <a href="#">Terms of Service,</a>
+                    <a href="#">Privacy Policy.</a>
+                  </div>
+                </StyledWrapper>
+                <StyledButton variant="cancel" type="submit">
+                  Sign Up{" "}
+                </StyledButton>
+                <span>
+                  You already have an account?
+                  <StyledNavigate href="#">Log In</StyledNavigate>
+                </span>
+              </StyledContainerSignUp>
             </StyledForm>
           </StyledContainerr>
-          <StyledContainerSignUp>
-            <StyledWrapper>
-              <Checkbox />
-              <div>
-                <p>Creating an account means you’re okay with our</p>
-                <a href="#">Terms of Service,</a>
-                <a href="#">Privacy Policy.</a>
-              </div>
-            </StyledWrapper>
-            <StyledButton variant="cancel">Sign Up</StyledButton>
-            <span>
-              You already have an account?{" "}
-              <StyledNavigate href="#">Log In</StyledNavigate>{" "}
-            </span>
-          </StyledContainerSignUp>
         </StyledWrapperForm>
         <StyledImage src={ImageSignUp} alt="ImageSignUp" />
       </ContainerBox>
     </Container>
   );
 };
+const StyledContainerMessage = styled("div")(() => ({
+  height: "54px",
+  display: "flex",
+  flexDirection: "column",
+}));
+
+const ErrorMessage = styled("span")(() => ({
+  color: "red",
+  fontSize: "13px",
+  paddingLeft: "3px",
+}));
 const Container = styled("div")(() => ({
   display: "flex",
   gap: "50px",
@@ -134,7 +263,6 @@ const StyledText = styled("p")(() => ({
 const StyledForm = styled("form")(() => ({
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
 }));
 const StyledInput = styled(Input)(() => ({
   width: "321px",

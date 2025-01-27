@@ -3,8 +3,28 @@ import { Icons } from "../assets";
 import ImageSignUp from "../assets/images/SigIn.png";
 import { Input } from "../components/UI/input/Input";
 import { Button } from "../components/UI/Button";
+import { useForm } from "react-hook-form";
 
 export const ChangePassword = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    mode: "onBlur",
+    defaultValues: {
+      password: "",
+      repeatPassword: "",
+    },
+  });
+
+  const formValue = watch();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <Container>
       <StyledContainerLogo>
@@ -15,11 +35,41 @@ export const ChangePassword = () => {
         <StyledWrapper>
           <p>Password</p>
           <StyledContainer>
-            <StyledForm>
-              <StyledInput placeholder="Password" type="password" />
-              <StyledInput placeholder="Repeat password" type="password" />
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+              <StyledContainerMessage>
+                <StyledInput
+                  type="password"
+                  placeholder="Password"
+                  {...register("password", {
+                    required: "Пароль обязателен для заполнения",
+                    minLength: {
+                      value: 6,
+                      message: "Пароль должен содержать минимум 6 символов",
+                    },
+                  })}
+                />
+                {errors.password && (
+                  <ErrorMessage>{errors.password.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledContainerMessage>
+                <StyledInput
+                  type="password"
+                  placeholder="Repeat password"
+                  {...register("repeatPassword", {
+                    required: "Подтверждение пароля обязательно",
+                    validate: (value) =>
+                      value === formValue.password || "Пароли не совпадают",
+                  })}
+                />
+                {errors.repeatPassword && (
+                  <ErrorMessage>{errors.repeatPassword.message}</ErrorMessage>
+                )}
+              </StyledContainerMessage>
+              <StyledButton type="submit" variant="cancel">
+                Log In
+              </StyledButton>
             </StyledForm>
-            <StyledButton variant="cancel">Log In</StyledButton>
           </StyledContainer>
         </StyledWrapper>
         <StyledImage src={ImageSignUp} alt="ImageSignUp" />
@@ -27,6 +77,17 @@ export const ChangePassword = () => {
     </Container>
   );
 };
+
+const ErrorMessage = styled("span")(() => ({
+  color: "red",
+  fontSize: "13px",
+  paddingLeft: "3px",
+}));
+const StyledContainerMessage = styled("div")(() => ({
+  height: "54px",
+  display: "flex",
+  flexDirection: "column",
+}));
 const Container = styled("div")(() => ({
   display: "flex",
   gap: "50px",
@@ -68,7 +129,7 @@ const StyledContainerLogo = styled("section")(() => ({
 const StyledForm = styled("form")(() => ({
   display: "flex",
   flexDirection: "column",
-  gap: "16px",
+  alignItems: "center",
 }));
 const StyledInput = styled(Input)(() => ({
   width: "321px",
@@ -84,6 +145,7 @@ const StyledButton = styled(Button)(() => ({
   height: "34px",
   backgroundColor: "#0079BF",
   color: "#FFFFFF",
+  marginTop: "10px",
 }));
 const StyledText = styled("p")(() => ({
   fontSize: "18px",
