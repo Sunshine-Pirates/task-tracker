@@ -1,9 +1,7 @@
-import { SignIn } from "./auth/SignIn";
-
 export const App = () => {
   return (
     <div>
-      <SignIn />
+      <h1>Task Tracker</h1>
     </div>
   );
 };
