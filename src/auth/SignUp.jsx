@@ -156,26 +156,34 @@ export const SignUp = () => {
                   />
                   <div>
                     <p>Creating an account means you’re okay with our </p>
-                    <a href="#">Terms of Service,</a>
-                    <a href="#">Privacy Policy.</a>
+                    <StyledTextContainer>
+                      <a href="#">Terms of Service,</a>
+                      <a href="#">Privacy Policy.</a>
+                    </StyledTextContainer>
                   </div>
                 </StyledWrapper>
                 <StyledButton variant="cancel" type="submit">
                   Sign Up{" "}
                 </StyledButton>
-                <span>
-                  You already have an account?
+                <StyledTextContainer>
+                  <span>You already have an account?</span>
                   <StyledNavigate href="#">Log In</StyledNavigate>
-                </span>
+                </StyledTextContainer>
               </StyledContainerSignUp>
             </StyledForm>
           </StyledContainerr>
         </StyledWrapperForm>
-        <StyledImage src={ImageSignUp} alt="ImageSignUp" />
+        <StyledImageContainer>
+          <StyledImage src={ImageSignUp} alt="ImageSignUp" />
+        </StyledImageContainer>{" "}
       </ContainerBox>
     </Container>
   );
 };
+const StyledTextContainer = styled("div")(() => ({
+  display: "flex",
+  gap: "4px",
+}));
 const StyledContainerMessage = styled("div")(() => ({
   height: "54px",
   display: "flex",
@@ -189,12 +197,13 @@ const ErrorMessage = styled("span")(() => ({
 }));
 const Container = styled("div")(() => ({
   display: "flex",
-  gap: "50px",
+  justifyContent: "space-around",
 }));
 const ContainerBox = styled("section")(() => ({
+  width: "1080px",
   display: "flex",
   alignItems: "center",
-  gap: "161px",
+  justifyContent: "space-around",
 }));
 const StyledWrapperForm = styled("div")(() => ({
   width: "321px",
@@ -205,11 +214,21 @@ const StyledWrapperForm = styled("div")(() => ({
   alignItems: "center",
   gap: "20px",
 }));
+const StyledImageContainer = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "auto",
+}));
+
 const StyledImage = styled("img")(() => ({
-  width: "579px",
+  width: "100%",
+  maxWidth: "579px",
   height: "auto",
   objectFit: "cover",
 }));
+
 const StyledContainerSignUp = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
@@ -240,7 +259,6 @@ const StyledGoogle = styled("div")(() => ({
 const StyledContainerLogo = styled("section")(() => ({
   display: "flex",
   gap: "8px",
-  paddingLeft: "40px",
   paddingTop: "20px",
 
   "& p": {

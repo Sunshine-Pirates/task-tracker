@@ -4,8 +4,20 @@ import { Input } from "../components/UI/input/Input";
 import { Button } from "../components/UI/Button";
 import ImageSignUp from "../assets/images/SigIn.png";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { ForgotPassword } from "./ForgotPassword";
+import { Modal } from "../components/UI/modal/Modal";
 
 export const SignIn = () => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   const {
     register,
     handleSubmit,
@@ -93,7 +105,9 @@ export const SignIn = () => {
                     <ErrorMessage>{errors.password.message}</ErrorMessage>
                   )}
                 </StyledContainerMessage>
-                <StyledTitle>Forgot password?</StyledTitle>
+                <StyledTitle onClick={handleOpenModal}>
+                  Forgot password?
+                </StyledTitle>
               </StyledContainerMessages>
               <StyledButton variant="cancel" type="submit">
                 Log In
@@ -101,14 +115,21 @@ export const SignIn = () => {
             </StyledForm>
           </StyledContainerr>
           <StyledContainerSignUp>
-            <span>
-              Not a member?
+            <StyledTextContainer>
+              <span>Not a member?</span>
               <StyledNavigate href="#">Sign up now</StyledNavigate>{" "}
-            </span>
+            </StyledTextContainer>
           </StyledContainerSignUp>
         </StyledWrapperForm>
-        <StyledImage src={ImageSignUp} alt="ImageSignUp" />
+        <StyledImageContainer>
+          <StyledImage src={ImageSignUp} alt="ImageSignUp" />
+        </StyledImageContainer>{" "}
       </ContainerBox>
+      {openModal && (
+        <Modal isOpen={openModal} onClose={handleCloseModal} icon>
+          <ForgotPassword />
+        </Modal>
+      )}
     </Container>
   );
 };
@@ -116,6 +137,10 @@ const StyledContainerMessage = styled("div")(() => ({
   height: "54px",
   display: "flex",
   flexDirection: "column",
+}));
+const StyledTextContainer = styled("div")(() => ({
+  display: "flex",
+  gap: "4px",
 }));
 const StyledContainerMessages = styled("div")(() => ({
   display: "flex",
@@ -134,12 +159,13 @@ const StyledTitle = styled("p")(() => ({
 }));
 const Container = styled("div")(() => ({
   display: "flex",
-  gap: "50px",
+  justifyContent: "space-around",
 }));
 const ContainerBox = styled("section")(() => ({
+  width: "1080px",
   display: "flex",
   alignItems: "center",
-  gap: "161px",
+  justifyContent: "space-around",
 }));
 const StyledWrapperForm = styled("div")(() => ({
   width: "321px",
@@ -150,8 +176,17 @@ const StyledWrapperForm = styled("div")(() => ({
   alignItems: "center",
   gap: "30px",
 }));
+const StyledImageContainer = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "auto",
+}));
+
 const StyledImage = styled("img")(() => ({
-  width: "579px",
+  width: "100%",
+  maxWidth: "579px",
   height: "auto",
   objectFit: "cover",
 }));
@@ -185,7 +220,6 @@ const StyledGoogle = styled("div")(() => ({
 const StyledContainerLogo = styled("section")(() => ({
   display: "flex",
   gap: "8px",
-  paddingLeft: "40px",
   paddingTop: "20px",
 
   "& p": {

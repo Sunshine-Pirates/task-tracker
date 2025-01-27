@@ -27,64 +27,52 @@ export const ForgotPassword = () => {
     console.log(data);
   };
   return (
-    <FullScreenContainer>
-      <Container>
-        <p>Forgot password?</p>
-        <StyledTitle>
-          A link will be sent to your Email, follow the link sent to the mail
-        </StyledTitle>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <StyledContainerMessage>
-            <StyledInput
-              type="email"
-              placeholder="example@gmail.com"
-              value={formValue.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
-              {...register("email", {
-                required: "Email обязателен для заполнения",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Введите корректный email",
-                },
-              })}
-            />
-            {errors.email && (
-              <ErrorMessage>{errors.email.message}</ErrorMessage>
-            )}
-          </StyledContainerMessage>
-          <StyledButton type="submit" variant="cancel">
-            {" "}
-            Send{" "}
-          </StyledButton>
-        </form>
-      </Container>
-    </FullScreenContainer>
+    <Container>
+      <p>Forgot password?</p>
+      <StyledTitle>
+        A link will be sent to your Email, follow the link sent to the mail
+      </StyledTitle>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <StyledContainerMessage>
+          <StyledInput
+            type="email"
+            placeholder="example@gmail.com"
+            value={formValue.email}
+            onChange={(e) => handleInputChange("email", e.target.value)}
+            {...register("email", {
+              required: "Email обязателен для заполнения",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Введите корректный email",
+              },
+            })}
+          />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+        </StyledContainerMessage>
+        <StyledButton type="submit" variant="cancel">
+          Send
+        </StyledButton>
+      </form>
+    </Container>
   );
 };
 const ErrorMessage = styled("span")(() => ({
   color: "red",
   fontSize: "13px",
-  paddingLeft: "3px",
+  paddingLeft: "4px",
 }));
 const StyledContainerMessage = styled("div")(() => ({
   height: "54px",
   display: "flex",
   flexDirection: "column",
-}));
-const FullScreenContainer = styled("div")(() => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  width: "100%",
+  gap: "2px",
 }));
 const Container = styled("div")(() => ({
   width: "460px",
-  height: "194px",
-  padding: "20px 28px 20px 20px",
   display: "flex",
   flexDirection: "column",
   gap: "14px",
+
   "& p": {
     fontSize: "20px",
     fontWeight: "500",
@@ -93,20 +81,23 @@ const Container = styled("div")(() => ({
   "& form": {
     display: "flex",
     flexDirection: "column",
-    alignItems: "end",
-    gap: "18px",
+    justifyContent: "space-between",
   },
 }));
+
 const StyledButton = styled(Button)(() => ({
   width: "139px",
   height: "34px",
   backgroundColor: "#0079BF",
   color: "#FFFFFF",
+  alignSelf: "flex-end",
 }));
+
 const StyledInput = styled(Input)(() => ({
-  width: "412px",
+  width: "100%",
   height: "32px",
 }));
+
 const StyledTitle = styled("span")(() => ({
   color: "#707070",
   fontSize: "14px",

@@ -72,7 +72,9 @@ export const ChangePassword = () => {
             </StyledForm>
           </StyledContainer>
         </StyledWrapper>
-        <StyledImage src={ImageSignUp} alt="ImageSignUp" />
+        <StyledImageContainer>
+          <StyledImage src={ImageSignUp} alt="ImageSignUp" />
+        </StyledImageContainer>{" "}
       </StyledContainerBox>
     </Container>
   );
@@ -90,12 +92,13 @@ const StyledContainerMessage = styled("div")(() => ({
 }));
 const Container = styled("div")(() => ({
   display: "flex",
-  gap: "50px",
+  justifyContent: "space-around",
 }));
 const StyledContainerBox = styled("div")(() => ({
+  width: "1080px",
   display: "flex",
   alignItems: "center",
-  gap: "161px",
+  justifyContent: "space-around",
 }));
 const StyledWrapper = styled("section")(() => ({
   display: "flex",
@@ -135,8 +138,17 @@ const StyledInput = styled(Input)(() => ({
   width: "321px",
   height: "32px",
 }));
+const StyledImageContainer = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "auto",
+}));
+
 const StyledImage = styled("img")(() => ({
-  width: "579px",
+  width: "100%",
+  maxWidth: "579px",
   height: "auto",
   objectFit: "cover",
 }));
