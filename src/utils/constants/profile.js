@@ -40,3 +40,5 @@ export const projectsList = [
     title: "Бухгалтерский сайт",
   },
 ];
+export const image =
+  "https://st3.depositphotos.com/19428878/37434/v/450/depositphotos_374342112-stock-illustration-default-avatar-profile-icon-vector.jpg";

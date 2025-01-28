@@ -3,7 +3,7 @@ import { Input } from "../UI/input/Input";
 import { useForm } from "react-hook-form";
 import { Button } from "../UI/Button";
 
-export const ProfileForm = () => {
+export const ProfileForm = ({ defaultValues, onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -12,23 +12,13 @@ export const ProfileForm = () => {
     setValue,
   } = useForm({
     mode: "onBlur",
-    defaultValues: {
-      name: "",
-      fullName: "",
-      email: "",
-      password: "",
-      repeatPassword: "",
-    },
+    defaultValues,
   });
 
   const formValue = watch();
 
   const handleInputChange = (name, value) => {
     setValue(name, value, { shouldValidate: true });
-  };
-
-  const onSubmit = (data) => {
-    console.log(data);
   };
 
   return (

@@ -1,14 +1,23 @@
 import { styled } from "@mui/material";
-import ProfileBanner from "../../assets/images/profile-banner.png";
 import { useState, useRef } from "react";
+import ProfileBanner from "../../assets/images/profile-banner.png";
+import { ProfileForm } from "./ProfileForm";
 import { ProjectsList } from "./ProjectsList";
 import { Icons } from "../../assets";
 import Profilee from "../../assets/images/Ellipse 11.png";
-import { ProfileForm } from "./ProfileForm";
+import { image } from "../../utils/constants/profile";
 
 export const Profile = () => {
   const [openProfile, setOpenProfile] = useState(false);
   const [profileImage, setProfileImage] = useState(Profilee);
+  const [profileData, setProfileData] = useState({
+    name: "",
+    fullName: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+    profileImage: Profilee,
+  });
 
   const fileInputRef = useRef(null);
 
@@ -18,6 +27,7 @@ export const Profile = () => {
       const reader = new FileReader();
       reader.onload = () => {
         setProfileImage(reader.result);
+        setProfileData((prev) => ({ ...prev, profileImage: reader.result }));
       };
       reader.readAsDataURL(file);
     }
@@ -29,7 +39,8 @@ export const Profile = () => {
   };
 
   const handleRemoveImage = () => {
-    setProfileImage(Profilee);
+    setProfileImage(image);
+    setProfileData((prev) => ({ ...prev, profileImage: Profilee }));
     setOpenProfile(false);
   };
 
@@ -40,6 +51,11 @@ export const Profile = () => {
 
   const handleCloseProfile = () => {
     setOpenProfile(false);
+  };
+
+  const handleFormSubmit = (formData) => {
+    const updatedData = { ...formData, profileImage };
+    console.log(updatedData);
   };
 
   return (
@@ -78,9 +94,9 @@ export const Profile = () => {
         </StyledProfile>
       </div>
       <StyledContainerForm>
-        <ProfileForm />
+        <ProfileForm defaultValues={profileData} onSubmit={handleFormSubmit} />
         <StyledItem>
-          <p>Involved in projects </p>
+          <p>Involved in projects</p>
           <StyledText>8</StyledText>
         </StyledItem>
         <ProjectsList />
