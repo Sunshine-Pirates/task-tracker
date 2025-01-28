@@ -1,4 +1,5 @@
 import { Button as MuiButton, styled } from "@mui/material";
+
 export const Button = ({
   children,
   disabled,
@@ -12,7 +13,7 @@ export const Button = ({
       onClick={onClick}
       variant={variant}
       disabled={disabled}
-      customStyles={style}
+      sx={style}
       {...props}
     >
       {children}

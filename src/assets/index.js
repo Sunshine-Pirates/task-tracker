@@ -41,6 +41,7 @@ import RadioLine from "../assets/icons/radioLine.svg";
 import Success from "../assets/icons/success.svg";
 import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
+import CheckMark from "../assets/icons/checkMark.svg";
 
 export const Icons = {
   KeyboardDoubleArrowDownIcon,
@@ -86,4 +87,5 @@ export const Icons = {
   Success,
   Error,
   Warning,
+  CheckMark,
 };

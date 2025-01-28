@@ -34,3 +34,14 @@ export const colors = [
   { bg: "#89609E" },
   { bg: "#005C92" },
 ];
+
+export const colorsSecond = [
+  { bg: "#CBCBCB" },
+  { bg: "#B04632" },
+  { bg: "#519839" },
+  { bg: "#D29034" },
+  { bg: "#89609E" },
+  { bg: "#005C92" },
+  { bg: "#CD5A91" },
+  { bg: "#2A2A2A" },
+];

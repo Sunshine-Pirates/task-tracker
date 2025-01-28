@@ -4,10 +4,17 @@ import Foto1 from "../../../assets/images/Rectangle 54.png";
 import Foto2 from "../../../assets/images/Rectangle 55.png";
 import Foto3 from "../../../assets/images/Rectangle 56.png";
 import { useState, useEffect } from "react";
-import { boardImage, colors } from "../../../utils/constants/general";
+import {
+  boardImage,
+  colors,
+  colorsSecond,
+} from "../../../utils/constants/general";
+import { Button } from "../Button";
+import { Icons } from "../../../assets";
 
-export const Board = () => {
+export const Board = ({ open, onClose }) => {
   const [openImage, setOpenImage] = useState(false);
+  const [openColors, setOpenColors] = useState(false);
   const [selectedBackground, setSelectedBackground] = useState("");
 
   useEffect(() => {
@@ -21,16 +28,26 @@ export const Board = () => {
   }, [selectedBackground]);
 
   const handleOpenImage = () => {
-    setOpenImage((prev) => !prev);
+    setOpenImage(true);
+  };
+
+  const handleOpenColors = () => {
+    setOpenColors(true);
+  };
+
+  const handleCloseModals = () => {
+    setOpenImage(false);
+    setOpenColors(false);
   };
 
   const handleSelectBackground = (background) => {
     setSelectedBackground(background);
+    handleCloseModals(); // Close all modals after selecting a background
   };
 
   return (
-    <MainBlock>
-      {!openImage && ( // Conditionally render the Board
+    <MainBlock open={open} onClose={onClose}>
+      {!openImage && !openColors && (
         <MainContainer>
           <h6>Create new board</h6>
           <BgStyle>
@@ -50,6 +67,11 @@ export const Board = () => {
                     onClick={() => handleSelectBackground(image)}
                   >
                     <img src={image} alt="" />
+                    {selectedBackground === image && (
+                      <CheckMark>
+                        <Icons.CheckMark />
+                      </CheckMark>
+                    )}
                   </ImageWrapper>
                 ))}
               </ImageBlock>
@@ -58,8 +80,9 @@ export const Board = () => {
             <Block>
               <TextBlock>
                 <p>Colors</p>
-                <StyleP>See more</StyleP>
+                <StyleP onClick={handleOpenColors}>See more</StyleP>
               </TextBlock>
+
               <ColorsBlock>
                 {colors.map((item, index) => (
                   <ColorWrapper
@@ -67,18 +90,29 @@ export const Board = () => {
                     bg={item.bg}
                     isSelected={selectedBackground === item.bg}
                     onClick={() => handleSelectBackground(item.bg)}
-                  />
+                  >
+                    {selectedBackground === item.bg && (
+                      <CheckMark>
+                        <Icons.CheckMark />
+                      </CheckMark>
+                    )}
+                  </ColorWrapper>
                 ))}
               </ColorsBlock>
             </Block>
+
+            <ButtonBlock>
+              <StyledBtn variant="cancel">Cancel</StyledBtn>
+              <StyledBtn variant="contained">Create board</StyledBtn>
+            </ButtonBlock>
           </BgStyle>
         </MainContainer>
       )}
 
-      {openImage && ( // Conditionally render the Modal
-        <ContainerModal>
+      {openImage && (
+        <ContainerModal onClick={handleCloseModals}>
           <h1>Photo</h1>
-          <ImageModal>
+          <ImageModal onClick={(e) => e.stopPropagation()}>
             {boardImage.map((item, index) => (
               <ImageWrapper
                 key={index}
@@ -86,10 +120,37 @@ export const Board = () => {
                 onClick={() => handleSelectBackground(item.image)}
               >
                 <img src={item.image} alt="" />
+                {selectedBackground === item.image && (
+                  <CheckMark>
+                    <Icons.CheckMark />
+                  </CheckMark>
+                )}
               </ImageWrapper>
             ))}
           </ImageModal>
         </ContainerModal>
+      )}
+
+      {openColors && (
+        <ContainerModalColor onClick={handleCloseModals}>
+          <h1>Colors</h1>
+          <ColorsModal onClick={(e) => e.stopPropagation()}>
+            {colorsSecond.map((item, index) => (
+              <ColorBlock
+                key={index}
+                bg={item.bg}
+                isSelected={selectedBackground === item.bg}
+                onClick={() => handleSelectBackground(item.bg)}
+              >
+                {selectedBackground === item.bg && (
+                  <CheckMark>
+                    <Icons.CheckMark />
+                  </CheckMark>
+                )}
+              </ColorBlock>
+            ))}
+          </ColorsModal>
+        </ContainerModalColor>
       )}
     </MainBlock>
   );
@@ -97,22 +158,22 @@ export const Board = () => {
 
 const slideInFromRight = keyframes`
   0% {
-    transform: translateX(100%); /* Start off-screen */
+    transform: translateX(100%); 
     opacity: 0;
   }
   100% {
-    transform: translateX(0); /* End at normal position */
+    transform: translateX(0); 
     opacity: 1;
   }
 `;
 
 const MainContainer = styled("div")(() => ({
   width: "477px",
-  height: "363px",
+  height: "373px",
   backgroundColor: "white",
   borderRadius: "10px",
   padding: "16px 20px",
-  animation: `${slideInFromRight} 1s ease-out`, // Apply the animation for slide-in
+  animation: `${slideInFromRight} 1s ease-out`,
 
   h6: {
     fontSize: "16px",
@@ -169,7 +230,7 @@ const ContainerModal = styled("div")(() => ({
   flexDirection: "column",
   alignItems: "center",
   borderRadius: "10px",
-  animation: `${slideInFromRight} 1s ease-out`, // Apply the animation for modal
+  animation: `${slideInFromRight} 1s ease-out`,
 
   h1: {
     fontSize: "16px",
@@ -204,10 +265,64 @@ const ImageWrapper = styled("div")(() => ({
 }));
 
 const ColorWrapper = styled("div")(({ bg }) => ({
+  position: "relative",
   backgroundColor: bg,
   width: "59px",
   height: "31px",
   borderRadius: "8px",
   cursor: "pointer",
+}));
+
+const ColorsModal = styled("div")(() => ({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "8px",
+}));
+
+const ContainerModalColor = styled("div")(() => ({
+  width: "293px",
+  height: "204px",
+  paddingLeft: "20px",
+  backgroundColor: "white",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  borderRadius: "10px",
+  animation: `${slideInFromRight} 1s ease-out`,
+
+  h1: {
+    fontSize: "16px",
+    fontWeight: "400",
+    padding: "16px",
+  },
+}));
+
+const ColorBlock = styled("div")(({ bg }) => ({
   position: "relative",
+  backgroundColor: bg,
+  width: "79px",
+  height: "40px",
+  borderRadius: "8px",
+  cursor: "pointer",
+}));
+
+const ButtonBlock = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "end",
+  gap: "16px",
+}));
+
+const StyledBtn = styled(Button)(() => ({
+  width: "auto",
+}));
+
+const CheckMark = styled("div")(() => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 2,
 }));
