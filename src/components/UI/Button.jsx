@@ -22,12 +22,12 @@ export const Button = ({
 };
 
 const StyledMuiButton = styled(MuiButton)(({
-  customStyles,
+  customstyle,
   disabled,
   variant,
 }) => {
   const backgroundColor =
-    customStyles?.backgroundColor ||
+    customstyle?.backgroundColor ||
     (disabled
       ? "#F0F0F0"
       : variant === "cancel"
@@ -39,7 +39,7 @@ const StyledMuiButton = styled(MuiButton)(({
             : "transparent");
 
   const textColor =
-    customStyles?.color ||
+    customstyle?.color ||
     (variant === "cancel"
       ? "#919191"
       : variant === "danger"
@@ -66,7 +66,7 @@ const StyledMuiButton = styled(MuiButton)(({
           ? "#005688"
           : isStaticBackground
             ? backgroundColor
-            : "transparent";
+            : "none";
 
   const activeBackgroundColor =
     variant === "cancel"
@@ -77,7 +77,7 @@ const StyledMuiButton = styled(MuiButton)(({
           ? "#57AEE0"
           : isStaticBackground
             ? backgroundColor
-            : "transparent";
+            : "none";
 
   return {
     width: "100%",
