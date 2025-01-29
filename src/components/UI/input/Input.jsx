@@ -74,7 +74,6 @@ const StyleUiInput = styled(TextField)(({ error }) => ({
     padding: "4px 16px",
     fontFamily: "Sans-serif, Arial, Helvetica, sans-serif",
   },
-
   "& .MuiInputBase-input::placeholder": {
     color: "#AFAFAF",
   },
