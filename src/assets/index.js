@@ -49,8 +49,10 @@ import Menu from "../assets/icons/menu.svg";
 import Success from "../assets/icons/success.svg";
 import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
+import Edit from "../assets/icons/Edit.svg";
 
 export const Icons = {
+  Edit,
   Menu,
   PlusGray,
   SelectIconTwo,
