@@ -200,10 +200,10 @@ const Container = styled("div")(() => ({
   justifyContent: "space-around",
 }));
 const ContainerBox = styled("section")(() => ({
-  width: "1080px",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-around",
+  gap: "161px",
 }));
 const StyledWrapperForm = styled("div")(() => ({
   width: "321px",
@@ -225,7 +225,7 @@ const StyledImageContainer = styled("div")(() => ({
 const StyledImage = styled("img")(() => ({
   width: "100%",
   maxWidth: "579px",
-  height: "auto",
+  height: "100vh",
   objectFit: "cover",
 }));
 

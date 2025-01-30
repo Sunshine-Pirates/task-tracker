@@ -49,19 +49,12 @@ import Menu from "../assets/icons/menu.svg";
 import Success from "../assets/icons/success.svg";
 import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
-<<<<<<< HEAD
 import LogoTaskTracker from "../assets/icons/Logo-rask-tracker.svg";
 import Google from "../assets/icons/flat-color-icons_google.svg";
 
 export const Icons = {
   Google,
   LogoTaskTracker,
-=======
-import Edit from "../assets/icons/Edit.svg";
-
-export const Icons = {
-  Edit,
->>>>>>> 7f792e380f0a027ddb7460435635caf601bba00e
   Menu,
   PlusGray,
   SelectIconTwo,
