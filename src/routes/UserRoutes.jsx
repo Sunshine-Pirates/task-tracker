@@ -16,27 +16,21 @@ export const UserRoutes = () => {
       path: "user-page",
       element: (
         <PrivateRoute
-          fallBackPath="/user"
+          fallBackPath="/"
           isAllowed={isAuthenticated}
           component={UserPage}
         />
       ),
-      children: [
-        {
-          path: "",
-          element: <Navigate to="profile" replace />,
-        },
-        {
-          path: "profile",
-          element: (
-            <PrivateRoute
-              fallBackPath="/admin"
-              isAllowed={isAuthenticated}
-              component={Profile}
-            />
-          ),
-        },
-      ],
+    },
+    {
+      path: "profile-page",
+      element: (
+        <PrivateRoute
+          fallBackPath="/"
+          isAllowed={isAuthenticated}
+          component={Profile}
+        />
+      ),
     },
   ];
 };

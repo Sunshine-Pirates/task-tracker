@@ -8,5 +8,5 @@ const authSlice = createSlice({
     isAuthenticated: true,
   },
 });
-export const { isAuth, userRole, isAuthenticated } = authSlice.actions;
+export const { isAuth } = authSlice.actions;
 export const authReducer = authSlice.reducer;
