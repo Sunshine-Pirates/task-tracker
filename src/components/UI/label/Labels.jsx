@@ -7,7 +7,7 @@ import { lables } from "../../../utils/constants/lables";
 
 export const Labels = () => {
   const [isOpenCard, setIsOpenCard] = useState(false);
-  const [labelById, setLabelById] = useState(null);
+  const [labelsById, setLabelsById] = useState([]);
 
   const handleOpenCard = () => {
     setIsOpenCard(true);
@@ -16,31 +16,41 @@ export const Labels = () => {
     setIsOpenCard(false);
   };
 
-  const handleLabelId = (id) => {
-    const label = lables.find((item) => item.id === id);
-    setLabelById(label);
+  const handleLabelId = (id, newText) => {
+    setLabelsById((prevLabels) => {
+      const existingLabel = prevLabels.find((item) => item.id === id);
+      if (existingLabel) {
+        return prevLabels.map((item) =>
+          item.id === id ? { ...item, text: newText } : item
+        );
+      } else {
+        const label = lables.find((item) => item.id === id);
+        if (label) {
+          return [...prevLabels, { ...label, text: newText }];
+        }
+      }
+      return prevLabels;
+    });
     handleCloseCard();
   };
+
   const handleDeleteLabel = (labelId) => {
-    const deleteLabel = lables.filter((item) => item.id !== labelId);
-    setLabelById(deleteLabel);
+    const deleteLabel = labelsById.filter((item) => item.id !== labelId);
+    setLabelsById(deleteLabel);
   };
 
   return (
     <Wrapper>
       <StyledText>Labels</StyledText>
       <ContainerList>
-        {labelById && (
-          <StyledList
-            key={labelById.id}
-            backgroundColor={labelById.backgroundColor}
-          >
-            <p>{labelById.text}</p>
-            <IconButton onClick={() => handleDeleteLabel(labelById.id)}>
+        {labelsById.map((label) => (
+          <StyledList key={label.id} backgroundColor={label.backgroundColor}>
+            <p>{label.text}</p>
+            <IconButton onClick={() => handleDeleteLabel(label.id)}>
               <Icons.DeleteText />
             </IconButton>
           </StyledList>
-        )}
+        ))}
         <StyledButton onClick={handleOpenCard}>
           <Icons.PlusWhite />
         </StyledButton>
