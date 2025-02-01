@@ -51,8 +51,12 @@ import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
 import TimeClock from "../assets/icons/timeclock.svg";
 import LayoutIcon from "../assets/icons/layouticon.svg";
+import LogoTaskTracker from "../assets/icons/Logo-rask-tracker.svg";
+import Google from "../assets/icons/flat-color-icons_google.svg";
 
 export const Icons = {
+  Google,
+  LogoTaskTracker,
   Menu,
   PlusGray,
   SelectIconTwo,
