@@ -1,7 +1,9 @@
+import { Labels } from "./components/UI/label/Labels";
+
 export const App = () => {
   return (
     <div>
-      <h1>Task tracker</h1>
+      <Labels />
     </div>
   );
 };
