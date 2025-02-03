@@ -61,15 +61,8 @@ const Wrapper = styled("div")(() => ({
   gap: "8px",
   padding: "8px 20px",
 }));
-const StyledButton = styled("div")(() => ({
+const StyledButton = styled(IconButton)(() => ({
   backgroundColor: "#C9C9C9",
-  width: "28px",
-  height: "28px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "50%",
-  color: "#FFFFFF",
 }));
 const ContainerList = styled("div")(() => ({
   display: "flex",

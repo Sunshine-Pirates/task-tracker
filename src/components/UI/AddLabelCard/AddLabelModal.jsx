@@ -4,7 +4,7 @@ import { Icons } from "../../../assets";
 import FileDownloadDone from "@mui/icons-material/DownloadDone";
 import { lables } from "../../../utils/constants/lables";
 
-export const AddLabelModal = ({ onLabelId, onClose }) => {
+export const AddLabelModal = ({ onLabelId }) => {
   const [labels, setLabels] = useState(lables);
   const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
@@ -28,7 +28,6 @@ export const AddLabelModal = ({ onLabelId, onClose }) => {
     const newText = editId === id ? editText : label.text;
     handleSave(id);
     onLabelId(id, newText);
-    onClose();
   };
 
   return (
