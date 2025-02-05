@@ -9,8 +9,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "../components/UI/modal/Modal";
 import { LogoutModal } from "../components/LogoutModal";
+import { PATHS } from "../utils/constants/constants";
+import { useSelector } from "react-redux";
 
 export const Header = ({ favourites }) => {
+  const { userRole } = useSelector((state) => state.auth);
+
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -32,7 +36,7 @@ export const Header = ({ favourites }) => {
       <StartHeaderBlock>
         <HeaderLogoStyled>
           <img src={TaskTrackerLogo} alt="TaskTrackerLogo" />
-          <Links to="/user/user-page">
+          <Links to={userRole === "USER" ? PATHS.USER.ROOT : PATHS.ADMIN.ROOT}>
             <h2>Task Tracker</h2>
           </Links>
         </HeaderLogoStyled>
@@ -58,7 +62,12 @@ export const Header = ({ favourites }) => {
             TransitionComponent={Fade}
           >
             <StyledMenuItem onClick={handleClose}>
-              <StyledLink to="/user/profile-page">Profile</StyledLink>
+              <StyledLink
+                to={userRole === "USER" ? PATHS.USER.PROFILE : PATHS.ADMIN.PAGE}
+              >
+                {" "}
+                Profile{" "}
+              </StyledLink>
             </StyledMenuItem>
 
             <StyledMenuItem onClick={handleClose}>

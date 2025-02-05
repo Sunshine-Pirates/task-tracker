@@ -1,67 +1,58 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import { Layout } from "../layout/Layout";
-import { GuestLayout } from "../layout/GuestLayout";
 import { UserRoutes } from "./UserRoutes";
 import { NotFound } from "../pages/notFound/NotFound";
 import { AdminLayout } from "../layout/AdminLayout";
 import { AdminRoutes } from "./AdminRoutes";
 import { useSelector } from "react-redux";
-import { Guestroutes } from "./GuestRoutes";
+import { SignIn } from "../auth/SignIn";
+import { PATHS } from "../utils/constants/constants";
 
 export const AppRoutes = () => {
-  const { userRole } = useSelector((state) => state.router);
+  const { userRole } = useSelector((state) => state.auth);
 
   const path = {
-    USER: "/user",
-    ADMIN: "/admin",
-    GUEST: "/guest",
+    USER: PATHS.USER.ROOT,
+    ADMIN: PATHS.ADMIN.ROOT,
+    GUEST: PATHS.GUEST,
   };
 
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Navigate to={path[userRole]} replace />,
-    },
-    {
-      path: "/admin",
+      path: PATHS.ADMIN.ROOT,
       element: (
         <PrivateRoute
           component={AdminLayout}
           isAllowed={userRole === "ADMIN"}
-          fallBackPath={"/"}
+          fallBackPath={path[userRole] || PATHS.ADMIN.ROOT}
         />
       ),
       children: AdminRoutes(),
     },
     {
-      path: "/user",
+      path: PATHS.USER.ROOT,
       element: (
         <PrivateRoute
           component={Layout}
           isAllowed={userRole === "USER"}
-          fallBackPath="/"
+          fallBackPath={path[userRole] || PATHS.USER.ROOT}
         />
       ),
       children: UserRoutes(),
     },
     {
-      path: "/guest",
+      path: PATHS.GUEST,
       element: (
         <PrivateRoute
-          component={GuestLayout}
+          component={SignIn}
           isAllowed={userRole === "GUEST"}
-          fallBackPath="/"
+          fallBackPath={path[userRole] || PATHS.GUEST}
         />
       ),
-      children: Guestroutes(),
     },
     {
-      path: "*",
+      path: PATHS.NOT_FOUND,
       element: <NotFound />,
     },
   ]);
