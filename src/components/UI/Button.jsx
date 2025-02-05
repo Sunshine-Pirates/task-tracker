@@ -13,7 +13,7 @@ export const Button = ({
       onClick={onClick}
       variant={variant}
       disabled={disabled}
-      customstyle={style}
+      sx={style}
       {...props}
     >
       {children}
