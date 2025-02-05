@@ -22,7 +22,10 @@ const Container = styled("div")(({ background }) => ({
   width: "271px",
   height: "122px",
   borderRadius: "8px",
-  backgroundColor: background,
+  background:
+    background.startsWith("http") || background.includes("/")
+      ? `url(${background}) center/cover no-repeat`
+      : background,
   color: "white",
   display: "flex",
   flexDirection: "column",

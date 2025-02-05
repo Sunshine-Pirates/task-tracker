@@ -1,22 +1,22 @@
 import { styled } from "@mui/material";
 import { useState, useRef } from "react";
 import ProfileBanner from "../../assets/images/profile-banner.png";
+import ProfileImage from "../../assets/images/Ellipse 11.png";
+import { image } from "../../utils/constants/profile";
 import { ProfileForm } from "./ProfileForm";
 import { ProjectsList } from "./ProjectsList";
 import { Icons } from "../../assets";
-import Profilee from "../../assets/images/Ellipse 11.png";
-import { image } from "../../utils/constants/profile";
 
 export const Profile = () => {
   const [openProfile, setOpenProfile] = useState(false);
-  const [profileImage, setProfileImage] = useState(Profilee);
+  const [profileImage, setProfileImage] = useState(ProfileImage);
   const [profileData, setProfileData] = useState({
     name: "",
     fullName: "",
     email: "",
     password: "",
     repeatPassword: "",
-    profileImage: Profilee,
+    profileImage: ProfileImage,
   });
 
   const fileInputRef = useRef(null);
@@ -34,13 +34,10 @@ export const Profile = () => {
     handleCloseProfile();
   };
 
-  const handleEditClick = () => {
-    fileInputRef.current.click();
-  };
-
+  const handleEditClick = () => fileInputRef.current.click();
   const handleRemoveImage = () => {
     setProfileImage(image);
-    setProfileData((prev) => ({ ...prev, profileImage: Profilee }));
+    setProfileData((prev) => ({ ...prev, profileImage: ProfileImage }));
     setOpenProfile(false);
   };
 
@@ -48,15 +45,9 @@ export const Profile = () => {
     e.stopPropagation();
     setOpenProfile(!openProfile);
   };
-
-  const handleCloseProfile = () => {
-    setOpenProfile(false);
-  };
-
-  const handleFormSubmit = (formData) => {
-    const updatedData = { ...formData, profileImage };
-    console.log(updatedData);
-  };
+  const handleCloseProfile = () => setOpenProfile(false);
+  const handleFormSubmit = (formData) =>
+    console.log({ ...formData, profileImage });
 
   return (
     <StyledContainer onClick={handleCloseProfile}>

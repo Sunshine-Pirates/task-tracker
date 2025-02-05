@@ -1,8 +1,10 @@
+import Foto12 from "../../assets/images/mountain12.jpg";
+
 export const data = [
   {
     id: 1,
     title: "Title",
-    background: "red",
+    background: Foto12,
     isFavorite: false,
   },
   {

@@ -5,8 +5,9 @@ import { Checkbox } from "../components/UI/checkbox/Checkbox";
 import { Button } from "../components/UI/Button";
 import ImageSignUp from "../assets/images/SigIn.png";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
-export const SignUp = () => {
+export const SignUp = ({ handleNavigate }) => {
   const {
     register,
     handleSubmit,
@@ -167,7 +168,9 @@ export const SignUp = () => {
                 </StyledButton>
                 <StyledTextContainer>
                   <span>You already have an account?</span>
-                  <StyledNavigate href="#">Log In</StyledNavigate>
+                  <StyledNavigate onClick={handleNavigate}>
+                    Log In
+                  </StyledNavigate>
                 </StyledTextContainer>
               </StyledContainerSignUp>
             </StyledForm>
@@ -235,7 +238,7 @@ const StyledContainerSignUp = styled("div")(() => ({
   alignItems: "center",
   gap: "30px",
 }));
-const StyledNavigate = styled("a")(() => ({
+const StyledNavigate = styled(Link)(() => ({
   color: "#0079BF",
 }));
 const StyledGoogle = styled("div")(() => ({
