@@ -7,15 +7,15 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { ForgotPassword } from "./ForgotPassword";
 import { Modal } from "../components/UI/modal/Modal";
+import { Link } from "react-router-dom";
+import { SignUp } from "./SignUp";
 
 export const SignIn = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [isNavigate, setIsNavigate] = useState(false);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleNavigate = () => {
+    setIsNavigate((prev) => !prev);
   };
 
   const {
@@ -39,134 +39,133 @@ export const SignIn = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (!errors.email && !errors.password) {
+      console.log("Form Data:", data);
+    }
   };
-
   return (
-    <Container>
-      <StyledContainerLogo>
-        <Icons.LogoTaskTracker />
-        <p>Task Tracker</p>
-      </StyledContainerLogo>
-      <ContainerBox>
-        <StyledWrapperForm>
-          <StyledText>Sign In</StyledText>
-          <StyledContainerr>
-            <StyledGoogle>
-              <div>
-                <StyledAvatar>
-                  <p>T</p>
-                </StyledAvatar>
-                <article>
-                  <p style={{ color: "#919191" }}>Sign Up as Nazira</p>
-                  <span>example@gmail.com</span>
-                </article>
-              </div>
-              <Icons.Google />
-            </StyledGoogle>
-            <p style={{ color: "#919191", textAlign: "center" }}>or</p>
-            <StyledForm onSubmit={handleSubmit(onSubmit)}>
-              <StyledContainerMessage>
-                <StyledInput
-                  type="email"
-                  placeholder="example@gmail.com"
-                  value={formValue.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  {...register("email", {
-                    required: "Email обязателен для заполнения",
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Введите корректный email",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <ErrorMessage>{errors.email.message}</ErrorMessage>
-                )}
-              </StyledContainerMessage>
-              <StyledContainerMessages>
-                <StyledContainerMessage>
-                  <StyledInput
-                    type="password"
-                    placeholder="Password"
-                    value={formValue.password}
-                    onChange={(e) =>
-                      handleInputChange("password", e.target.value)
-                    }
-                    {...register("password", {
-                      required: "Пароль обязателен для заполнения",
-                      minLength: {
-                        value: 6,
-                        message: "Пароль должен содержать минимум 6 символов",
-                      },
-                    })}
-                  />
-                  {errors.password && (
-                    <ErrorMessage>{errors.password.message}</ErrorMessage>
-                  )}
-                </StyledContainerMessage>
-                <StyledTitle onClick={handleOpenModal}>
-                  Forgot password?
-                </StyledTitle>
-              </StyledContainerMessages>
-              <StyledButton variant="" type="submit">
-                Log In
-              </StyledButton>
-            </StyledForm>
-          </StyledContainerr>
-          <StyledContainerSignUp>
-            <StyledTextContainer>
-              <span>Not a member?</span>
-              <StyledNavigate href="#">Sign up now</StyledNavigate>{" "}
-            </StyledTextContainer>
-          </StyledContainerSignUp>
-        </StyledWrapperForm>
-        <StyledImageContainer>
-          <StyledImage src={ImageSignUp} alt="ImageSignUp" />
-        </StyledImageContainer>{" "}
-      </ContainerBox>
-      {openModal && (
-        <Modal isOpen={openModal} onClose={handleCloseModal} icon>
-          <ForgotPassword />
-        </Modal>
+    <>
+      {isNavigate ? (
+        <SignUp handleNavigate={handleNavigate} />
+      ) : (
+        <Container>
+          <StyledContainerLogo>
+            <Icons.LogoTaskTracker />
+            <p>Task Tracker</p>
+          </StyledContainerLogo>
+
+          <ContainerBox>
+            <StyledWrapperForm>
+              <StyledText>Sign In</StyledText>
+              <StyledContainerr>
+                <StyledGoogle>
+                  <div>
+                    <StyledAvatar>
+                      <p>T</p>
+                    </StyledAvatar>
+                    <article>
+                      <p style={{ color: "#919191" }}>Sign Up as Nazira</p>
+                      <span>example@gmail.com</span>
+                    </article>
+                  </div>
+                  <Icons.Google />
+                </StyledGoogle>
+                <p style={{ color: "#919191", textAlign: "center" }}>or</p>
+
+                <StyledForm onSubmit={handleSubmit(onSubmit)}>
+                  <StyledContainerMessage>
+                    <StyledInput
+                      type="email"
+                      placeholder="example@gmail.com"
+                      value={formValue.email}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                      {...register("email", {
+                        required: "Email обязателен",
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: "Введите корректный email",
+                        },
+                      })}
+                    />
+                    {errors.email && (
+                      <ErrorMessage>{errors.email.message}</ErrorMessage>
+                    )}
+                  </StyledContainerMessage>
+
+                  <StyledContainerMessages>
+                    <StyledContainerMessage>
+                      <StyledInput
+                        type="password"
+                        placeholder="Password"
+                        value={formValue.password}
+                        onChange={(e) =>
+                          handleInputChange("password", e.target.value)
+                        }
+                        {...register("password", {
+                          required: "Пароль обязателен",
+                          minLength: {
+                            value: 6,
+                            message: "Пароль минимум 6 символов",
+                          },
+                        })}
+                      />
+                      {errors.password && (
+                        <ErrorMessage>{errors.password.message}</ErrorMessage>
+                      )}
+                    </StyledContainerMessage>
+                    <StyledTitle onClick={() => setOpenModal(true)}>
+                      Forgot password?
+                    </StyledTitle>
+                  </StyledContainerMessages>
+
+                  <StyledButton type="submit">Log In</StyledButton>
+                </StyledForm>
+              </StyledContainerr>
+
+              <StyledContainerSignUp>
+                <StyledTextContainer>
+                  <span>Not a member?</span>
+                  <StyledNavigate onClick={handleNavigate}>
+                    Sign up now
+                  </StyledNavigate>
+                </StyledTextContainer>
+              </StyledContainerSignUp>
+            </StyledWrapperForm>
+
+            <StyledImageContainer>
+              <StyledImage src={ImageSignUp} alt="Sign Up" />
+            </StyledImageContainer>
+          </ContainerBox>
+
+          {openModal && (
+            <Modal isOpen={openModal} onClose={() => setOpenModal(false)} icon>
+              <ForgotPassword />
+            </Modal>
+          )}
+        </Container>
       )}
-    </Container>
+    </>
   );
 };
-const StyledContainerMessage = styled("div")(() => ({
-  height: "54px",
-  display: "flex",
-  flexDirection: "column",
-}));
 const StyledTextContainer = styled("div")(() => ({
   display: "flex",
   gap: "4px",
 }));
-const StyledContainerMessages = styled("div")(() => ({
-  display: "flex",
-  flexDirection: "column",
-}));
-const ErrorMessage = styled("span")(() => ({
-  color: "red",
-  fontSize: "13px",
-  paddingLeft: "3px",
-}));
-const StyledTitle = styled("p")(() => ({
-  textAlign: "end",
-  fontSize: "14px",
-  color: "#393939",
-  cursor: "pointer",
-}));
+
 const Container = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-around",
 }));
+
 const ContainerBox = styled("section")(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-around",
   gap: "161px",
 }));
+
 const StyledWrapperForm = styled("div")(() => ({
   width: "321px",
   height: "529px",
@@ -176,6 +175,7 @@ const StyledWrapperForm = styled("div")(() => ({
   alignItems: "center",
   gap: "30px",
 }));
+
 const StyledImageContainer = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
@@ -190,15 +190,19 @@ const StyledImage = styled("img")(() => ({
   height: "100vh",
   objectFit: "cover",
 }));
+
 const StyledContainerSignUp = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: "30px",
 }));
-const StyledNavigate = styled("a")(() => ({
+
+const StyledNavigate = styled(Link)(() => ({
   color: "#0079BF",
+  cursor: "pointer",
 }));
+
 const StyledGoogle = styled("div")(() => ({
   width: "321px",
   height: "58px",
@@ -217,33 +221,37 @@ const StyledGoogle = styled("div")(() => ({
     },
   },
 }));
+
 const StyledContainerLogo = styled("section")(() => ({
   display: "flex",
   gap: "8px",
   paddingTop: "20px",
-
   "& p": {
     color: "#0079BF",
     fontWeight: "600",
     fontSize: "20px",
   },
 }));
+
 const StyledAvatar = styled(Avatar)(() => ({
   width: "35px",
   height: "35px",
-  color: "#fffff",
+  color: "#ffffff",
   backgroundColor: "#0079BF",
 }));
+
 const StyledText = styled("p")(() => ({
   color: "#000000",
   fontSize: "18px",
   fontWeight: "500",
 }));
+
 const StyledForm = styled("form")(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
 }));
+
 const StyledInput = styled(Input)(() => ({
   width: "321px",
   height: "32px",
@@ -259,8 +267,33 @@ const StyledButton = styled(Button)(() => ({
     color: "#FFFFFF",
   },
 }));
+
 const StyledContainerr = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "10px",
+}));
+
+const StyledContainerMessage = styled("div")(() => ({
+  height: "54px",
+  display: "flex",
+  flexDirection: "column",
+}));
+
+const StyledContainerMessages = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+}));
+
+const ErrorMessage = styled("span")(() => ({
+  color: "red",
+  fontSize: "13px",
+  paddingLeft: "3px",
+}));
+
+const StyledTitle = styled("p")(() => ({
+  textAlign: "end",
+  fontSize: "14px",
+  color: "#393939",
+  cursor: "pointer",
 }));
