@@ -7,6 +7,7 @@ export const notificationsData = [
     text: "Moved to list Done",
     time: "Sep 15 at 13:23 PM",
     read: false,
+    background: "#ffffff",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const notificationsData = [
     text: "Was due 10 min ago",
     time: "Sep 15 at 13:23 PM",
     read: false,
+    background: "#ffffff",
   },
   {
     id: 3,
@@ -25,5 +27,6 @@ export const notificationsData = [
     text: "My God, let me not burn out on this task",
     time: "Sep 15 at 13:23 PM",
     read: false,
+    background: "#ffffff",
   },
 ];

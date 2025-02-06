@@ -51,10 +51,17 @@ import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
 import TimeClock from "../assets/icons/timeclock.svg";
 import LayoutIcon from "../assets/icons/layouticon.svg";
+import CheckMark from "../assets/icons/checkMark.svg";
 import LogoTaskTracker from "../assets/icons/Logo-rask-tracker.svg";
 import Google from "../assets/icons/flat-color-icons_google.svg";
+import Edit from "../assets/icons/Edit.svg";
+import PlusLable from "../assets/icons/PluseIcons.svg";
+import DeleteText from "../assets/icons/DeleteText.svg";
 
 export const Icons = {
+  DeleteText,
+  PlusLable,
+  Edit,
   Google,
   LogoTaskTracker,
   Menu,
@@ -110,4 +117,5 @@ export const Icons = {
   Warning,
   TimeClock,
   LayoutIcon,
+  CheckMark,
 };

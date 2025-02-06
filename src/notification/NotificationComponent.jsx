@@ -63,6 +63,7 @@ export const NotificationComponent = () => {
                 key={notification.id}
                 read={notification.read ? "true" : "false"}
                 onClick={() => markAsRead(notification.id)}
+                background={notification.background}
               >
                 <ContentBox>
                   <Dot read={notification.read} />
@@ -162,12 +163,12 @@ const ButtonForMark = styled(Button)(() => ({
   textDecorationStyle: "solid",
 }));
 
-const ListItemStyled = styled(ListItem)(({ read }) => ({
+const ListItemStyled = styled(ListItem)(({ read, background }) => ({
   display: "flex",
   flexDirection: "column",
   padding: "10px",
   borderBottom: "1px solid #ddd",
-  backgroundColor: read === "true" ? "#f7f7f7" : "#fff",
+  backgroundColor: read === "true" ? "#f7f7f7" : background,
 }));
 const TitleWrapper = styled(Box)(() => ({
   position: "relative",
