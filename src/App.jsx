@@ -1,4 +1,4 @@
-import { DatePicker } from "./components/DatePicker";
+import { DatePicker } from "./components/DatePickerComponent";
 
 export const App = () => {
   return (
