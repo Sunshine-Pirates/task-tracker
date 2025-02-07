@@ -1,7 +1,9 @@
+import { AppRoutes } from "./routes/AppRoutes";
+
 export const App = () => {
   return (
     <div>
-      <h1>Task tracker</h1>
+      <AppRoutes />
     </div>
   );
 };
