@@ -49,6 +49,8 @@ import Menu from "../assets/icons/menu.svg";
 import Success from "../assets/icons/success.svg";
 import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
+import TimeClock from "../assets/icons/timeclock.svg";
+import LayoutIcon from "../assets/icons/layouticon.svg";
 import CheckMark from "../assets/icons/checkMark.svg";
 import LogoTaskTracker from "../assets/icons/Logo-rask-tracker.svg";
 import Google from "../assets/icons/flat-color-icons_google.svg";
@@ -113,5 +115,7 @@ export const Icons = {
   Success,
   Error,
   Warning,
+  TimeClock,
+  LayoutIcon,
   CheckMark,
 };
