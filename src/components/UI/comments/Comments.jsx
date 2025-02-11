@@ -6,7 +6,7 @@ import { comments } from "../../../utils/constants/comments";
 import { Icons } from "../../../assets";
 
 export const Comments = () => {
-  const [commentsVisible, setCommentsVisible] = useState(false);
+  const [commentsVisible, setCommentsVisible] = useState(true);
 
   const toggleCommentsVisibility = () => {
     setCommentsVisible((prev) => !prev);

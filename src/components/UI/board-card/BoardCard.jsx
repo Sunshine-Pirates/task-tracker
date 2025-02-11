@@ -2,6 +2,8 @@ import { styled } from "@mui/material";
 import { title } from "../../../utils/constants/board-card";
 import { Icons } from "../../../assets";
 import { useState } from "react";
+import { Modal } from "../modal/Modal";
+import { CreateCardModal } from "./CreateCardModal";
 
 const colorTexts = {
   "#61BD4F": "Сделано",
@@ -12,6 +14,14 @@ const colorTexts = {
 
 export const BoardCard = () => {
   const [visibleItem, setVisibleItem] = useState(null);
+  const [openAddCardModal, setOpenCardModal] = useState(false);
+
+  const handleOpenCard = () => {
+    setOpenCardModal(true);
+  };
+  const hanldeCardClose = () => {
+    setOpenCardModal(false);
+  };
 
   const handleVisibleText = (id) => {
     setVisibleItem((prevId) => (prevId === id ? null : id));
@@ -83,7 +93,10 @@ export const BoardCard = () => {
       ) : (
         <EmptyItem>Title</EmptyItem>
       )}
-      <StyledText>+ Add a card</StyledText>
+      <StyledText onClick={handleOpenCard}>+ Add a card</StyledText>
+      <Modal isOpen={openAddCardModal} onClose={hanldeCardClose}>
+        <CreateCardModal />
+      </Modal>
     </List>
   );
 };
