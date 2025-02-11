@@ -4,6 +4,7 @@ import { Icons } from "../../../assets";
 import { useState } from "react";
 import { Modal } from "../modal/Modal";
 import { CreateCardModal } from "./CreateCardModal";
+import { CreateNewTitle } from "./CreateNewTitle";
 
 const colorTexts = {
   "#61BD4F": "Сделано",
@@ -15,6 +16,10 @@ const colorTexts = {
 export const BoardCard = () => {
   const [visibleItem, setVisibleItem] = useState(null);
   const [openAddCardModal, setOpenCardModal] = useState(false);
+  const [newTitle, setNewTitle] = useState(false);
+  const handleNewTite = () => {
+    setNewTitle(true);
+  };
 
   const handleOpenCard = () => {
     setOpenCardModal(true);
@@ -32,7 +37,7 @@ export const BoardCard = () => {
       <Text>Title</Text>
       {title.length > 0 ? (
         title.map((item) => (
-          <StyledItem key={item.id}>
+          <StyledItem key={item.id} onClick={handleNewTite}>
             <Container onClick={() => handleVisibleText(item.id)}>
               {visibleItem === item.id ? (
                 <StyledWrapperColors>
@@ -97,6 +102,9 @@ export const BoardCard = () => {
       <Modal isOpen={openAddCardModal} onClose={hanldeCardClose}>
         <CreateCardModal />
       </Modal>
+      <Modal isOpen={newTitle} onClose={() => setNewTitle(false)}>
+             <CreateNewTitle />
+            </Modal>
     </List>
   );
 };
@@ -172,6 +180,7 @@ const StyledItem = styled("li")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "13px",
+  cursor: "pointer",
 }));
 
 const Text = styled("p")(() => ({

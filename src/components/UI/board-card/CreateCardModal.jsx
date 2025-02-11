@@ -1,12 +1,12 @@
 import { Avatar, styled } from "@mui/material";
 import { Icons } from "../../../assets";
 import { Labels } from "../label/Labels";
-import { assignee } from "../../../utils/constants/assignee";
 import { Input } from "../input/Input";
 import { Checkbox } from "../checkbox/Checkbox";
 import { Button } from "../Button";
 import { useState } from "react";
 import { AddCard } from "./AddCard";
+import { members } from "../../../utils/constants/members";
 
 export const CreateCardModal = () => {
   const MAX_VISIBLE = 8;
@@ -49,13 +49,13 @@ export const CreateCardModal = () => {
             <StartAndDueDate>
               <Text>Members</Text>
               <Members>
-                {assignee.slice(0, MAX_VISIBLE).map((item, index) => (
+                {members.slice(0, MAX_VISIBLE).map((item, index) => (
                   <ImageWrapper key={item.id} index={index}>
                     <StyledImage src={item.image} alt={item.fullName} />
                   </ImageWrapper>
                 ))}
-                {assignee.length > MAX_VISIBLE && (
-                  <StyledAvatar>+{assignee.length - MAX_VISIBLE}</StyledAvatar>
+                {members.length > MAX_VISIBLE && (
+                  <StyledAvatar>+{members.length - MAX_VISIBLE}</StyledAvatar>
                 )}
               </Members>
             </StartAndDueDate>
@@ -199,6 +199,7 @@ const Task = styled("p")(() => ({
 
 const StyledWrapper = styled("div")(() => ({
   width: "1087px",
+  height: "708px",
   display: "flex",
   justifyContent: "space-between",
 }));
@@ -257,6 +258,7 @@ const StyledImage = styled("img")(() => ({
   height: "34px",
   borderRadius: "50%",
   border: "2px solid white",
+  cursor: "pointer",
 }));
 
 const StyledAvatar = styled(Avatar)(() => ({
@@ -270,8 +272,9 @@ const StyledAvatar = styled(Avatar)(() => ({
   justifyContent: "center",
   border: "2px solid white",
   position: "absolute",
-  left: `${assignee.length * 20}px`,
+  left: `${members.length * 10.5}px`,
   marginBottom: "6px",
+  cursor: "pointer",
 }));
 const ContainerDescription = styled("div")(() => ({
   display: "flex",
