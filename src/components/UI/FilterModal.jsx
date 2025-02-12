@@ -20,15 +20,18 @@ export const FilterModal = () => {
       console.log(`Text: ${text}`);
     }
   };
+  const handleOpenOrCloseModal = () => {
+    setOpen((prev) => !prev);
+  };
   return (
     <div>
-      <button onClick={() => setOpen(!false)}>filter btn</button>
+      <button onClick={handleOpenOrCloseModal}>filter btn</button>
 
-      <BaseModal open={open} onClose={() => setOpen((prev) => !prev)}>
+      <BaseModal open={open} onClose={handleOpenOrCloseModal}>
         <StyledHeader>
           <InnerHeaderStyle>
             Filter
-            <IconButton onClick={() => setOpen((prev) => !prev)}>
+            <IconButton onClick={handleOpenOrCloseModal}>
               <Icons.Cancel />
             </IconButton>
           </InnerHeaderStyle>
