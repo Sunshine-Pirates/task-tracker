@@ -1,17 +1,44 @@
-import { styled } from "@mui/material";
+import { Fade, Menu, MenuItem, styled } from "@mui/material";
 import TaskTrackerLogo from "/task-tracker.svg?react";
 import { SearchInput } from "../components/UI/searchInput/SearchInput";
 import Badge from "@mui/material/Badge";
 import { Icons } from "../assets";
 import { IconButton } from "../components/UI/IconButton";
 import EndHeaderIcon from "../assets/images/header-end-icon.png";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Modal } from "../components/UI/modal/Modal";
+import { LogoutModal } from "../components/LogoutModal";
+import { PATHS } from "../utils/constants/constants";
+import { useSelector } from "react-redux";
+
 export const Header = ({ favourites }) => {
+  const { userRole } = useSelector((state) => state.auth);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   return (
     <StyledHeader>
       <StartHeaderBlock>
         <HeaderLogoStyled>
           <img src={TaskTrackerLogo} alt="TaskTrackerLogo" />
-          <h2>Task Tracker</h2>
+          <Links to={userRole === "USER" ? PATHS.USER.ROOT : PATHS.ADMIN.ROOT}>
+            <h2>Task Tracker</h2>
+          </Links>
         </HeaderLogoStyled>
         {favourites && (
           <FavouriteBlock>
@@ -27,14 +54,61 @@ export const Header = ({ favourites }) => {
               <Icons.Notify className="notify" />
             </Badge>
           </IconButton>
-          <IconButton>
+          <StyledMenu
+            anchorEl={anchorEl}
+            id="fade-menu"
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            <StyledMenuItem onClick={handleClose}>
+              <StyledLink
+                to={userRole === "USER" ? PATHS.USER.PROFILE : PATHS.ADMIN.PAGE}
+              >
+                {" "}
+                Profile{" "}
+              </StyledLink>
+            </StyledMenuItem>
+
+            <StyledMenuItem onClick={handleClose}>
+              <StyledLink onClick={handleOpenModal}>Log out</StyledLink>
+            </StyledMenuItem>
+          </StyledMenu>
+          <IconButton onClick={handleClick}>
             <img src={EndHeaderIcon} alt="EndHeaderIcon" className="end-icon" />
           </IconButton>
         </DuoIconButtons>
       </StyledEndBlock>
+      <Modal isOpen={openModal} onClose={handleCloseModal} icon>
+        <LogoutModal onClose={handleCloseModal} />
+      </Modal>
     </StyledHeader>
   );
 };
+const Links = styled(Link)(() => ({
+  color: "#0079BF",
+  textDecoration: "none",
+}));
+const StyledMenu = styled(Menu)(() => ({
+  "& .css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper": {
+    width: "158px",
+    height: "84px",
+    borderRadius: "10px",
+  },
+}));
+const StyledMenuItem = styled(MenuItem)({
+  "&:hover": {
+    color: "#0073DE",
+  },
+});
+const StyledLink = styled(Link)({
+  textDecoration: "none",
+  color: "#292929",
+  "&:hover": {
+    color: "#0073DE",
+  },
+});
+
 const StyledHeader = styled("header")(({ theme }) => ({
   display: "flex",
   alignItems: "center",

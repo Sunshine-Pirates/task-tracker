@@ -1,10 +1,9 @@
-import { DatePicker } from "./components/DatePickerComponent";
+import { AppRoutes } from "./routes/AppRoutes";
 
 export const App = () => {
   return (
     <div>
-      <h1>Task tracker</h1>
-      <DatePicker />
+      <AppRoutes />
     </div>
   );
 };
