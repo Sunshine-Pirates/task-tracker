@@ -6,8 +6,8 @@ import { NotFound } from "../pages/notFound/NotFound";
 import { AdminLayout } from "../layout/AdminLayout";
 import { AdminRoutes } from "./AdminRoutes";
 import { useSelector } from "react-redux";
-import { SignIn } from "../auth/SignIn";
 import { PATHS } from "../utils/constants/constants";
+import { SignIn } from "../auth/SignIn";
 
 export const AppRoutes = () => {
   const { userRole } = useSelector((state) => state.auth);
