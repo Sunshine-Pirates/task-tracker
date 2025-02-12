@@ -1,6 +1,7 @@
 import { styled } from "@mui/material";
 import { Input } from "./Input";
 import { Icons } from "../../../assets";
+import { useState } from "react";
 
 export const EmailInputList = ({
   emails,
@@ -10,18 +11,30 @@ export const EmailInputList = ({
   onEmailsChange,
   ...props
 }) => {
+  const [error, setError] = useState("");
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === ",") {
       e.preventDefault();
-      if (
-        typeof memberEmail === "string" &&
-        validateEmail(memberEmail.trim())
-      ) {
-        const updatedEmails = [...emails, memberEmail.trim()];
-        setEmails(updatedEmails);
-        setMemberEmail("");
-        onEmailsChange(updatedEmails);
+      const trimmedEmail = memberEmail.trim();
+      if (!validateEmail(trimmedEmail)) {
+        setError("Некорректный email");
+        return;
       }
+
+      if (trimmedEmail.length > 50) {
+        setError("Email не должен превышать 50 символов");
+        return;
+      }
+
+      if (emails.includes(trimmedEmail)) {
+        setError("Этот email уже добавлен");
+        return;
+      }
+      const updatedEmails = [...emails, memberEmail.trim()];
+      setEmails(updatedEmails);
+      setMemberEmail("");
+      onEmailsChange(updatedEmails);
+      setError("");
     }
   };
 
@@ -51,10 +64,20 @@ export const EmailInputList = ({
           type="text"
           value={memberEmail}
           placeholder="example@gmail.com"
-          onChange={(e) => setMemberEmail(e.target.value)}
+          onChange={(e) => {
+            setMemberEmail(e.target.value);
+            if (!e.target.value.trim()) {
+              setError("");
+            }
+          }}
           onKeyDown={handleKeyDown}
           {...props}
         />
+        {error && (
+          <p style={{ color: "red", fontSize: "14px", paddingLeft: "10px" }}>
+            {error}
+          </p>
+        )}
       </StyledInputWrapper>
     </Wrapper>
   );
@@ -98,7 +121,7 @@ const RemoveButton = styled("button")(() => ({
 const StyledInput = styled(Input)(({ value }) => ({
   border: "none",
   outline: "none",
-  minWidth: value ? "329px" : "150px",
+  maxWidth: value ? "329px" : "329px",
   flexGrow: 1,
   fontSize: "14px",
 }));

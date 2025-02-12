@@ -5,15 +5,10 @@ import { Button } from "./Button";
 import { styled } from "@mui/material";
 import { EmailInputList } from "./input/EmaiInputList";
 
-export const CreateNewWorkspace = () => {
+export const CreateWorkspaceModal = ({ open, onClose }) => {
   const [workspaceName, setWorkspaceName] = useState("");
   const [emailList, setEmailList] = useState([]);
   const [memberEmail, setMemberEmail] = useState("");
-  const [open, setOpen] = useState(false);
-
-  const handleOpenOrCloseModal = () => {
-    setOpen((prev) => !prev);
-  };
 
   const handleCreate = () => {
     console.log("Workspace:", workspaceName);
@@ -24,8 +19,7 @@ export const CreateNewWorkspace = () => {
 
   return (
     <>
-      <button onClick={handleOpenOrCloseModal}>open workspace</button>
-      <BaseModal open={open} onClose={handleOpenOrCloseModal}>
+      <BaseModal open={open} onClose={onClose}>
         <WrapperDiv>
           <StyledHeader>
             <p>Create a new workspace</p>
@@ -54,7 +48,7 @@ export const CreateNewWorkspace = () => {
             </StyledDiv>
           </MainStyled>
           <FooterStyled>
-            <ButtonStyled variant={"cancel"} type={"button"}>
+            <ButtonStyled variant={"cancel"} type={"button"} onClick={onClose}>
               Cancel
             </ButtonStyled>
             <ButtonStyled
