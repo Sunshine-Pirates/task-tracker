@@ -51,14 +51,14 @@ export const CreateWorkspaceModal = ({ open, onClose }) => {
             <ButtonStyled variant={"cancel"} type={"button"} onClick={onClose}>
               Cancel
             </ButtonStyled>
-            <ButtonStyled
+            <CreateButton
               variant={"contained"}
               type={"button"}
               disabled={!workspaceName.trim() || emailList.length === 0}
               onClick={handleCreate}
             >
               Create
-            </ButtonStyled>
+            </CreateButton>
           </FooterStyled>
         </WrapperDiv>
       </BaseModal>
@@ -104,3 +104,12 @@ const ButtonStyled = styled(Button)(() => ({
   width: "78px",
   height: "34px",
 }));
+
+const CreateButton = styled(Button)({
+  width: "78px",
+  height: "34px",
+  ":disabled": {
+    background: "#B2B2B2",
+    color: "white",
+  },
+});
