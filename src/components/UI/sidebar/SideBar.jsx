@@ -11,6 +11,8 @@ import { IconButton, styled } from "@mui/material";
 import { WorkspaceList } from "./WorkspaceList";
 import { CollapsedSideBar } from "./CollapsedSideBar";
 import { workspaces } from "../../../utils/constants/workspaces";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../../utils/constants/constants";
 
 export const SideBar = () => {
   const [open] = useState(true);
@@ -89,17 +91,19 @@ export const SideBar = () => {
 
       <StyledDivider />
       <StyledWrapper>
-        <Container>
-          <section>
-            <IconButton>
-              <Icons.Group />
-            </IconButton>
-            <p>All issues</p>
-          </section>
-          <StyledNumber variant="body2" color="textSecondary">
-            (267)
-          </StyledNumber>
-        </Container>
+        <Links to={PATHS.ADMIN.AllISSUESPAGE}>
+          <Container>
+            <section>
+              <IconButton>
+                <Icons.Group />
+              </IconButton>
+              <p>All issues</p>
+            </section>
+            <StyledNumber variant="body2" color="textSecondary">
+              (267)
+            </StyledNumber>
+          </Container>
+        </Links>
 
         <Container>
           <section>
@@ -129,6 +133,10 @@ export const SideBar = () => {
     </StyledDrawer>
   );
 };
+const Links = styled(Link)(() => ({
+  color: "#111111",
+  textDecoration: "none",
+}));
 
 const StyledNumber = styled(Typography)(() => ({
   paddingBottom: "5px",
@@ -158,9 +166,11 @@ const StyledListItem = styled(ListItem)(() => ({
     borderLeft: "0.0625rem solid #E0E0E0",
   },
 }));
-const StyledDrawer = styled(Drawer)(() => ({
+const StyledDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== "isCollapsed",
+})(({ isCollapsed }) => ({
   "& .MuiDrawer-paper": {
-    width: "15.625rem",
+    width: isCollapsed ? "5rem" : "15.625rem",
     display: "flex",
     flexDirection: "column",
     gap: "10px",
