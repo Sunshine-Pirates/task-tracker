@@ -7,7 +7,7 @@ export const MenuBoard = () => {
     <MainContainer>
       <MenuBlock>
         <h1>{""}</h1>
-        <p>Menu</p>
+        <h6>Menu</h6>
         <Icons.Cancel />
       </MenuBlock>
       <TextBlock>
@@ -31,7 +31,6 @@ const MainContainer = styled("div")(() => ({
   animation: `${slideInFromRight} 1s ease-out`,
   boxShadow: " rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
   borderRadius: "10px",
-  padding: "16px 20px",
   p: {
     fontSize: "16px",
     fontWeight: "400",
@@ -39,7 +38,7 @@ const MainContainer = styled("div")(() => ({
   },
 
   "& p:hover": {
-    backgroundColor: "red",
+    backgroundColor: "#F2F2F2",
   },
 }));
 
@@ -47,6 +46,13 @@ const MenuBlock = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  padding: "16px 20px",
+  paddingBottom: "10px",
+
+  h6: {
+    fontSize: "16px",
+    fontWeight: "400",
+  },
 }));
 
 const TextBlock = styled("div")(() => ({
@@ -62,6 +68,10 @@ const ImageBlock = styled("div")(() => ({
     width: "59px",
     height: "26px",
     borderRadius: "6px",
+  },
+
+  ":hover": {
+    backgroundColor: "#F2F2F2",
   },
 }));
 
