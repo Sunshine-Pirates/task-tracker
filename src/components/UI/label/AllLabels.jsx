@@ -1,16 +1,14 @@
-import { Select, styled, MenuItem, Avatar } from "@mui/material";
+import { Select, styled, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { Icons } from "../../../assets";
-import { SearchInput } from "../searchInput/SearchInput";
 import { assignee } from "../../../utils/constants/assignee";
 import { Checkbox } from "../checkbox/Checkbox";
-import { Person } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
+import { lables } from "../../../utils/constants/lables";
 
-export const Assignee = () => {
+export const AllLabeles = () => {
   const [selectOpen, setSelectOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [filteredOptions, setFilteredOptions] = useState(assignee);
   const [checkedState, setCheckedState] = useState(
     assignee.reduce((acc, option) => ({ ...acc, [option.id]: false }), {})
   );
@@ -18,17 +16,6 @@ export const Assignee = () => {
   const handleClose = () => {
     console.log(selectedIds);
     setSelectOpen(false);
-  };
-
-  const handleSearch = (value) => {
-    if (!value.trim()) {
-      setFilteredOptions(assignee);
-    } else {
-      const filtered = assignee.filter((option) =>
-        option.fullName.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredOptions(filtered);
-    }
   };
 
   const handleCheckboxChange = (id) => {
@@ -79,7 +66,7 @@ export const Assignee = () => {
         selected.length > 0 ? (
           <StyledSelectedItems>
             {selected.map((id) => {
-              const option = assignee.find((item) => item.id === id);
+              const option = lables.find((item) => item.id === id);
               return (
                 <StyledSelectedItem key={id}>
                   {option?.fullName}
@@ -101,20 +88,12 @@ export const Assignee = () => {
               setSelectOpen((prev) => !prev);
             }}
           >
-            Assignee
+            All labels
           </StyledText>
         )
       }
     >
       <StyledMenuItem>
-        <section onClick={(e) => e.stopPropagation()}>
-          <StyledSearchInput
-            placeholder="Search"
-            iconEnd={<Icons.Search />}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-        </section>
-
         <StyledItem>
           <StyledWrapper>
             <Checkbox
@@ -123,16 +102,13 @@ export const Assignee = () => {
               checkedIcon={<Icons.Checkbox />}
               uncheckedIcon={<Icons.CheckboxLine />}
             />
-            <Avatar>
-              <Person />
-            </Avatar>
             <div onClick={handleUnassignedClick}>
-              <StyledName>Unassigned</StyledName>
+              <StyledName>No labels</StyledName>
             </div>
           </StyledWrapper>
 
-          {filteredOptions.length > 0 ? (
-            filteredOptions.map((option) => (
+          {lables.length > 0 ? (
+            lables.map((option) => (
               <StyledWrapper key={option.id} value={option.id}>
                 <Checkbox
                   checked={checkedState[option.id]}
@@ -140,11 +116,9 @@ export const Assignee = () => {
                   checkedIcon={<Icons.Checkbox />}
                   uncheckedIcon={<Icons.CheckboxLine />}
                 />
-                <StyledImage src={option.image} alt={option.fullName} />
-                <div onClick={() => handleCheckboxChange(option.id)}>
-                  <StyledName>{option.fullName}</StyledName>
-                  <StyledEmail>{option.email}</StyledEmail>
-                </div>
+                <StyledList backgroundColor={option.backgroundColor}>
+                  {" "}
+                </StyledList>
               </StyledWrapper>
             ))
           ) : (
@@ -155,29 +129,26 @@ export const Assignee = () => {
     </StyledSelect>
   );
 };
-
+const StyledList = styled("div")(({ backgroundColor }) => ({
+  width: "230px",
+  height: "32px",
+  borderRadius: "6px",
+  backgroundColor,
+}));
 const StyledWrapper = styled(MenuItem)(() => ({
   display: "flex",
   gap: "0.5625rem",
 }));
-
-const StyledImage = styled("img")(() => ({
-  maxWidth: "2.5rem",
-  height: "auto",
-  objectFit: "cover",
-}));
-
 const StyledItem = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
 }));
 
 const StyledMenuItem = styled("div")(() => ({
-  width: "19.625rem",
-  height: "31.875rem",
+  width: "304px",
+  height: "224px",
   display: "flex",
   flexDirection: "column",
-  paddingTop: "1rem",
   gap: "0.5rem",
   borderRadius: "1rem",
   "& section": {
@@ -186,7 +157,7 @@ const StyledMenuItem = styled("div")(() => ({
 }));
 
 const StyledSelect = styled(Select)(() => ({
-  width: "219px",
+  width: "154px",
   height: "36px",
   background: "#ffffff",
   borderRadius: "0.5rem",
@@ -206,13 +177,6 @@ const StyledText = styled("span")(() => ({
   fontSize: "0.875rem",
 }));
 
-const StyledSearchInput = styled(SearchInput)(() => ({
-  width: "16.875rem",
-  "& .css-elo8k2-MuiInputAdornment-root": {
-    marginTop: "4px",
-  },
-}));
-
 const Text = styled("div")(() => ({
   color: "#A0A0A0",
   textAlign: "center",
@@ -221,10 +185,6 @@ const Text = styled("div")(() => ({
 
 const StyledName = styled("p")(() => ({
   color: "#111111",
-}));
-
-const StyledEmail = styled("p")(() => ({
-  color: "#919191",
 }));
 
 const StyledIcons = styled("div")(() => ({

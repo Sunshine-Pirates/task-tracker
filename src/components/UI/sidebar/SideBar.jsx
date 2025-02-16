@@ -91,19 +91,19 @@ export const SideBar = () => {
 
       <StyledDivider />
       <StyledWrapper>
-        <Links to={PATHS.ADMIN.AllISSUESPAGE}>
-          <Container>
-            <section>
-              <IconButton>
-                <Icons.Group />
-              </IconButton>
+        <Container>
+          <section>
+            <IconButton>
+              <Icons.Group />
+            </IconButton>
+            <Links to={PATHS.ADMIN.AllISSUESPAGE}>
               <p>All issues</p>
-            </section>
-            <StyledNumber variant="body2" color="textSecondary">
-              (267)
-            </StyledNumber>
-          </Container>
-        </Links>
+            </Links>
+          </section>
+          <StyledNumber variant="body2" color="textSecondary">
+            (267)
+          </StyledNumber>
+        </Container>
 
         <Container>
           <section>
@@ -175,6 +175,7 @@ const StyledDrawer = styled(Drawer, {
     flexDirection: "column",
     gap: "10px",
     borderRight: "none",
+    marginTop: "68px",
     background:
       "linear-gradient(90deg, rgba(248,248,248,0.6) 0%, rgba(248,248,248,0.6) 100%)",
   },
@@ -209,6 +210,7 @@ const StyledIconButton = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  marginTop: "68px",
 }));
 
 const StyledContainer = styled("div")(() => ({

@@ -1,11 +1,8 @@
-// import { AppRoutes } from "./routes/AppRoutes";
-
-import { AllIssues } from "./pages/admin/AllIssues";
-
+import { AppRoutes } from "./routes/AppRoutes";
 export const App = () => {
   return (
     <div>
-      <AllIssues />
+      <AppRoutes />
     </div>
   );
 };

@@ -10,6 +10,6 @@ export const PATHS = {
 
   ADMIN: {
     ROOT: "/admin",
-    PAGE: "/admin/admin-page",
+    PAGE: "admin/all-issues",
   },
 };
