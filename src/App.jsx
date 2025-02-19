@@ -1,9 +1,11 @@
-import { AppRoutes } from "./routes/AppRoutes";
+import { MenuBoard } from "./components/UI/board/MenuBoard";
+// import { AppRoutes } from "./routes/AppRoutes";
 
 export const App = () => {
   return (
     <div>
-      <AppRoutes />
+      {/* <AppRoutes /> */}
+      <MenuBoard />
     </div>
   );
 };
