@@ -232,7 +232,7 @@ const StyleP = styled("p")(() => ({
   cursor: "pointer",
 }));
 
-const MainBlock = styled("div")(() => ({
+export const MainBlock = styled("div")(() => ({
   display: "flex",
   gap: "50px",
   position: "fixed",

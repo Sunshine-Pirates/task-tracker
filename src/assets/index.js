@@ -55,8 +55,30 @@ import Google from "../assets/icons/flat-color-icons_google.svg";
 import Edit from "../assets/icons/Edit.svg";
 import PlusLable from "../assets/icons/PluseIcons.svg";
 import DeleteText from "../assets/icons/DeleteText.svg";
+import Message from "../assets/icons/Message.svg";
+import Month from "../assets/icons/Month.svg";
+import ListIcon from "../assets/icons/List.svg";
+import Peopleicon from "../assets/icons/People Icon.svg";
+import UiAndKeyBoard from "../assets/icons/UI and Keyboard Icon.svg";
+import Editt from "../assets/icons/EditText.svg";
+import System from "../assets/icons/System.svg";
+import Memberss from "../assets/icons/State=Member.svg";
+import Estimation from "../assets/icons/System (1).svg";
+import Attachment from "../assets/icons/System (2).svg";
+import Checklist from "../assets/icons/Vector (7).svg";
 
 export const Icons = {
+  Checklist,
+  Attachment,
+  Estimation,
+  Memberss,
+  System,
+  Editt,
+  UiAndKeyBoard,
+  Peopleicon,
+  ListIcon,
+  Month,
+  Message,
   DeleteText,
   PlusLable,
   Edit,
