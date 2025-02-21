@@ -91,19 +91,19 @@ export const SideBar = () => {
 
       <StyledDivider />
       <StyledWrapper>
-        <Container>
-          <section>
-            <IconButton>
-              <Icons.Group />
-            </IconButton>
-            <Links to={PATHS.ADMIN.AllISSUESPAGE}>
+        <Links to={PATHS.ADMIN.AllISSUESPAGE}>
+          <Container>
+            <section>
+              <IconButton>
+                <Icons.Group />
+              </IconButton>
               <p>All issues</p>
-            </Links>
-          </section>
-          <StyledNumber variant="body2" color="textSecondary">
-            (267)
-          </StyledNumber>
-        </Container>
+            </section>
+            <StyledNumber variant="body2" color="textSecondary">
+              (267)
+            </StyledNumber>
+          </Container>
+        </Links>
 
         <Container>
           <section>
@@ -169,6 +169,7 @@ const StyledListItem = styled(ListItem)(() => ({
 const StyledDrawer = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== "isCollapsed",
 })(({ isCollapsed }) => ({
+  transition: "width 0.6s ease-in-out",
   "& .MuiDrawer-paper": {
     width: isCollapsed ? "5rem" : "15.625rem",
     display: "flex",
@@ -198,19 +199,21 @@ const StyledHeader = styled("div")(() => ({
   },
 }));
 
-const StyledIconButton = styled("div")(() => ({
+const StyledIconButton = styled("div")(({ isCollapsed }) => ({
   width: "2.5rem",
   height: "2.5rem",
   background: "linear-gradient(to left, #F8F8F899 40%, transparent 40%)",
   borderRadius: "0px 0.5rem 0.5rem 0px",
   position: "fixed",
   top: "1.25rem",
-  left: "14.125rem",
+  left: isCollapsed ? "3.125rem" : "14.125rem",
   zIndex: "10",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   marginTop: "68px",
+  transition: "left 0.6s ease-in-out, transform 0.6s ease-in-out",
+  transform: isCollapsed ? "rotate(180deg)" : "rotate(0deg)",
 }));
 
 const StyledContainer = styled("div")(() => ({

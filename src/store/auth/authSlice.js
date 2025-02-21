@@ -4,7 +4,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     userRole: "ADMIN",
-    isAuthenticated: false,
+    isAuthenticated: true,
   },
 });
 export const authReducer = authSlice.reducer;

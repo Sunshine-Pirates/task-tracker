@@ -141,14 +141,15 @@ const StyledContainerItem = styled("div")(() => ({
 }));
 
 const Wrapper = styled("div")(() => ({
-  width: "1146px",
-  height: "fit-content",
+  width: "100%",
+  maxWidth: "1146px",
+  height: "683px",
   backgroundColor: "#F8F8F899",
   display: "flex",
   flexDirection: "column",
   gap: "22px",
   padding: "22px 16px",
-  margin: "12px 24px 12px 20px",
+  marginLeft: "270px",
 }));
 
 const AllIssuesContainer = styled("div")(() => ({
