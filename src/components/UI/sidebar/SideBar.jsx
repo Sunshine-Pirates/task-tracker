@@ -11,6 +11,8 @@ import { IconButton, styled } from "@mui/material";
 import { WorkspaceList } from "./WorkspaceList";
 import { CollapsedSideBar } from "./CollapsedSideBar";
 import { workspaces } from "../../../utils/constants/workspaces";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../../utils/constants/constants";
 
 export const SideBar = () => {
   const [open] = useState(true);
@@ -89,17 +91,19 @@ export const SideBar = () => {
 
       <StyledDivider />
       <StyledWrapper>
-        <Container>
-          <section>
-            <IconButton>
-              <Icons.Group />
-            </IconButton>
-            <p>All issues</p>
-          </section>
-          <StyledNumber variant="body2" color="textSecondary">
-            (267)
-          </StyledNumber>
-        </Container>
+        <Links to={PATHS.ADMIN.AllISSUESPAGE}>
+          <Container>
+            <section>
+              <IconButton>
+                <Icons.Group />
+              </IconButton>
+              <p>All issues</p>
+            </section>
+            <StyledNumber variant="body2" color="textSecondary">
+              (267)
+            </StyledNumber>
+          </Container>
+        </Links>
 
         <Container>
           <section>
@@ -129,6 +133,10 @@ export const SideBar = () => {
     </StyledDrawer>
   );
 };
+const Links = styled(Link)(() => ({
+  color: "#111111",
+  textDecoration: "none",
+}));
 
 const StyledNumber = styled(Typography)(() => ({
   paddingBottom: "5px",
@@ -158,13 +166,17 @@ const StyledListItem = styled(ListItem)(() => ({
     borderLeft: "0.0625rem solid #E0E0E0",
   },
 }));
-const StyledDrawer = styled(Drawer)(() => ({
+const StyledDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== "isCollapsed",
+})(({ isCollapsed }) => ({
+  transition: "width 0.6s ease-in-out",
   "& .MuiDrawer-paper": {
-    width: "15.625rem",
+    width: isCollapsed ? "5rem" : "15.625rem",
     display: "flex",
     flexDirection: "column",
     gap: "10px",
     borderRight: "none",
+    marginTop: "68px",
     background:
       "linear-gradient(90deg, rgba(248,248,248,0.6) 0%, rgba(248,248,248,0.6) 100%)",
   },
@@ -187,18 +199,21 @@ const StyledHeader = styled("div")(() => ({
   },
 }));
 
-const StyledIconButton = styled("div")(() => ({
+const StyledIconButton = styled("div")(({ isCollapsed }) => ({
   width: "2.5rem",
   height: "2.5rem",
   background: "linear-gradient(to left, #F8F8F899 40%, transparent 40%)",
   borderRadius: "0px 0.5rem 0.5rem 0px",
   position: "fixed",
   top: "1.25rem",
-  left: "14.125rem",
+  left: isCollapsed ? "3.125rem" : "14.125rem",
   zIndex: "10",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  marginTop: "68px",
+  transition: "left 0.6s ease-in-out, transform 0.6s ease-in-out",
+  transform: isCollapsed ? "rotate(180deg)" : "rotate(0deg)",
 }));
 
 const StyledContainer = styled("div")(() => ({
