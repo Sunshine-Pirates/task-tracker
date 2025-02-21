@@ -142,7 +142,7 @@ const StyledContainerItem = styled("div")(() => ({
 
 const Wrapper = styled("div")(() => ({
   width: "100%",
-  maxWidth: "1146px",
+  maxWidth: "1166px",
   height: "683px",
   backgroundColor: "#F8F8F899",
   display: "flex",
@@ -150,6 +150,7 @@ const Wrapper = styled("div")(() => ({
   gap: "22px",
   padding: "22px 16px",
   marginLeft: "270px",
+  marginTop: "12px",
 }));
 
 const AllIssuesContainer = styled("div")(() => ({
