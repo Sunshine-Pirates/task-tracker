@@ -59,7 +59,6 @@ const Wrapper = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "8px",
-  padding: "8px 20px",
 }));
 const StyledButton = styled(IconButton)(() => ({
   backgroundColor: "#C9C9C9",

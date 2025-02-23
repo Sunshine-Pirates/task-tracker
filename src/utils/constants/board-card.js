@@ -1,0 +1,38 @@
+export const title = [
+  {
+    id: 1,
+    text: "Какая то задача, которую нужно выполнить",
+    priority: ["#61BD4F", "#EB5A46", "#F2D600", "#0079BF", "#EB5A46"],
+    list: true,
+    message: true,
+    month: true,
+    сhecklist: false,
+  },
+  {
+    id: 2,
+    text: "Какая то задача, которую нужно выполнить",
+    priority: ["#61BD4F", "#EB5A46", "#F2D600", "#0079BF", "#EB5A46"],
+    list: false,
+    message: false,
+    month: false,
+    сhecklist: true,
+  },
+  {
+    id: 3,
+    text: "Какая то задача, которую нужно выполнить",
+    priority: ["#61BD4F", "#EB5A46", "#F2D600", "#0079BF", "#EB5A46"],
+    list: true,
+    message: true,
+    month: true,
+    сhecklist: false,
+  },
+  {
+    id: 4,
+    text: "Какая то задача, которую нужно выполнить",
+    priority: ["#61BD4F", "#EB5A46", "#F2D600"],
+    list: false,
+    message: false,
+    month: false,
+    сhecklist: false,
+  },
+];
