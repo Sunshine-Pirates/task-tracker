@@ -63,7 +63,16 @@ export const NotificationComponent = () => {
                 key={notification.id}
                 read={notification.read ? "true" : "false"}
                 onClick={() => markAsRead(notification.id)}
-                background={notification.background}
+                style={{
+                  background:
+                    notification.background?.startsWith("http") &&
+                    notification.background.trim() !== ""
+                      ? `url(${notification.background}) center/cover no-repeat`
+                      : notification.background &&
+                          notification.background.trim() !== ""
+                        ? notification.background
+                        : "#e0e0e0",
+                }}
               >
                 <ContentBox>
                   <Dot read={notification.read} />
@@ -167,7 +176,7 @@ const ListItemStyled = styled(ListItem)(({ read, background }) => ({
   display: "flex",
   flexDirection: "column",
   padding: "10px",
-  borderBottom: "1px solid #ddd",
+  borderBottom: "1px solid #fffff",
   backgroundColor: read === "true" ? "#f7f7f7" : background,
 }));
 const TitleWrapper = styled(Box)(() => ({
@@ -207,12 +216,20 @@ const Dot = styled("div")(({ read }) => ({
   backgroundColor: read ? "transparent" : "#007bff",
 }));
 
-const ContentBox = styled(Box)(() => ({
+const ContentBox = styled(Box)(({ background }) => ({
   width: "321px",
   height: "270px",
   display: "flex",
   flexWrap: "wrap",
   gap: "15px",
+  background:
+    typeof background === "string" &&
+    background.startsWith("http") &&
+    background.trim() !== ""
+      ? `url(${background}) center/cover no-repeat`
+      : background && background.trim() !== ""
+        ? background
+        : "white",
 }));
 
 const DetailsMessageBox = styled(Box)(() => ({
@@ -220,6 +237,7 @@ const DetailsMessageBox = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "10px",
+  background: "white",
 }));
 
 const DetailsMessage = styled("div")(() => ({

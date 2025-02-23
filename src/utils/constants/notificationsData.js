@@ -7,8 +7,9 @@ export const notificationsData = [
     text: "Moved to list Done",
     time: "Sep 15 at 13:23 PM",
     read: false,
-    background: "#ffffff",
+    background: "https://blackriver.agency/wp-content/uploads/2024/06/cower0401-2.png",
   },
+
   {
     id: 2,
     name: "Reminder",
@@ -17,7 +18,7 @@ export const notificationsData = [
     text: "Was due 10 min ago",
     time: "Sep 15 at 13:23 PM",
     read: false,
-    background: "#ffffff",
+    background: "white",
   },
   {
     id: 3,
@@ -27,6 +28,6 @@ export const notificationsData = [
     text: "My God, let me not burn out on this task",
     time: "Sep 15 at 13:23 PM",
     read: false,
-    background: "#ffffff",
+    background: "white",
   },
 ];
