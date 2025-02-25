@@ -66,9 +66,14 @@ import Memberss from "../assets/icons/State=Member.svg";
 import Estimation from "../assets/icons/System (1).svg";
 import Attachment from "../assets/icons/System (2).svg";
 import Checklist from "../assets/icons/Vector (7).svg";
-import Assignee from "../assets/images/Ellipse 2.png";
+import AllIssues from "../assets/icons/All-Issues.svg";
+import Participants from "../assets/icons/Participants.svg";
+import Boards from "../assets/icons/Boards.svg";
 
 export const Icons = {
+  Boards,
+  Participants,
+  AllIssues,
   Checklist,
   Attachment,
   Estimation,

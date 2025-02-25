@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -13,12 +13,19 @@ import { CollapsedSideBar } from "./CollapsedSideBar";
 import { workspaces } from "../../../utils/constants/workspaces";
 import { Link } from "react-router-dom";
 import { PATHS } from "../../../utils/constants/constants";
+import { useState } from "react";
+import { toggleSidebar } from "../../../store/sidebar/sideBarSlice";
 
 export const SideBar = () => {
-  const [open] = useState(true);
+  const dispatch = useDispatch();
+  const isCollapsed = useSelector((state) => state.sidebar.isCollapsed);
   const [showTitles, setShowTitles] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+
+const handleSectionToggle = (section) => {
+  setActiveSection((prev) => (prev === section ? null : section));
+};
 
   const handleShowToggle = () => {
     setIsExpanded((prev) => !prev);
@@ -29,16 +36,13 @@ export const SideBar = () => {
   const handleSelectIconClick = () => {
     setShowTitles((prev) => !prev);
   };
-  const toggleDrawer = () => {
-    setIsCollapsed((prev) => !prev);
-  };
-  const title = "LMS";
 
+  const title = "LMS";
   const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
 
   return isCollapsed ? (
     <CollapsedSideBar
-      toggleDrawer={toggleDrawer}
+      toggleDrawer={() => dispatch(toggleSidebar())}
       isCollapsed={isCollapsed}
       title={title}
       isExpanded={isExpanded}
@@ -48,7 +52,7 @@ export const SideBar = () => {
   ) : (
     <StyledDrawer
       anchor="left"
-      open={open}
+      open={!isCollapsed}
       variant="persistent"
       isCollapsed={isCollapsed}
     >
@@ -57,25 +61,43 @@ export const SideBar = () => {
           <Icons.Vector />
           <p>{title}</p>
         </section>
-        <StyledIconButton onClick={toggleDrawer}>
+        <StyledIconButton onClick={() => dispatch(toggleSidebar())}>
           <Icons.MenuItem />
         </StyledIconButton>
       </StyledHeader>
       <StyledDivider />
-      <StyledContainer>
-        <StyledBoards>
-          <IconButton>
-            <Icons.VectorTwo />
-          </IconButton>
-          <p>Boards</p>
-        </StyledBoards>
-        <StyledCOntainerIcons>
-          <Icons.PlusWhite />
-          <div onClick={handleSelectIconClick}>
-            {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
-          </div>
-        </StyledCOntainerIcons>
-      </StyledContainer>
+
+      {activeSection === "boards" ? (
+  <StyledContainer>
+    <StyledBoards>
+      <IconButton>
+        <Icons.VectorTwo />
+      </IconButton>
+      <p>Boards</p>
+    </StyledBoards>
+    <StyledCOntainerIcons>
+      <Icons.PlusWhite />
+      <div onClick={handleSelectIconClick}>
+        {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
+      </div>
+    </StyledCOntainerIcons>
+  </StyledContainer>
+) : (
+  <BoardWrapper onClick={() => handleSectionToggle("boards")}>
+    <BoardTitle>
+      <IconButton>
+        <Icons.Boards />
+      </IconButton>
+      <p>Boards</p>
+    </BoardTitle>
+    <BoardIcons>
+      <Icons.PlusGray />
+      <IconButton onClick={handleSelectIconClick}>
+        {showTitles ? <Icons.Up /> : <Icons.Down />}
+      </IconButton>
+    </BoardIcons>
+  </BoardWrapper>
+)}
 
       {showTitles && (
         <StyledList>
@@ -91,31 +113,53 @@ export const SideBar = () => {
 
       <StyledDivider />
       <StyledWrapper>
-        <Links to={PATHS.ADMIN.AllISSUESPAGE}>
-          <Container>
-            <section>
-              <IconButton>
-                <Icons.Group />
-              </IconButton>
-              <p>All issues</p>
-            </section>
-            <StyledNumber variant="body2" color="textSecondary">
-              (267)
-            </StyledNumber>
-          </Container>
-        </Links>
+      {activeSection === "allIssues" ? (
+  
+    <Wrapper>
+      <IconButton>
+        <Icons.AllIssues />
+      </IconButton>
+      <Typography variant="body1">All issues</Typography>
+      <StyledNumberr variant="body2">(267)</StyledNumberr>
+    </Wrapper>
+) : (
+  <Links to={PATHS.ADMIN.AllISSUESPAGE}>
+  <Container onClick={() => handleSectionToggle("allIssues")}>
+    <section>
+      <IconButton>
+        <Icons.Group />
+      </IconButton>
+      <p>All issues</p>
+    </section>
+    <StyledNumber variant="body2" color="textSecondary">
+      (267)
+    </StyledNumber>
+  </Container>
+  </Links>
 
-        <Container>
-          <section>
-            <IconButton>
-              <Icons.Members />
-            </IconButton>
-            <p>Participants</p>
-          </section>
-          <StyledNumber variant="body2" color="textSecondary">
-            (7)
-          </StyledNumber>
-        </Container>
+)}
+
+{activeSection === "participants" ? (
+  <Wrapper>
+    <IconButton>
+      <Icons.Participants />
+    </IconButton>
+    <Typography variant="body1">Participants</Typography>
+    <StyledNumberr variant="body2">(7)</StyledNumberr>
+  </Wrapper>
+) : (
+  <Container onClick={() => handleSectionToggle("participants")}>
+    <section>
+      <IconButton>
+        <Icons.Members />
+      </IconButton>
+      <p>Participants</p>
+    </section>
+    <StyledNumber variant="body2" color="textSecondary">
+      (7)
+    </StyledNumber>
+  </Container>
+)}
 
         <StyledSettings>
           <IconButton>
@@ -133,6 +177,47 @@ export const SideBar = () => {
     </StyledDrawer>
   );
 };
+
+const BoardWrapper = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "30px",
+  cursor: "pointer",
+});
+
+const BoardTitle = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+});
+
+const BoardIcons = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  gap: "7px",
+  color: "#757575",
+});
+
+const Wrapper = styled("div")({
+  display: "flex",
+  alignItems: "center",
+  background:
+    "linear-gradient(90deg, rgba(58,104,131,0.6) 0%, rgba(58,104,131,0.6) 100%)",
+  padding: "10px 20px",
+  width: "14.1875rem",
+  height: "2.3125rem",
+  color: "#FFFFFF",
+  paddingLeft: "2.5rem",
+  marginBottom: "0.75rem",
+  borderTopRightRadius: "1.5rem",
+  borderBottomRightRadius: "1.5rem",
+});
+
+const StyledNumberr = styled(Typography)({
+  color: "white",
+  marginLeft: "8px",
+});
 const Links = styled(Link)(() => ({
   color: "#111111",
   textDecoration: "none",
@@ -188,7 +273,7 @@ const StyledHeader = styled("div")(() => ({
   "& section": {
     display: "flex",
     justifyContent: "center",
-    gap: "0.75rem",
+    gap: "12px",
     paddingLeft: "2.5rem",
     paddingTop: "1.9375rem",
     paddingBottom: "1.4375rem",
@@ -242,9 +327,10 @@ const StyledCOntainerIcons = styled("div")(() => ({
 const Container = styled("div")(() => ({
   width: "190px",
   display: "flex",
-  justifyContent: "center",
   alignItems: "center",
-  gap: "1.900rem",
+  justifyContent: "center",
+  gap: "36px",
+  margin: "0 auto",
   borderTopRightRadius: "1.5rem",
   borderBottomRightRadius: "1.5rem",
   "& p": {
@@ -254,31 +340,21 @@ const Container = styled("div")(() => ({
   "& section": {
     display: "flex",
   },
-  "&:hover": {
-    background: "#3A68831A",
-    transition: "background-color 0.3s ease",
-  },
 }));
 const StyledSettings = styled("div")(() => ({
+  width: "190px",
+  margin: "0 auto",
   display: "flex",
-  paddingLeft: "10px",
-  borderTopRightRadius: "1.5rem",
-  borderBottomRightRadius: "1.5rem",
-  "& p": {
-    paddingTop: "7px",
-  },
-  "&:hover": {
-    background: "#3A68831A",
-    transition: "background-color 0.3s ease",
-  },
+  alignItems: "center",
+  gap: "8px",
+  paddingLeft: "6px",
 }));
 
 const StyledWrapper = styled("div")(() => ({
-  height: "94px",
+  height: "fit-content",
   display: "flex",
   flexDirection: "column",
   cursor: "pointer",
-  margin: "0 auto",
 }));
 const StyledDivider = styled(Divider)(() => ({
   width: "10.625rem",

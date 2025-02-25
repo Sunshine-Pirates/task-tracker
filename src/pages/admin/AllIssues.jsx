@@ -5,12 +5,14 @@ import { AllLabeles } from "../../components/UI/label/AllLabels";
 import { allIssues } from "../../utils/constants/all-issues";
 import { Assignee } from "../../components/UI/assignee/Assignee";
 import { assignee } from "../../utils/constants/assignee";
+import { useSelector } from "react-redux";
 
 export const AllIssues = () => {
   const MAX_VISIBLE = 2;
+  const isCollapsed = useSelector((state) => state.sidebar.isCollapsed);
 
   return (
-    <Wrapper>
+    <Wrapper isCollapsed={isCollapsed}>
       <AllIssuesContainer>
         <div>
           <Text>View all issues</Text>
@@ -141,18 +143,16 @@ const StyledContainerItem = styled("div")(() => ({
 }));
 
 const Wrapper = styled("div")(() => ({
-  width: "100%",
-  maxWidth: "1166px",
-  height: "683px",
+  flexGrow: 1,
+  height: "fit-content",
   backgroundColor: "#F8F8F899",
   display: "flex",
   flexDirection: "column",
   gap: "22px",
   padding: "22px 16px",
-  marginLeft: "270px",
+  transition: "width 0.3s ease",
   marginTop: "12px",
 }));
-
 const AllIssuesContainer = styled("div")(() => ({
   display: "flex",
   gap: "33px",
