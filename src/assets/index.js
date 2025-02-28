@@ -55,7 +55,8 @@ import Google from "../assets/icons/flat-color-icons_google.svg";
 import Edit from "../assets/icons/Edit.svg";
 import PlusLable from "../assets/icons/PluseIcons.svg";
 import DeleteText from "../assets/icons/DeleteText.svg";
-
+import ArrowDown from "../assets/icons/arrow-down.svg";
+import ArrowUp from "../assets/icons/arrow-up.svg";
 export const Icons = {
   DeleteText,
   PlusLable,
@@ -114,4 +115,6 @@ export const Icons = {
   Error,
   Warning,
   CheckMark,
+  ArrowDown,
+  ArrowUp,
 };
