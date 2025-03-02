@@ -48,12 +48,15 @@ export const DatePickerComponent = () => {
     setSelectedEndDate(null);
     setSelectedTime("");
     setActiveField("start");
+    setSelectedReminder(null);
   };
 
   return (
     <DatePickerContainer>
       <Header>
-        <div>Estimation</div>
+        <EstimstionStyle>
+          Estimation <Icons.Cancel />
+        </EstimstionStyle>
         <div>
           <MonthTypography variant="h6">
             <Icons.Left
@@ -93,6 +96,7 @@ export const DatePickerComponent = () => {
         <InputContainer>
           <Typography variant="body2">Start date</Typography>
           <InputTextField
+            placeholder="Date"
             value={selectedDate ? selectedDate.format("DD/MM/YY") : ""}
             onClick={() => setActiveField("start")}
           />
@@ -101,6 +105,7 @@ export const DatePickerComponent = () => {
           <InputContainer>
             <Typography variant="body2">Due date</Typography>
             <InputTextField
+              placeholder="Date"
               value={selectedEndDate ? selectedEndDate.format("DD/MM/YY") : ""}
               onClick={() => setActiveField("end")}
             />
@@ -109,6 +114,7 @@ export const DatePickerComponent = () => {
             <Typography variant="body2">Due time</Typography>
             <InputTextField
               label=""
+              placeholder="time"
               type="text"
               value={selectedTime}
               onChange={(e) => setSelectedTime(e.target.value)}
@@ -119,11 +125,17 @@ export const DatePickerComponent = () => {
           <Typography variant="body2">Set due date reminder</Typography>
           <InputSelect
             IconComponent={Icons.Down}
-            value={selectedReminder}
+            value={selectedReminder || ""}
             onChange={(e) => setSelectedReminder(e.target.value)}
             displayEmpty
             renderValue={(selected) => (selected ? selected : "None")}
+            MenuProps={{
+              PaperProps: {
+                sx: menuStyles,
+              },
+            }}
           >
+            <MenuItem value="">None</MenuItem>
             <MenuItem value="5min">5 minutes before</MenuItem>
             <MenuItem value="30min">15 minutes before</MenuItem>
             <MenuItem value="10min">10 minutes before</MenuItem>
@@ -153,6 +165,13 @@ const Header = styled(Box)({
   flexDirection: "column",
   alignItems: "center",
 });
+
+const EstimstionStyle = styled("div")(() => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "75px",
+  marginLeft: "90px",
+}));
 
 const MonthTypography = styled(Typography)(() => ({
   display: "flex",
@@ -237,4 +256,18 @@ const InputSelect = styled(Select)({
   width: "250px",
   height: "34px",
   borderRadius: "8px",
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#D0D0D0 !important",
+  },
 });
+const menuStyles = {
+  maxHeight: "200px",
+  overflowY: "auto",
+  "&::-webkit-scrollbar": {
+    width: "6px",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "grey",
+    borderRadius: "4px",
+  },
+};
