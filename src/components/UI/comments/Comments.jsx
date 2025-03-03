@@ -1,15 +1,37 @@
 import { styled } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import { useState } from "react";
 import { Input } from "../input/Input";
-import { comments } from "../../../utils/constants/comments";
 import { Icons } from "../../../assets";
+import { useState } from "react";
+import { Modal } from "../modal/Modal";
+import { DeleteComments } from "./DeleteComments";
+import { comments as initialComments } from "../../../utils/constants/comments";
+import { UpdateModal } from "./UpdateModal";
 
-export const Comments = () => {
-  const [commentsVisible, setCommentsVisible] = useState(false);
+export const Comments = ({ commentsVisible, toggleCommentsVisibility }) => {
+  const [comments, setComments] = useState(initialComments);
+  const [isOpenDeleteModal, setOpenDeleteModal] = useState(false);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [selectedComment, setSelectedComment] = useState(null);
+  const [updateOpenModal, setUpdateOpenModal] = useState(false);
 
-  const toggleCommentsVisibility = () => {
-    setCommentsVisible((prev) => !prev);
+  const handleUpdateOpenModal = (id) => {
+    const commentToEdit = comments.find((comment) => comment.id === id);
+    if (commentToEdit) {
+      setSelectedComment(commentToEdit);
+      setUpdateOpenModal(true);
+    }
+  };
+
+  const handleOpenDeleteModal = (id) => {
+    setSelectedCommentId(id);
+    setOpenDeleteModal(true);
+  };
+
+  const handleDelete = (id) => {
+    const del = comments.filter((comment) => comment.id !== id);
+    setComments(del);
+    setOpenDeleteModal(false);
   };
 
   return (
@@ -24,6 +46,7 @@ export const Comments = () => {
           )}
         </div>
       </StyledSection>
+
       {commentsVisible && (
         <>
           <StyledContentWrapper>
@@ -41,8 +64,17 @@ export const Comments = () => {
                         <StyledDate>{comment.date}</StyledDate>
                         {comment.isMyComment && (
                           <StyledActions>
-                            <p>Edit</p>
-                            <p>Delete</p>
+                            <p
+                              onClick={() => handleUpdateOpenModal(comment.id)}
+                            >
+                              Edit
+                            </p>
+
+                            <p
+                              onClick={() => handleOpenDeleteModal(comment.id)}
+                            >
+                              Delete
+                            </p>
                           </StyledActions>
                         )}
                       </article>
@@ -57,9 +89,32 @@ export const Comments = () => {
               </StyledNoComments>
             )}
           </StyledContentWrapper>
+
           <StyledFixedInput>
             <StyledInput placeholder="Write a comment" />
           </StyledFixedInput>
+
+          <Modal
+            isOpen={isOpenDeleteModal}
+            onClose={() => setOpenDeleteModal(false)}
+          >
+            <DeleteComments
+              handleDelete={handleDelete}
+              id={selectedCommentId}
+            />
+          </Modal>
+          <Modal
+            isOpen={updateOpenModal}
+            onClose={() => setUpdateOpenModal(false)}
+            icon
+          >
+            <UpdateModal
+              comment={selectedComment}
+              comments={comments}
+              setComments={setComments}
+              onClose={() => setUpdateOpenModal(false)}
+            />
+          </Modal>
         </>
       )}
     </StyledCommentsContainer>

@@ -30,7 +30,7 @@ export const CollapsedSideBar = ({
           </IconButton>
 
           <StyledIconButton onClick={toggleDrawer}>
-              <Icons.Menu />
+            <Icons.Menu />
           </StyledIconButton>
         </StyledHeader>
 
@@ -121,6 +121,7 @@ const StyledDrawer = styled(Drawer)(() => ({
     background:
       "linear-gradient(90deg, rgba(248,248,248,0.6) 0%, rgba(248,248,248,0.6) 100%)",
     borderRight: "none",
+    marginTop: "68px",
   },
 }));
 
@@ -162,6 +163,7 @@ const StyledIconButton = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  marginTop: "68px",
 }));
 
 const StyledContainer = styled("div")(() => ({
