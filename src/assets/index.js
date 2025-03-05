@@ -71,8 +71,14 @@ import Checklist from "../assets/icons/Vector (7).svg";
 import AllIssues from "../assets/icons/All-Issues.svg";
 import Participants from "../assets/icons/Participants.svg";
 import Boards from "../assets/icons/Boards.svg";
+import StarBluee from "../assets/icons/star.svg";
+import Frame from "../assets/icons/Frame.svg";
+import BoardBlue from "../assets/icons/Frame (1).svg";
 
 export const Icons = {
+  BoardBlue,
+  Frame,
+  StarBluee,
   Boards,
   Participants,
   AllIssues,

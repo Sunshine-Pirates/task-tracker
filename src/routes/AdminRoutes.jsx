@@ -4,6 +4,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PATHS } from "../utils/constants/constants";
 import { AllIssues } from "../pages/admin/AllIssues";
 import { AdminPage } from "../pages/admin/AdminPage";
+import { InnerPage } from "../pages/admin/innerPage/InnerPage";
 
 export const AdminRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -29,6 +30,16 @@ export const AdminRoutes = () => {
           fallBackPath={PATHS.ADMIN.ROOT}
           isAllowed={isAuthenticated}
           component={AllIssues}
+        />
+      ),
+    },
+    {
+      path: PATHS.ADMIN.INNERPAGE,
+      element: (
+        <PrivateRoute
+          fallBackPath={PATHS.ADMIN.ROOT}
+          isAllowed={isAuthenticated}
+          component={InnerPage}
         />
       ),
     },
