@@ -8,15 +8,16 @@ export const AllBoardCard = ({
   isFavorite,
   id,
   onChange,
+  onNavigate,
 }) => {
   return (
-    <Container background={background} id={id}>
+    <Container background={background} id={id} onNavigate={onNavigate}>
       <p>{title}</p>
       <CheckboxBlock>
         <Checkbox
           checked={isFavorite}
           onChange={onChange}
-          checkedIcon={<Icons.Star />}
+          checkedIcon={<Icons.Star className="white-star" />}
           uncheckedIcon={<Icons.StarLine />}
         />
       </CheckboxBlock>
@@ -46,4 +47,11 @@ const CheckboxBlock = styled("div")(() => ({
   display: "flex",
   justifyContent: "end",
   padding: "5px",
+  "& .white-star": {
+    "& path": {
+      fill: "#ffff",
+      stroke: "none",
+    },
+    stroke: "#ffff",
+  },
 }));
