@@ -150,7 +150,6 @@ export const Table = ({ variant, columns, data, subTitle }) => {
   );
 };
 
-// 🔹 **Стили**
 const StyledTableContainer = styled(TableContainer)(() => ({
   maxWidth: "calc(100% - 80px)",
   maxHeight: "calc(100vh - 10px)",
