@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import { PATHS } from "../utils/constants/constants";
-// import { AllIssues } from "../pages/admin/AllIssues";
+import { AllIssues } from "../pages/admin/AllIssues";
 import { AdminPage } from "../pages/admin/AdminPage";
 
 export const AdminRoutes = () => {
@@ -22,15 +22,15 @@ export const AdminRoutes = () => {
         />
       ),
     },
-    // {
-    //   path: PATHS.ADMIN.AllISSUESPAGE,
-    //   element: (
-    //     <PrivateRoute
-    //       fallBackPath={PATHS.ADMIN.ROOT}
-    //       isAllowed={isAuthenticated}
-    //       component={AllIssues}
-    //     />
-    //   ),
-    // },
+    {
+      path: PATHS.ADMIN.AllISSUESPAGE,
+      element: (
+        <PrivateRoute
+          fallBackPath={PATHS.ADMIN.ROOT}
+          isAllowed={isAuthenticated}
+          component={AllIssues}
+        />
+      ),
+    },
   ];
 };
