@@ -11,7 +11,7 @@ export const AllBoardCard = ({
   onNavigate,
 }) => {
   return (
-    <Container background={background} id={id} onNavigate={onNavigate}>
+    <Container background={background} id={id} onClick={onNavigate}>
       <p>{title}</p>
       <CheckboxBlock>
         <Checkbox
