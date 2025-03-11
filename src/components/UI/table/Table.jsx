@@ -231,9 +231,9 @@ const StyledSubTitle = styled("p")(() => ({
   margin: "16px",
 }));
 const HeaderStyledTableCell = styled(TableCell)(() => ({
-  "& td": {
-    textAlign: "start",
-  },
+  padding: "0px 16px",
+  margin: 0,
+  textAlign: "start",
 }));
 const TitleWrapper = styled("div")(() => ({
   display: "flex",
@@ -276,6 +276,7 @@ const StyledTableBodyCell = styled(TableCell)(() => ({
   fontSize: "16px",
   color: "#000000",
   textAlign: "start",
+  fontWeight: "400",
   "& > div": {
     width: "100%",
     display: "flex",
