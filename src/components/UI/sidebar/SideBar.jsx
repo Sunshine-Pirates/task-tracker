@@ -23,9 +23,9 @@ export const SideBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
 
-const handleSectionToggle = (section) => {
-  setActiveSection((prev) => (prev === section ? null : section));
-};
+  const handleSectionToggle = (section) => {
+    setActiveSection((prev) => (prev === section ? null : section));
+  };
 
   const handleShowToggle = () => {
     setIsExpanded((prev) => !prev);
@@ -68,36 +68,36 @@ const handleSectionToggle = (section) => {
       <StyledDivider />
 
       {activeSection === "boards" ? (
-  <StyledContainer>
-    <StyledBoards>
-      <IconButton>
-        <Icons.VectorTwo />
-      </IconButton>
-      <p>Boards</p>
-    </StyledBoards>
-    <StyledCOntainerIcons>
-      <Icons.PlusWhite />
-      <div onClick={handleSelectIconClick}>
-        {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
-      </div>
-    </StyledCOntainerIcons>
-  </StyledContainer>
-) : (
-  <BoardWrapper onClick={() => handleSectionToggle("boards")}>
-    <BoardTitle>
-      <IconButton>
-        <Icons.Boards />
-      </IconButton>
-      <p>Boards</p>
-    </BoardTitle>
-    <BoardIcons>
-      <Icons.PlusGray />
-      <IconButton onClick={handleSelectIconClick}>
-        {showTitles ? <Icons.Up /> : <Icons.Down />}
-      </IconButton>
-    </BoardIcons>
-  </BoardWrapper>
-)}
+        <StyledContainer>
+          <StyledBoards>
+            <IconButton>
+              <Icons.VectorTwo />
+            </IconButton>
+            <p>Boards</p>
+          </StyledBoards>
+          <StyledCOntainerIcons>
+            <Icons.PlusWhite />
+            <div onClick={handleSelectIconClick}>
+              {showTitles ? <Icons.SelectIconTwo /> : <Icons.SelectIcon />}
+            </div>
+          </StyledCOntainerIcons>
+        </StyledContainer>
+      ) : (
+        <BoardWrapper onClick={() => handleSectionToggle("boards")}>
+          <BoardTitle>
+            <IconButton>
+              <Icons.Boards />
+            </IconButton>
+            <p>Boards</p>
+          </BoardTitle>
+          <BoardIcons>
+            <Icons.PlusGray />
+            <IconButton onClick={handleSelectIconClick}>
+              {showTitles ? <Icons.Up /> : <Icons.Down />}
+            </IconButton>
+          </BoardIcons>
+        </BoardWrapper>
+      )}
 
       {showTitles && (
         <StyledList>
@@ -113,53 +113,51 @@ const handleSectionToggle = (section) => {
 
       <StyledDivider />
       <StyledWrapper>
-      {activeSection === "allIssues" ? (
-  
-    <Wrapper>
-      <IconButton>
-        <Icons.AllIssues />
-      </IconButton>
-      <Typography variant="body1">All issues</Typography>
-      <StyledNumberr variant="body2">(267)</StyledNumberr>
-    </Wrapper>
-) : (
-  <Links to={PATHS.ADMIN.AllISSUESPAGE}>
-  <Container onClick={() => handleSectionToggle("allIssues")}>
-    <section>
-      <IconButton>
-        <Icons.Group />
-      </IconButton>
-      <p>All issues</p>
-    </section>
-    <StyledNumber variant="body2" color="textSecondary">
-      (267)
-    </StyledNumber>
-  </Container>
-  </Links>
+        {activeSection === "allIssues" ? (
+          <Wrapper>
+            <IconButton>
+              <Icons.AllIssues />
+            </IconButton>
+            <Typography variant="body1">All issues</Typography>
+            <StyledNumberr variant="body2">(267)</StyledNumberr>
+          </Wrapper>
+        ) : (
+          <Links to={PATHS.ADMIN.AllISSUESPAGE}>
+            <Container onClick={() => handleSectionToggle("allIssues")}>
+              <section>
+                <IconButton>
+                  <Icons.Group />
+                </IconButton>
+                <p>All issues</p>
+              </section>
+              <StyledNumber variant="body2" color="textSecondary">
+                (267)
+              </StyledNumber>
+            </Container>
+          </Links>
+        )}
 
-)}
-
-{activeSection === "participants" ? (
-  <Wrapper>
-    <IconButton>
-      <Icons.Participants />
-    </IconButton>
-    <Typography variant="body1">Participants</Typography>
-    <StyledNumberr variant="body2">(7)</StyledNumberr>
-  </Wrapper>
-) : (
-  <Container onClick={() => handleSectionToggle("participants")}>
-    <section>
-      <IconButton>
-        <Icons.Members />
-      </IconButton>
-      <p>Participants</p>
-    </section>
-    <StyledNumber variant="body2" color="textSecondary">
-      (7)
-    </StyledNumber>
-  </Container>
-)}
+        {activeSection === "participants" ? (
+          <Wrapper>
+            <IconButton>
+              <Icons.Participants />
+            </IconButton>
+            <Typography variant="body1">Participants</Typography>
+            <StyledNumberr variant="body2">(7)</StyledNumberr>
+          </Wrapper>
+        ) : (
+          <Container onClick={() => handleSectionToggle("participants")}>
+            <section>
+              <IconButton>
+                <Icons.Members />
+              </IconButton>
+              <p>Participants</p>
+            </section>
+            <StyledNumber variant="body2" color="textSecondary">
+              (7)
+            </StyledNumber>
+          </Container>
+        )}
 
         <StyledSettings>
           <IconButton>

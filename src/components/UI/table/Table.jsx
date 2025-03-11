@@ -40,12 +40,7 @@ export const Table = ({ variant, columns, data, subTitle }) => {
         {variant === "workspaceadmin" ? (
           <>
             <Title>{title}</Title>
-            <Button
-              variant={"contained"}
-              style={{ width: "77px", height: "34px" }}
-            >
-              Create
-            </Button>
+            <CreateBtnStyled variant={"contained"}>Create</CreateBtnStyled>
           </>
         ) : variant === "workspaceuser" ? (
           <Title>{title}</Title>
@@ -80,12 +75,7 @@ export const Table = ({ variant, columns, data, subTitle }) => {
                   </SelectStyled>
                 </FormControlStyle>
               </div>
-              <Button
-                variant={"contained"}
-                style={{ width: "77px", height: "34px" }}
-              >
-                Create
-              </Button>
+              <CreateBtnStyled variant={"contained"}>Create</CreateBtnStyled>
             </div>
 
             <TotalIssues>
@@ -94,10 +84,43 @@ export const Table = ({ variant, columns, data, subTitle }) => {
           </StyledTopContainer>
         ) : variant === "viewuser" ? (
           <>
-            <Title>{title}</Title>
-            <TotalIssues>
-              Total: <TotalCount>{data.length}</TotalCount>
-            </TotalIssues>
+            <StyledTopContainer>
+              <div className="first-wrapper">
+                <div className="second-wrapper">
+                  <Title>{title}</Title>
+                  <FormControlStyle
+                    variant="outlined"
+                    sx={{
+                      m: 1,
+                      minWidth: 120,
+                      margin: "0",
+                    }}
+                    size="small"
+                  >
+                    <InputLabel id="demo-select-small-label">Role</InputLabel>
+                    <SelectStyled
+                      labelId="demo-select-small-label"
+                      id="demo-select-small"
+                      value={role}
+                      label="Role"
+                      onChange={(e) => setRole(e.target.value)}
+                      IconComponent={
+                        toggleSvg ? Icons.ArrowUp : Icons.ArrowDown
+                      }
+                      onOpen={() => setToggleSvg(true)}
+                      onClose={() => setToggleSvg(false)}
+                    >
+                      <MenuItem value={"All"}>All</MenuItem>
+                      <MenuItem value={"Admin"}>Admin</MenuItem>
+                      <MenuItem value={"Member"}>Member</MenuItem>
+                    </SelectStyled>
+                  </FormControlStyle>
+                </div>
+              </div>
+              <TotalIssues>
+                Total: <TotalCount>{data.length}</TotalCount>
+              </TotalIssues>
+            </StyledTopContainer>
           </>
         ) : (
           <Title>{title}</Title>
@@ -259,4 +282,8 @@ const StyledTableBodyCell = styled(TableCell)(() => ({
     justifyContent: "start",
     alignItems: "center",
   },
+}));
+const CreateBtnStyled = styled(Button)(() => ({
+  width: "77px",
+  height: "34px",
 }));
