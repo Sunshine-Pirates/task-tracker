@@ -6,11 +6,13 @@ export const PATHS = {
     ROOT: "/user",
     PAGE: "/user/user-page",
     PROFILE: "/user/profile",
+    PARTICIPANTS: "/user/participants",
   },
 
   ADMIN: {
     ROOT: "/admin",
     PAGE: "/admin/admin-page",
     AllISSUESPAGE: "/admin/all-issues",
+    PARTICIPANTS: "/admin/participants",
   },
 };
