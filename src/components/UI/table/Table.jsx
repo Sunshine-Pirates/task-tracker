@@ -174,9 +174,9 @@ export const Table = ({ variant, columns, data, subTitle }) => {
 };
 
 const StyledTableContainer = styled(TableContainer)(() => ({
-  maxWidth: "calc(100% - 80px)",
+  maxWidth: "calc(100% - 40px)",
   maxHeight: "calc(100vh - 10px)",
-  margin: "16px 40px 10px 40px",
+  margin: "16px 20px 10px 10px",
   overflow: "auto",
   border: "none",
   borderRadius: "8px",
