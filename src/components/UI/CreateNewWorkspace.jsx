@@ -4,15 +4,28 @@ import { Input } from "./input/Input";
 import { Button } from "./Button";
 import { styled } from "@mui/material";
 import { EmailInputList } from "./input/EmaiInputList";
-
-export const CreateWorkspaceModal = ({ open, onClose }) => {
+import avatar from "../../assets/images/header-end-icon.png";
+export const CreateWorkspaceModal = ({
+  open,
+  onClose,
+  onShow,
+  arrayNumber,
+}) => {
   const [workspaceName, setWorkspaceName] = useState("");
   const [emailList, setEmailList] = useState([]);
   const [memberEmail, setMemberEmail] = useState("");
 
   const handleCreate = () => {
-    console.log("Workspace:", workspaceName);
-    console.log("Emails:", emailList);
+    const newWorkspace = {
+      id: Date.now().toString(),
+      number: arrayNumber,
+      workspaceTitle: workspaceName,
+      userIcon: avatar,
+      lead: "Alisher Estebesov",
+      emails: emailList,
+    };
+    onShow(newWorkspace);
+
     setWorkspaceName("");
     setEmailList([]);
   };
