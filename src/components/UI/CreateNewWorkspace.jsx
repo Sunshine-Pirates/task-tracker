@@ -28,6 +28,7 @@ export const CreateWorkspaceModal = ({
 
     setWorkspaceName("");
     setEmailList([]);
+    onClose();
   };
 
   return (
