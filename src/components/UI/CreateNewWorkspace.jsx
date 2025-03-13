@@ -54,7 +54,7 @@ export const CreateWorkspaceModal = ({ open, onClose }) => {
             <CreateButton
               variant={"contained"}
               type={"button"}
-              disabled={!workspaceName.trim() || emailList.length === 0}
+              disabled={!workspaceName.trim() && emailList.length === 0}
               onClick={handleCreate}
             >
               Create

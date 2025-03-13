@@ -17,7 +17,7 @@ import { Button } from "../Button";
 import { useState } from "react";
 import { Icons } from "../../../assets";
 
-export const Table = ({ variant, columns, data, subTitle }) => {
+export const Table = ({ variant, columns, data, subTitle, onOpen }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
   const [role, setRole] = useState("");
@@ -43,6 +43,7 @@ export const Table = ({ variant, columns, data, subTitle }) => {
             <Button
               variant={"contained"}
               style={{ width: "77px", height: "34px" }}
+              onClick={onOpen}
             >
               Create
             </Button>

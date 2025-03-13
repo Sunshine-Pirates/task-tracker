@@ -11,12 +11,15 @@ import { Modal } from "../components/UI/modal/Modal";
 import { LogoutModal } from "../components/LogoutModal";
 import { PATHS } from "../utils/constants/constants";
 import { useSelector } from "react-redux";
+import { Favourites } from "../components/UI/favourites/Favourites";
 
 export const Header = ({ favourites }) => {
   const { userRole } = useSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openFavourites, setOpenFavourites] = useState();
+  // const [openNotifications, setOpenNotifications] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleClose = () => {
@@ -31,6 +34,7 @@ export const Header = ({ favourites }) => {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+
   return (
     <StyledHeader>
       <StartHeaderBlock>
@@ -41,9 +45,16 @@ export const Header = ({ favourites }) => {
           </Links>
         </HeaderLogoStyled>
         {favourites && (
-          <FavouriteBlock>
-            Favourites ({favourites}) <Icons.Down className="down" />
-          </FavouriteBlock>
+          <>
+            <FavouriteBlock onClick={() => setOpenFavourites((prev) => !prev)}>
+              Favourites ({favourites.length})
+              <Icons.Down className="down" />
+            </FavouriteBlock>
+            <Favourites
+              onOpen={openFavourites}
+              handleClose={() => setOpenFavourites((prev) => !prev)}
+            />
+          </>
         )}
       </StartHeaderBlock>
       <StyledEndBlock>
@@ -182,6 +193,7 @@ const FavouriteBlock = styled("div")(() => ({
   gap: "5px",
   fontWeight: "500",
   lineHeight: "20px",
+  cursor: "pointer",
   "& .down path": {
     stroke: "#909090",
     strokeWidth: 1,
