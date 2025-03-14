@@ -1,10 +1,11 @@
-import { styled, keyframes, IconButton } from "@mui/material";
+import { styled, keyframes } from "@mui/material";
 import { Input } from "../input/Input";
 import { useState, useEffect } from "react";
 import { boardImage, colors } from "../../../utils/constants/general";
 import { Button } from "../Button";
 import { Icons } from "../../../assets";
-import { BoardModal } from "./BoardModal";
+import { CheckMark, ColorBoard } from "./ColorBoard";
+import { ImageBoard } from "./ImageBoard";
 
 export const Board = ({ open, onClose }) => {
   const [openImage, setOpenImage] = useState(false);
@@ -102,65 +103,19 @@ export const Board = ({ open, onClose }) => {
         </MainContainer>
       )}
 
-      {openImage && (
-        <BoardModal>
-          <div>
-            <IconBlock>
-              <IconButton onClick={handleCloseModals}>
-                <Icons.Cancel />
-              </IconButton>
-              <h1>Photo</h1>
-              <h1>{}</h1>
-            </IconBlock>
-            <ImageModal onClick={(e) => e.stopPropagation()}>
-              {boardImage.map((item, index) => (
-                <ImageWrapper
-                  key={index}
-                  isSelected={selectedBackground === item.image}
-                  onClick={() => handleSelectBackground(item.image)}
-                >
-                  <img src={item.image} alt="" />
-                  {selectedBackground === item.image && (
-                    <CheckMark>
-                      <Icons.CheckMark />
-                    </CheckMark>
-                  )}
-                </ImageWrapper>
-              ))}
-            </ImageModal>
-          </div>
-        </BoardModal>
-      )}
-
-      {openColors && (
-        <BoardModal>
-          <StyledColorBlock>
-            <IconBlock>
-              <IconButton onClick={handleCloseModals}>
-                <Icons.Cancel />
-              </IconButton>
-              <h1>Colors</h1>
-              <h1>{}</h1>
-            </IconBlock>
-            <ColorsModal onClick={(e) => e.stopPropagation()}>
-              {colors.map((item, index) => (
-                <ColorBlock
-                  key={index}
-                  bg={item.bg}
-                  isSelected={selectedBackground === item.bg}
-                  onClick={() => handleSelectBackground(item.bg)}
-                >
-                  {selectedBackground === item.bg && (
-                    <CheckMark>
-                      <Icons.CheckMark />
-                    </CheckMark>
-                  )}
-                </ColorBlock>
-              ))}
-            </ColorsModal>
-          </StyledColorBlock>
-        </BoardModal>
-      )}
+      <ColorBoard
+        openColors={openColors}
+        handleCloseModals={handleCloseModals}
+        selectedBackground={selectedBackground}
+        handleSelectBackground={handleSelectBackground}
+      />
+      <ImageBoard
+        openImage={openImage}
+        handleCloseModals={handleCloseModals}
+        selectedBackground={selectedBackground}
+        handleSelectBackground={handleSelectBackground}
+        boardImage={boardImage}
+      />
     </MainBlock>
   );
 };
@@ -241,47 +196,11 @@ export const MainBlock = styled("div")(() => ({
   zIndex: 1000,
 }));
 
-const ImageModal = styled("div")(() => ({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  gap: "8px",
-
-  img: {
-    width: "123px",
-    borderRadius: "8px",
-  },
-}));
-
-const ImageWrapper = styled("div")(() => ({
-  position: "relative",
-  cursor: "pointer",
-  img: {
-    width: "135px",
-    height: "62px",
-  },
-}));
-
 const ColorWrapper = styled("div")(({ bg }) => ({
   position: "relative",
   backgroundColor: bg,
   width: "59px",
   height: "31px",
-  borderRadius: "8px",
-  cursor: "pointer",
-}));
-
-const ColorsModal = styled("div")(() => ({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "8px",
-}));
-
-const ColorBlock = styled("div")(({ bg }) => ({
-  position: "relative",
-  backgroundColor: bg,
-  width: "79px",
-  height: "40px",
   borderRadius: "8px",
   cursor: "pointer",
 }));
@@ -296,32 +215,11 @@ const StyledBtn = styled(Button)(() => ({
   width: "auto",
 }));
 
-const CheckMark = styled("div")(() => ({
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  zIndex: 2,
-}));
-
-const StyledColorBlock = styled("div")(() => ({
-  h1: {
-    fontSize: "16px",
-    fontWeight: "400",
-  },
-}));
-
-const IconBlock = styled("div")(() => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingBottom: "16px",
-
-  h1: {
-    fontSize: "16px",
-    fontWeight: "400",
+const ImageWrapper = styled("div")(() => ({
+  position: "relative",
+  cursor: "pointer",
+  img: {
+    width: "135px",
+    height: "62px",
   },
 }));

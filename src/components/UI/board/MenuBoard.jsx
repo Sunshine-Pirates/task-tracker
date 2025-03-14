@@ -2,23 +2,80 @@ import { keyframes, styled } from "@mui/material";
 import { Icons } from "../../../assets";
 import Foto16 from "../../../assets/images/mountain16.avif";
 import { BoardModal } from "./BoardModal";
-import { useState } from "react";
 import { MainBlock } from "./Board";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { boardImage, colors } from "../../../utils/constants/general";
+import { ColorBoard } from "./ColorBoard";
+import { ImageBoard } from "./ImageBoard";
 
 export const MenuBoard = () => {
-  const [isdOpenClose, setIsOpenClose] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [openImage, setOpenImage] = useState(false);
+  const [openColors, setOpenColors] = useState(false);
+  const [selectedBackground, setSelectedBackground] = useState("");
+
+  const isModalOpen = searchParams.get("changeBg") === "true";
+  const isImageOpen = searchParams.get("image") === "true";
+  const isColorsOpen = searchParams.get("colors") === "true";
+
+  useEffect(() => {
+    setIsModalVisible(isModalOpen);
+    setOpenImage(isImageOpen);
+    setOpenColors(isColorsOpen);
+  }, [isModalOpen, isImageOpen, isColorsOpen]);
+
+  useEffect(() => {
+    if (selectedBackground) {
+      document.body.style.background = selectedBackground.includes("#")
+        ? selectedBackground
+        : `url(${selectedBackground}) no-repeat center center / cover`;
+      document.body.style.height = "100vh";
+      document.body.style.margin = "0";
+    }
+  }, [selectedBackground]);
 
   const handleOpenBoard = () => {
-    setIsOpenClose(true);
+    setSearchParams({ changeBg: "true" });
+    setIsModalVisible(true);
   };
 
   const handleCloseBoard = () => {
-    setIsOpenClose(false);
+    setSearchParams({});
+    setIsModalVisible(false);
+  };
+
+  const handleBack = () => {
+    setIsModalVisible(false);
+    setSearchParams({ changeBg: "true" });
+  };
+
+  const handleOpenImage = () => {
+    setSearchParams({ changeBg: "true", image: "true" });
+    setOpenImage(true);
+    setOpenColors(false);
+  };
+
+  const handleOpenColors = () => {
+    setSearchParams({ changeBg: "true", colors: "true" });
+    setOpenColors(true);
+    setOpenImage(false);
+  };
+
+  const handleCloseModals = () => {
+    setSearchParams({ changeBg: "true" });
+    setOpenImage(false);
+    setOpenColors(false);
+  };
+
+  const handleSelectBackground = (background) => {
+    setSelectedBackground(background);
   };
 
   return (
     <MainBlock>
-      {!isdOpenClose && (
+      {!isModalVisible && (
         <MainContainer>
           <MenuBlock>
             <h1>{""}</h1>
@@ -36,20 +93,41 @@ export const MenuBoard = () => {
         </MainContainer>
       )}
 
-      {isdOpenClose && (
-        <BoardModal>
-          <ImageContent>
-            <IconWrapper>
-              <Icons.Left />
-              <p>Change the background</p>
-              <Icons.Cancel onClick={handleCloseBoard} />
-            </IconWrapper>
-            <>
-              <img src={Foto16} alt="" />
-            </>
-          </ImageContent>
-        </BoardModal>
-      )}
+      {isModalVisible &&
+        searchParams.get("changeBg") === "true" &&
+        !isImageOpen &&
+        !isColorsOpen && (
+          <BoardModal width={{ width: "367px" }}>
+            <ImageContent>
+              <IconWrapper>
+                <Icons.Left onClick={handleBack} />
+                <p>Change the background</p>
+                <Icons.Cancel onClick={handleCloseBoard} />
+              </IconWrapper>
+              <BgChangeStyled>
+                <img src={Foto16} alt="" onClick={handleOpenImage} />
+                <Block onClick={handleOpenColors}>
+                  {colors.slice(0, 8).map((item, index) => (
+                    <ColorWrapper key={index} bg={item.bg}></ColorWrapper>
+                  ))}
+                </Block>
+              </BgChangeStyled>
+            </ImageContent>
+          </BoardModal>
+        )}
+      <ColorBoard
+        openColors={openColors}
+        handleCloseModals={handleCloseModals}
+        selectedBackground={selectedBackground}
+        handleSelectBackground={handleSelectBackground}
+      />
+      <ImageBoard
+        openImage={openImage}
+        handleCloseModals={handleCloseModals}
+        selectedBackground={selectedBackground}
+        handleSelectBackground={handleSelectBackground}
+        boardImage={boardImage}
+      />
     </MainBlock>
   );
 };
@@ -126,5 +204,32 @@ const IconWrapper = styled("div")(() => ({
 const ImageContent = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
+  gap: "18px",
   width: "100%",
+}));
+
+const ColorWrapper = styled("div")(({ bg }) => ({
+  width: "20px",
+  height: "80px",
+  backgroundColor: bg,
+}));
+
+const Block = styled("div")(() => ({
+  display: "flex",
+  borderRadius: "8px",
+  width: "160px",
+  height: "80px",
+  overflow: "hidden",
+  cursor: "pointer",
+}));
+
+const BgChangeStyled = styled("div")(() => ({
+  display: "flex",
+  gap: "8px",
+  "& img": {
+    width: "160px",
+    height: "80px",
+    borderRadius: "8px",
+    cursor: "pointer",
+  },
 }));

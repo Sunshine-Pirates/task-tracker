@@ -55,6 +55,8 @@ import Google from "../assets/icons/flat-color-icons_google.svg";
 import Edit from "../assets/icons/Edit.svg";
 import PlusLable from "../assets/icons/PluseIcons.svg";
 import DeleteText from "../assets/icons/DeleteText.svg";
+import ArrowDown from "../assets/icons/arrow-down.svg";
+import ArrowUp from "../assets/icons/arrow-up.svg";
 import Message from "../assets/icons/Message.svg";
 import Month from "../assets/icons/Month.svg";
 import ListIcon from "../assets/icons/List.svg";
@@ -66,8 +68,14 @@ import Memberss from "../assets/icons/State=Member.svg";
 import Estimation from "../assets/icons/System (1).svg";
 import Attachment from "../assets/icons/System (2).svg";
 import Checklist from "../assets/icons/Vector (7).svg";
+import AllIssues from "../assets/icons/All-Issues.svg";
+import Participants from "../assets/icons/Participants.svg";
+import Boards from "../assets/icons/Boards.svg";
 
 export const Icons = {
+  Boards,
+  Participants,
+  AllIssues,
   Checklist,
   Attachment,
   Estimation,
@@ -136,4 +144,6 @@ export const Icons = {
   Error,
   Warning,
   CheckMark,
+  ArrowDown,
+  ArrowUp,
 };
