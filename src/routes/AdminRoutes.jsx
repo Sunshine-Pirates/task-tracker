@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
-import { AdminPage } from "../pages/admin/AdminPage";
 import { PATHS } from "../utils/constants/constants";
-
+import { AllIssues } from "../pages/admin/AllIssues";
+import { AdminPage } from "../pages/admin/AdminPage";
+import { AllBoards } from "../pages/admin/AllBoards";
 export const AdminRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   return [
@@ -18,6 +19,26 @@ export const AdminRoutes = () => {
           fallBackPath={PATHS.ADMIN.ROOT}
           isAllowed={isAuthenticated}
           component={AdminPage}
+        />
+      ),
+    },
+    {
+      path: PATHS.ADMIN.AllISSUESPAGE,
+      element: (
+        <PrivateRoute
+          fallBackPath={PATHS.ADMIN.ROOT}
+          isAllowed={isAuthenticated}
+          component={AllIssues}
+        />
+      ),
+    },
+    {
+      path: PATHS.ADMIN.ALLBOARDS,
+      element: (
+        <PrivateRoute
+          fallBackPath={PATHS.ADMIN.ROOT}
+          isAllowed={isAuthenticated}
+          component={AllBoards}
         />
       ),
     },

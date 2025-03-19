@@ -11,5 +11,7 @@ export const PATHS = {
   ADMIN: {
     ROOT: "/admin",
     PAGE: "/admin/admin-page",
+    AllISSUESPAGE: "/admin/all-issues",
+    ALLBOARDS: "/admin/all-boards",
   },
 };
