@@ -47,11 +47,7 @@ const CheckboxBlock = styled("div")(() => ({
   display: "flex",
   justifyContent: "end",
   padding: "5px",
-  "& .white-star": {
-    "& path": {
-      fill: "#ffff",
-      stroke: "none",
-    },
+  "& svg path": {
     stroke: "#ffff",
   },
 }));
