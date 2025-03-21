@@ -16,6 +16,7 @@ import { Notification } from "../notification/Notification";
 export const Header = ({ favourites }) => {
   const { userRole } = useSelector((state) => state.auth);
   const [openNotification, setOpenNotification] = useState(false);
+  const [unreadCount, setUreadCount] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -32,6 +33,10 @@ export const Header = ({ favourites }) => {
   const handleCloseModal = () => {
     setOpenModal(false);
   };
+  const handleGetCurrentBadgeAmount = (array = []) => {
+    setUreadCount(array.length);
+  };
+
   return (
     <StyledHeader>
       <StartHeaderBlock>
@@ -51,13 +56,14 @@ export const Header = ({ favourites }) => {
         <SearchInput type={"search"} placeholder={"Search"} />
         <DuoIconButtons>
           <IconButton onClick={() => setOpenNotification(!open)}>
-            <Badge badgeContent={4} color="error">
+            <Badge badgeContent={unreadCount} color="error">
               <Icons.Notify className="notify" />
             </Badge>
           </IconButton>
           <Notification
             open={openNotification}
             onClose={() => setOpenNotification(false)}
+            onShow={handleGetCurrentBadgeAmount}
           />
           <StyledMenu
             anchorEl={anchorEl}

@@ -4,14 +4,18 @@ import { List, MenuList, styled } from "@mui/material";
 import { notificationsData } from "../utils/constants/notificationsData";
 import { IconButton } from "../components/UI/IconButton";
 import { Icons } from "../assets";
-import { useState } from "react";
-export const Notification = ({ open, onClose }) => {
+import { useEffect, useState } from "react";
+export const Notification = ({ open, onClose, onShow }) => {
   const [notifications, setNotifications] = useState(
     notificationsData.map((notification) => ({
       ...notification,
       read: false,
     }))
   );
+  useEffect(() => {
+    const unreadCount = notifications.filter((notify) => !notify.read);
+    onShow(unreadCount);
+  }, [notifications, onShow]);
 
   const markAsRead = (id) => {
     setNotifications((prevNotifications) =>
