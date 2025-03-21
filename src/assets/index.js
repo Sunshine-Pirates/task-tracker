@@ -73,6 +73,7 @@ import Checklist from "../assets/icons/Vector (7).svg";
 import AllIssues from "../assets/icons/All-Issues.svg";
 import Participants from "../assets/icons/Participants.svg";
 import Boards from "../assets/icons/Boards.svg";
+import ArrowToRightNotification from "../assets/icons/arrow-to-right-notification.svg";
 
 export const Icons = {
   Boards,
@@ -150,4 +151,5 @@ export const Icons = {
   CheckMark,
   ArrowDown,
   ArrowUp,
+  ArrowToRightNotification,
 };

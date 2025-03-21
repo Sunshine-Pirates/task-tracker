@@ -63,51 +63,53 @@ export const NotificationComponent = () => {
                 key={notification.id}
                 read={notification.read ? "true" : "false"}
                 onClick={() => markAsRead(notification.id)}
-                style={{
-                  background:
-                    notification.background?.startsWith("http") &&
-                    notification.background.trim() !== ""
-                      ? `url(${notification.background}) center/cover no-repeat`
-                      : notification.background &&
-                          notification.background.trim() !== ""
-                        ? notification.background
-                        : "#e0e0e0",
-                }}
+                // style={{
+                //   background:
+                //     notification.background?.startsWith("http") &&
+                //     notification.background.trim() !== ""
+                //       ? `url(${notification.background}) center/cover no-repeat`
+                //       : notification.background &&
+                //           notification.background.trim() !== ""
+                //         ? notification.background
+                //         : "#e0e0e0",
+                // }}
               >
                 <ContentBox>
                   <Dot read={notification.read} />
-                  <TitleWrapper>
-                    <TitleContainer>
-                      <TitleText component="div">
-                        {notification.title}
-                      </TitleText>
-                      <TitleText component="span">
-                        {notification.title2}
-                      </TitleText>
-                    </TitleContainer>
-                  </TitleWrapper>
-                  <DetailsMessageBox>
-                    <DetailsMessage>
-                      <ProfileImage
-                        src="/src/assets/images/ProfileImage.png"
-                        alt=""
-                      />
-                      <TextAndName>{notification.name}</TextAndName>
-                    </DetailsMessage>
-                    <TextAndButtonContainer>
-                      <TextContainer>
-                        <TextReminder>{notification.text}</TextReminder>
-                        <TimeText component="span">
-                          {notification.time}
-                        </TimeText>
-                      </TextContainer>
-                      <div>
-                        <ButtonForIcon read="false">
-                          <Icons.Right />
-                        </ButtonForIcon>
-                      </div>
-                    </TextAndButtonContainer>
-                  </DetailsMessageBox>
+                  <div>
+                    <TitleWrapper>
+                      <TitleContainer>
+                        <TitleText component="div">
+                          {notification.title}
+                        </TitleText>
+                        <TitleText component="span">
+                          {notification.title2}
+                        </TitleText>
+                      </TitleContainer>
+                    </TitleWrapper>
+                    <DetailsMessageBox>
+                      <DetailsMessage>
+                        <ProfileImage
+                          src="/src/assets/images/ProfileImage.png"
+                          alt=""
+                        />
+                        <TextAndName>{notification.name}</TextAndName>
+                      </DetailsMessage>
+                      <TextAndButtonContainer>
+                        <TextContainer>
+                          <TextReminder>{notification.text}</TextReminder>
+                          <TimeText component="span">
+                            {notification.time}
+                          </TimeText>
+                        </TextContainer>
+                        <div>
+                          <ButtonForIcon read="false">
+                            <Icons.Right />
+                          </ButtonForIcon>
+                        </div>
+                      </TextAndButtonContainer>
+                    </DetailsMessageBox>
+                  </div>
                 </ContentBox>
               </ListItemStyled>
             ))}
@@ -131,11 +133,15 @@ const NotificationContainer = styled(Box)(() => ({
   backgroundColor: "white",
   display: "flex",
   flexDirection: "column",
+  alignItems: "center",
+  padding: "16px 0px",
 }));
 
 const NotificationList = styled(List)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   overflowY: "auto",
-  paddingBottom: "20px",
 }));
 
 const ButtonBoard = styled(Button)(() => ({
@@ -216,20 +222,11 @@ const Dot = styled("div")(({ read }) => ({
   backgroundColor: read ? "transparent" : "#007bff",
 }));
 
-const ContentBox = styled(Box)(({ background }) => ({
-  width: "321px",
-  height: "270px",
+const ContentBox = styled(Box)(() => ({
+  width: "100%",
+  height: "100%",
   display: "flex",
-  flexWrap: "wrap",
-  gap: "15px",
-  background:
-    typeof background === "string" &&
-    background.startsWith("http") &&
-    background.trim() !== ""
-      ? `url(${background}) center/cover no-repeat`
-      : background && background.trim() !== ""
-        ? background
-        : "white",
+  gap: "20px",
 }));
 
 const DetailsMessageBox = styled(Box)(() => ({
