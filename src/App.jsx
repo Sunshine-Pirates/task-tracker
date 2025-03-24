@@ -1,8 +1,11 @@
-import { AppRoutes } from "./routes/AppRoutes";
+// import { AppRoutes } from "./routes/AppRoutes";
+
+import { Notification } from "./components/notification/Notification";
+
 export const App = () => {
   return (
     <div>
-      <AppRoutes />
+      <Notification open onShow={() => {}} />
     </div>
   );
 };

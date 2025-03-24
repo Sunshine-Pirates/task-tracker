@@ -1,11 +1,12 @@
+import { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { List, MenuList, styled } from "@mui/material";
-import { notificationsData } from "../utils/constants/notificationsData";
-import { IconButton } from "../components/UI/IconButton";
-import { Icons } from "../assets";
-import { useEffect, useState } from "react";
-export const Notification = ({ open, onClose, onShow }) => {
+import { notificationsData } from "../../utils/constants/notificationsData";
+import { IconButton } from "../UI/IconButton";
+import { Icons } from "../../assets";
+
+export const Notification = ({ open = false, onClose, onShow }) => {
   const [notifications, setNotifications] = useState(
     notificationsData.map((notification) => ({
       ...notification,
