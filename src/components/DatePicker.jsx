@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 
 dayjs.locale("ru");
 
-export const DatePickerComponent = ({ open, onClose }) => {
+export const DatePicker = ({ open, onClose }) => {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
