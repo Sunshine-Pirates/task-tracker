@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { List, MenuList, styled } from "@mui/material";
 import { notificationsData } from "../../utils/constants/notificationsData";
 import { IconButton } from "../UI/IconButton";
 import { Icons } from "../../assets";
 
 export const Notification = ({ open = false, onClose, onShow }) => {
-  const [notifications, setNotifications] = useState(
-    notificationsData.map((notification) => ({
-      ...notification,
-      read: false,
-    }))
-  );
+  const [notifications, setNotifications] = useState(notificationsData);
   useEffect(() => {
     const unreadCount = notifications.filter((notify) => !notify.read);
     onShow(unreadCount);
@@ -84,6 +78,7 @@ export const Notification = ({ open = false, onClose, onShow }) => {
                         sx={{
                           padding: "0px",
                         }}
+                        onClick={(event) => event.stopPropagation()}
                       >
                         <Icons.ArrowToRightNotification />
                       </IconButton>
@@ -106,19 +101,13 @@ const StyledMenu = styled(Menu)(() => ({
   },
 }));
 
-const StyledHeaderMenuItem = styled(MenuItem)(() => ({
+const StyledHeaderMenuItem = styled("div")(() => ({
   width: "100%",
   height: "40px",
   display: "flex",
   justifyContent: "end",
-  position: "sticky",
-  top: 0,
-  zIndex: 10,
   padding: "16px 0px 15px 0px",
   background: "#ffffff",
-  "&:hover": {
-    background: "#ffffff",
-  },
   "& div": {
     width: "fit-content",
     display: "flex",
