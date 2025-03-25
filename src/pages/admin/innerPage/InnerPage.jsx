@@ -6,10 +6,22 @@ import { useState } from "react";
 import { FilterModal } from "../../../components/UI/FilterModal";
 import { Modal } from "../../../components/UI/modal/Modal";
 import { InviteModal } from "./InviteModal";
+import { AddAColumn } from "../AddAColumn";
+import { CreateNewTitle } from "../../../components/UI/board-card/CreateNewTitle";
 
 export const InnerPage = () => {
   const [openFilter, setOpenFilter] = useState(false);
   const [openInvite, setOpenInvite] = useState(false);
+  const [showAddColumn, setShowAddColumn] = useState(false);
+  const [columns, setColumns] = useState([]);
+  const [openAddCardModal, setOpenCardModal] = useState(false);
+
+  const handleOpenCard = () => {
+    setOpenCardModal(true);
+  };
+  const hanldeCardClose = () => {
+    setOpenCardModal(false);
+  };
   const handleOpenInvite = () => {
     setOpenInvite(true);
   };
@@ -19,7 +31,18 @@ export const InnerPage = () => {
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
+  const handleToggleAddColumn = () => {
+    setShowAddColumn((prev) => !prev);
+  };
+  const handleAddColumn = (columnName) => {
+    if (columnName.trim()) {
+      setColumns([...columns, columnName]);
+      setShowAddColumn(false);
+    }
+  };
+
   const MAX_VISIBLE = 8;
+
   return (
     <Container>
       <Wrapper>
@@ -29,7 +52,7 @@ export const InnerPage = () => {
             <Text>Title</Text>
           </StyledContainer>
           <StyledTitle>
-            Columns: <span>24</span>
+            Columns: <span>{columns.length}</span>
           </StyledTitle>
         </div>
         <StyledHeader>
@@ -75,10 +98,114 @@ export const InnerPage = () => {
           </StyledIconsContainer>
         </StyledHeader>
       </Wrapper>
-      <BoardCard />
+      <StyledContainerColumn>
+        <BoardCard />
+        {columns.map((column, index) => (
+          <NewAddTitle>
+            <StyledWrapperr>
+              <ContainerNewTitle>
+                <Title>Title</Title>
+                <StyledContainerIconss>
+                  <Iconss />
+                  <Iconss />
+                  <Iconss />
+                </StyledContainerIconss>
+              </ContainerNewTitle>
+              <StyledContainerText>
+                <p key={index}>{column}</p>
+              </StyledContainerText>
+            </StyledWrapperr>
+
+            <StyledText onClick={handleOpenCard}>+ Add a card</StyledText>
+            <Modal isOpen={openAddCardModal} onClose={hanldeCardClose}>
+              <CreateNewTitle />
+            </Modal>
+          </NewAddTitle>
+        ))}
+        {!showAddColumn ? (
+          <StyledContainerr onClick={handleToggleAddColumn}>
+            + Add a column
+          </StyledContainerr>
+        ) : (
+          <AddAColumn
+            onClose={handleToggleAddColumn}
+            onAddColumn={handleAddColumn}
+          />
+        )}
+      </StyledContainerColumn>
     </Container>
   );
 };
+const StyledWrapperr = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: "11px",
+}));
+
+const StyledText = styled("p")(() => ({
+  color: "#000000",
+  fontWeight: "400",
+  padding: "4px 0px 0px 8px",
+  cursor: "pointer",
+}));
+
+const StyledContainerText = styled("div")(() => ({
+  width: "264px",
+  height: "fit-content",
+  padding: "8px 10px",
+  background: "#FFFFFF",
+  borderRadius: "4px",
+  marginRight: "8px",
+}));
+const ContainerNewTitle = styled("div")(() => ({
+  width: "254px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+const Title = styled("p")(() => ({
+  fontWeight: "500",
+  color: "#000000",
+  paddingLeft: "8px",
+}));
+
+const NewAddTitle = styled("div")(() => ({
+  width: "280px",
+  height: "fit-content",
+  borderRadius: "8px",
+  backgroundColor: "#9191911F",
+  padding: "8px 8px 16px 8px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
+}));
+const StyledContainerIconss = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "space-around",
+  width: "20px",
+  cursor: "pointer",
+}));
+const Iconss = styled("section")(() => ({
+  width: "4.5px",
+  height: "4.5px",
+  backgroundColor: "#111111",
+  borderRadius: "50%",
+}));
+const StyledContainerr = styled("div")(() => ({
+  width: "280px",
+  height: "44px",
+  borderRadius: "8px",
+  backgroundColor: "#9191911C",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
+}));
+const StyledContainerColumn = styled("div")(() => ({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "8px",
+}));
 const StyledContainerMenu = styled("div")(() => ({
   display: "flex",
   gap: "6px",
@@ -184,7 +311,6 @@ const StyledAvatar = styled(Avatar)(() => ({
   cursor: "pointer",
 }));
 const Container = styled("div")(() => ({
-  width: "1000px",
   flexGrow: 1,
   height: "fit-content",
   display: "flex",

@@ -72,7 +72,7 @@ export const FilterModal = ({ handleCloseFilter }) => {
                         backgroundColor: item.backgrounColor,
                       }}
                     >
-                      {item.text}
+                      {/* {item.text} */}
                     </StyledButton>
                   )}
                 </ListStyled>
