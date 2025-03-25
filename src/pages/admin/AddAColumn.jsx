@@ -30,7 +30,9 @@ export const AddAColumn = ({ onClose, onAddColumn }) => {
         onChange={handleChange}
       />
       <ButtonContainer>
-        <SaveBtn onClick={handleCreate}>Create</SaveBtn>
+        <SaveBtn onClick={handleCreate} type="submit">
+          Create
+        </SaveBtn>
       </ButtonContainer>
     </StyledForm>
   );
