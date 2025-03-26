@@ -11,7 +11,7 @@ import { Modal } from "../components/UI/modal/Modal";
 import { LogoutModal } from "../components/LogoutModal";
 import { PATHS } from "../utils/constants/constants";
 import { useSelector } from "react-redux";
-import { Notification } from "../notification/Notification";
+import { Notification } from "../components/notification/Notification";
 
 export const Header = ({ favourites }) => {
   const { userRole } = useSelector((state) => state.auth);
