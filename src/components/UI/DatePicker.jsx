@@ -4,9 +4,9 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Icons } from "../assets";
+import { Icons } from "../../assets";
 import { Menu, MenuItem, Select } from "@mui/material";
-import { Button } from "./UI/Button";
+import { Button } from "./Button";
 import dayjs from "dayjs";
 
 dayjs.locale("ru");
@@ -16,6 +16,7 @@ export const DatePicker = ({ open, onClose }) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
   const [selectedTime, setSelectedTime] = useState(dayjs().format("HH:mm"));
+
   const [activeField, setActiveField] = useState("start");
   const [selectedReminder, setSelectedReminder] = useState("");
 
