@@ -36,7 +36,6 @@ export const SideBar = () => {
   const handleSelectIconClick = () => {
     setShowTitles((prev) => !prev);
   };
-
   const title = "LMS";
   const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
 
@@ -83,7 +82,7 @@ export const SideBar = () => {
           </StyledCOntainerIcons>
         </StyledContainer>
       ) : (
-        <Links to={PATHS.ADMIN.INNERPAGE}>
+        <Links to={PATHS.ADMIN.ALLBOARDS}>
           <BoardWrapper onClick={() => handleSectionToggle("boards")}>
             <BoardTitle>
               <IconButton>
