@@ -49,6 +49,8 @@ import Menu from "../assets/icons/menu.svg";
 import Success from "../assets/icons/success.svg";
 import Error from "../assets/icons/error.svg";
 import Warning from "../assets/icons/warning.svg";
+import TimeClock from "../assets/icons/timeclock.svg";
+import LayoutIcon from "../assets/icons/layouticon.svg";
 import CheckMark from "../assets/icons/checkMark.svg";
 import LogoTaskTracker from "../assets/icons/Logo-rask-tracker.svg";
 import Google from "../assets/icons/flat-color-icons_google.svg";
@@ -71,6 +73,7 @@ import Checklist from "../assets/icons/Vector (7).svg";
 import AllIssues from "../assets/icons/All-Issues.svg";
 import Participants from "../assets/icons/Participants.svg";
 import Boards from "../assets/icons/Boards.svg";
+import ArrowToRightNotification from "../assets/icons/arrow-to-right-notification.svg";
 
 export const Icons = {
   Boards,
@@ -143,7 +146,10 @@ export const Icons = {
   Success,
   Error,
   Warning,
+  TimeClock,
+  LayoutIcon,
   CheckMark,
   ArrowDown,
   ArrowUp,
+  ArrowToRightNotification,
 };

@@ -11,11 +11,12 @@ import { Modal } from "../components/UI/modal/Modal";
 import { LogoutModal } from "../components/LogoutModal";
 import { PATHS } from "../utils/constants/constants";
 import { useSelector } from "react-redux";
-import { Favourites } from "../components/UI/favourites/Favourites";
+import { Notification } from "../components/notification/Notification";
 
 export const Header = ({ favourites }) => {
   const { userRole } = useSelector((state) => state.auth);
-
+  const [openNotification, setOpenNotification] = useState(false);
+  const [unreadCount, setUreadCount] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openFavourites, setOpenFavourites] = useState();
@@ -33,6 +34,9 @@ export const Header = ({ favourites }) => {
   };
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+  const handleGetCurrentBadgeAmount = (array = []) => {
+    setUreadCount(array.length);
   };
 
   return (
@@ -60,11 +64,16 @@ export const Header = ({ favourites }) => {
       <StyledEndBlock>
         <SearchInput type={"search"} placeholder={"Search"} />
         <DuoIconButtons>
-          <IconButton>
-            <Badge badgeContent={4} color="error">
+          <IconButton onClick={() => setOpenNotification(!open)}>
+            <Badge badgeContent={unreadCount} color="error">
               <Icons.Notify className="notify" />
             </Badge>
           </IconButton>
+          <Notification
+            open={openNotification}
+            onClose={() => setOpenNotification(false)}
+            onShow={handleGetCurrentBadgeAmount}
+          />
           <StyledMenu
             anchorEl={anchorEl}
             id="fade-menu"

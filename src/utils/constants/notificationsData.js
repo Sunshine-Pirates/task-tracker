@@ -1,0 +1,122 @@
+import ProfileIcon from "../../assets/images/ProfileImage.png";
+import TimerIcon from "../../assets/images/timer.png";
+export const notificationsData = [
+  {
+    id: 1,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+
+  {
+    id: 2,
+    userName: "Reminder",
+    avatar: TimerIcon,
+    read: false,
+    comment: "Was due 10 min ago",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 3,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 4,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 5,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 6,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 7,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 8,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+  {
+    id: 9,
+    userName: "Nazira Nazirova",
+    avatar: ProfileIcon,
+    read: false,
+    comment: "Moved to list Done",
+    time: "Sep 15 at 13:23 PM",
+    cardBoard: {
+      title: "Name of the column",
+      columnName: "Title on the board",
+      background: "#CBCBCB",
+    },
+  },
+];
