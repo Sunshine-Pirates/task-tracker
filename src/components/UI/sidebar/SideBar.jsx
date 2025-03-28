@@ -37,7 +37,6 @@ export const SideBar = () => {
   const handleSelectIconClick = () => {
     setShowTitles((prev) => !prev);
   };
-
   const title = "LMS";
   const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
 
@@ -84,20 +83,22 @@ export const SideBar = () => {
           </StyledCOntainerIcons>
         </StyledContainer>
       ) : (
-        <BoardWrapper onClick={() => handleSectionToggle("boards")}>
-          <BoardTitle>
-            <IconButton>
-              <Icons.Boards />
-            </IconButton>
-            <p>Boards</p>
-          </BoardTitle>
-          <BoardIcons>
-            <Icons.PlusGray />
-            <IconButton onClick={handleSelectIconClick}>
-              {showTitles ? <Icons.Up /> : <Icons.Down />}
-            </IconButton>
-          </BoardIcons>
-        </BoardWrapper>
+        <Links to={PATHS.ADMIN.ALLBOARDS}>
+          <BoardWrapper onClick={() => handleSectionToggle("boards")}>
+            <BoardTitle>
+              <IconButton>
+                <Icons.Boards />
+              </IconButton>
+              <p>Boards</p>
+            </BoardTitle>
+            <BoardIcons>
+              <Icons.PlusGray />
+              <IconButton onClick={handleSelectIconClick}>
+                {showTitles ? <Icons.Up /> : <Icons.Down />}
+              </IconButton>
+            </BoardIcons>
+          </BoardWrapper>
+        </Links>
       )}
 
       {showTitles && (
