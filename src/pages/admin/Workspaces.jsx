@@ -6,7 +6,7 @@ import { userTable } from "../../utils/constants/userTable";
 import { CreateWorkspaceModal } from "../../components/UI/CreateNewWorkspace";
 import { styled } from "@mui/material";
 
-export const AdminWorkspaces = () => {
+export const Workspaces = () => {
   const [currentData, setCurrentData] = useState(userTable);
   const [stars, setStars] = useState(currentData.map(() => false));
   const [openWorkspaceModal, setOpenWorkspaceModal] = useState(false);

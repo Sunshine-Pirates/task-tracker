@@ -12,6 +12,5 @@ export const PATHS = {
     ROOT: "/admin",
     PAGE: "/admin/admin-page",
     AllISSUESPAGE: "/admin/all-issues",
-    WORKSPACES: "/admin/workspaces",
   },
 };
