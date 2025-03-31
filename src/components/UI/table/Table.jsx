@@ -81,12 +81,7 @@ export const Table = ({ variant, columns, data, subTitle, onOpen }) => {
                   </SelectStyled>
                 </FormControlStyle>
               </div>
-              <Button
-                variant={"contained"}
-                style={{ width: "77px", height: "34px" }}
-              >
-                Create
-              </Button>
+              <CreateBtnStyled variant={"contained"}>Create</CreateBtnStyled>
             </div>
 
             <TotalIssues>
@@ -95,10 +90,43 @@ export const Table = ({ variant, columns, data, subTitle, onOpen }) => {
           </StyledTopContainer>
         ) : variant === "viewuser" ? (
           <>
-            <Title>{title}</Title>
-            <TotalIssues>
-              Total: <TotalCount>{data.length}</TotalCount>
-            </TotalIssues>
+            <StyledTopContainer>
+              <div className="first-wrapper">
+                <div className="second-wrapper">
+                  <Title>{title}</Title>
+                  <FormControlStyle
+                    variant="outlined"
+                    sx={{
+                      m: 1,
+                      minWidth: 120,
+                      margin: "0",
+                    }}
+                    size="small"
+                  >
+                    <InputLabel id="demo-select-small-label">Role</InputLabel>
+                    <SelectStyled
+                      labelId="demo-select-small-label"
+                      id="demo-select-small"
+                      value={role}
+                      label="Role"
+                      onChange={(e) => setRole(e.target.value)}
+                      IconComponent={
+                        toggleSvg ? Icons.ArrowUp : Icons.ArrowDown
+                      }
+                      onOpen={() => setToggleSvg(true)}
+                      onClose={() => setToggleSvg(false)}
+                    >
+                      <MenuItem value={"All"}>All</MenuItem>
+                      <MenuItem value={"Admin"}>Admin</MenuItem>
+                      <MenuItem value={"Member"}>Member</MenuItem>
+                    </SelectStyled>
+                  </FormControlStyle>
+                </div>
+              </div>
+              <TotalIssues>
+                Total: <TotalCount>{data.length}</TotalCount>
+              </TotalIssues>
+            </StyledTopContainer>
           </>
         ) : (
           <Title>{title}</Title>
@@ -151,11 +179,10 @@ export const Table = ({ variant, columns, data, subTitle, onOpen }) => {
   );
 };
 
-// 🔹 **Стили**
 const StyledTableContainer = styled(TableContainer)(() => ({
-  maxWidth: "calc(100% - 80px)",
+  maxWidth: "calc(100% - 40px)",
   maxHeight: "calc(100vh - 10px)",
-  margin: "16px 40px 10px 40px",
+  margin: "16px 20px 10px 10px",
   overflow: "auto",
   border: "none",
   borderRadius: "8px",
@@ -210,9 +237,9 @@ const StyledSubTitle = styled("p")(() => ({
   margin: "16px",
 }));
 const HeaderStyledTableCell = styled(TableCell)(() => ({
-  "& td": {
-    textAlign: "start",
-  },
+  padding: "0px 16px",
+  margin: 0,
+  textAlign: "start",
 }));
 const TitleWrapper = styled("div")(() => ({
   display: "flex",
@@ -255,10 +282,15 @@ const StyledTableBodyCell = styled(TableCell)(() => ({
   fontSize: "16px",
   color: "#000000",
   textAlign: "start",
+  fontWeight: "400",
   "& > div": {
     width: "100%",
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
   },
+}));
+const CreateBtnStyled = styled(Button)(() => ({
+  width: "77px",
+  height: "34px",
 }));

@@ -19,6 +19,7 @@ import { toggleSidebar } from "../../../store/sidebar/sideBarSlice";
 export const SideBar = () => {
   const dispatch = useDispatch();
   const isCollapsed = useSelector((state) => state.sidebar.isCollapsed);
+  const { userRole } = useSelector((state) => state.auth);
   const [showTitles, setShowTitles] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
@@ -147,17 +148,25 @@ export const SideBar = () => {
             <StyledNumberr variant="body2">(7)</StyledNumberr>
           </Wrapper>
         ) : (
-          <Container onClick={() => handleSectionToggle("participants")}>
-            <section>
-              <IconButton>
-                <Icons.Members />
-              </IconButton>
-              <p>Participants</p>
-            </section>
-            <StyledNumber variant="body2" color="textSecondary">
-              (7)
-            </StyledNumber>
-          </Container>
+          <Links
+            to={
+              userRole === "ADMIN"
+                ? PATHS.ADMIN.PARTICIPANTS
+                : PATHS.USER.PARTICIPANTS
+            }
+          >
+            <Container onClick={() => handleSectionToggle("participants")}>
+              <section>
+                <IconButton>
+                  <Icons.Members />
+                </IconButton>
+                <p>Participants</p>
+              </section>
+              <StyledNumber variant="body2" color="textSecondary">
+                (7)
+              </StyledNumber>
+            </Container>
+          </Links>
         )}
 
         <StyledSettings>
