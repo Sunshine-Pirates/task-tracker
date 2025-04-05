@@ -8,7 +8,9 @@ export const AddChecklist = () => {
       <StyledText>Add checklist</StyledText>
       <form>
         <StyledInput placeholder="Title" />
-        <StyledButton variant="" type="submit"> Add checklist</StyledButton>
+        <StyledButton variant="" type="submit">
+          Add checklist
+        </StyledButton>
       </form>
     </Container>
   );

@@ -72,10 +72,8 @@ const StyledSecondBlock = styled("div")(() => ({
   flexWrap: "wrap",
   gap: "10px",
 }));
-const ButtonStyled = styled(Button)(() => ({
-  width: "154px",
-  height: "34px",
-}));
+const ButtonStyled = styled(Button)(() => ({ width: "154px", height: "34px" }));
+
 const Heading3Styled = styled("h3")(() => ({
   fontWeight: "500",
   fontSize: "20px",
