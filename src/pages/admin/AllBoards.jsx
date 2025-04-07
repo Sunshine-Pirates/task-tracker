@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Board } from "../../components/UI/board/Board";
 import { AllBoardCard } from "../../components/UI/board-card/AllBoardCard";
 import { dataBoards } from "../../utils/constants/board";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../utils/constants/constants";
 
 export const AllBoards = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,16 +40,21 @@ export const AllBoards = () => {
       </StyledTopBlock>
       <StyledSecondBlock>
         {boards.map((board) => (
-          <AllBoardCard
-            {...board}
-            key={board.id}
-            onChange={() => handleToggleFavorite(board.id)}
-          />
+          <Links to={PATHS.ADMIN.INNERPAGEADMIN}>
+            <AllBoardCard
+              {...board}
+              key={board.id}
+              onChange={() => handleToggleFavorite(board.id)}
+            />
+          </Links>
         ))}
       </StyledSecondBlock>
     </MainTagStyled>
   );
 };
+const Links = styled(Link)(() => ({
+  textDecoration: "none",
+}));
 const MainTagStyled = styled("section")(() => ({
   width: "100%",
   height: "100%",
