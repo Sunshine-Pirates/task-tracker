@@ -6,6 +6,8 @@ import { AllIssues } from "../pages/admin/AllIssues";
 import { AdminPage } from "../pages/admin/AdminPage";
 import { AllBoards } from "../pages/admin/AllBoards";
 import { InnerPage } from "../pages/admin/innerPage/InnerPage";
+import { Participants } from "../pages/table-participants/Participants";
+
 export const AdminRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   return [
@@ -40,6 +42,16 @@ export const AdminRoutes = () => {
           fallBackPath={PATHS.ADMIN.ROOT}
           isAllowed={isAuthenticated}
           component={AllBoards}
+        />
+      ),
+    },
+    {
+      path: PATHS.ADMIN.PARTICIPANTS,
+      element: (
+        <PrivateRoute
+          fallBackPath={PATHS.ADMIN.ROOT}
+          isAllowed={isAuthenticated}
+          component={Participants}
         />
       ),
     },

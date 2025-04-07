@@ -41,5 +41,4 @@ export const workspaces = [
     id: "10",
     text: "LMS",
   },
-  
 ];
