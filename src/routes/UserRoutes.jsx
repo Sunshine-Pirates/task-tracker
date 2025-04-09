@@ -4,6 +4,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { UserPage } from "../pages/user/UserPage";
 import { Profile } from "../components/profile/Profile";
 import { PATHS } from "../utils/constants/constants";
+import { Participants } from "../pages/table-participants/Participants";
 
 export const UserRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -30,6 +31,16 @@ export const UserRoutes = () => {
           fallBackPath={PATHS.USER.ROOT}
           isAllowed={isAuthenticated}
           component={Profile}
+        />
+      ),
+    },
+    {
+      path: PATHS.USER.PARTICIPANTS,
+      element: (
+        <PrivateRoute
+          fallBackPath={PATHS.USER.ROOT}
+          isAllowed={isAuthenticated}
+          component={Participants}
         />
       ),
     },

@@ -8,23 +8,31 @@ import { useEffect, useState } from "react";
 import { boardImage, colors } from "../../../utils/constants/general";
 import { ColorBoard } from "./ColorBoard";
 import { ImageBoard } from "./ImageBoard";
+import { Modal } from "../modal/Modal";
+import { Button } from "../Button";
 
 export const MenuBoard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [openImage, setOpenImage] = useState(false);
   const [openColors, setOpenColors] = useState(false);
+  const [openArchive, setOpenArchiv] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [selectedBackground, setSelectedBackground] = useState("");
 
   const isModalOpen = searchParams.get("changeBg") === "true";
   const isImageOpen = searchParams.get("image") === "true";
   const isColorsOpen = searchParams.get("colors") === "true";
+  const inArchive = searchParams.get("archive") === "true";
+  const inDelete = searchParams.get("delete") === "true";
 
   useEffect(() => {
     setIsModalVisible(isModalOpen);
     setOpenImage(isImageOpen);
     setOpenColors(isColorsOpen);
-  }, [isModalOpen, isImageOpen, isColorsOpen]);
+    setOpenArchiv(inArchive);
+    setOpenDelete(inDelete);
+  }, [isModalOpen, isImageOpen, isColorsOpen, inArchive, inDelete]);
 
   useEffect(() => {
     if (selectedBackground) {
@@ -73,6 +81,16 @@ export const MenuBoard = () => {
     setSelectedBackground(background);
   };
 
+  const openArchiveHandler = () => {
+    setSearchParams({ archive: "true" });
+    setOpenArchiv(true);
+  };
+
+  const openDeleteHandler = () => {
+    setSearchParams({ delete: "true" });
+    setOpenDelete(true);
+  };
+
   return (
     <MainBlock>
       {!isModalVisible && (
@@ -87,10 +105,34 @@ export const MenuBoard = () => {
               <p>Change the background</p>
               <img src={Foto16} alt="" />
             </ImageBlock>
-            <p>In archive</p>
-            <p>Delete this board</p>
+            <p onClick={openArchiveHandler}>In archive</p>
+            <p onClick={openDeleteHandler}>Delete this board</p>
           </TextBlock>
         </MainContainer>
+      )}
+
+      {openArchive && (
+        <Modal isOpen={openArchive} onClose={() => setOpenArchiv(false)}>
+          <ModalStyled>
+            <p>Вы точно хотите архивировать?</p>
+            <ButtonStyled>
+              <Button variant="cancel">Cancel</Button>
+              <Button variant="danger">Archive</Button>
+            </ButtonStyled>
+          </ModalStyled>
+        </Modal>
+      )}
+
+      {openDelete && (
+        <Modal isOpen={openDelete} onClose={() => setOpenDelete(false)}>
+          <ModalStyled>
+            <p>Вы точно хотите удалить?</p>
+            <ButtonStyled>
+              <Button variant="cancel">Cancel</Button>
+              <Button variant="danger">Delete</Button>
+            </ButtonStyled>
+          </ModalStyled>
+        </Modal>
       )}
 
       {isModalVisible &&
@@ -148,6 +190,7 @@ const MainContainer = styled("div")(() => ({
 
   "& p:hover": {
     backgroundColor: "#F2F2F2",
+    borderRadius: "10px",
   },
 }));
 
@@ -167,6 +210,7 @@ const MenuBlock = styled("div")(() => ({
 const TextBlock = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
+  cursor: "pointer",
 }));
 
 const ImageBlock = styled("div")(() => ({
@@ -232,4 +276,16 @@ const BgChangeStyled = styled("div")(() => ({
     borderRadius: "8px",
     cursor: "pointer",
   },
+}));
+
+const ButtonStyled = styled("div")(() => ({
+  display: "flex",
+  gap: "16px",
+}));
+
+const ModalStyled = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: "24px",
+  padding: "0 10px 0 10px",
 }));

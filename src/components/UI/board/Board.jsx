@@ -7,10 +7,11 @@ import { Icons } from "../../../assets";
 import { CheckMark, ColorBoard } from "./ColorBoard";
 import { ImageBoard } from "./ImageBoard";
 
-export const Board = ({ open, onClose }) => {
+export const Board = ({ open, onClose, setBoards }) => {
   const [openImage, setOpenImage] = useState(false);
   const [openColors, setOpenColors] = useState(false);
   const [selectedBackground, setSelectedBackground] = useState("");
+  const [createTitle, setCreateTitle] = useState("");
 
   useEffect(() => {
     if (selectedBackground) {
@@ -39,13 +40,32 @@ export const Board = ({ open, onClose }) => {
     setSelectedBackground(background);
   };
 
+  const handleCreateNewBoardCard = () => {
+    if (!createTitle || !selectedBackground) return;
+    const newBoard = {
+      id: Date.now().toString(),
+      title: createTitle,
+      background: selectedBackground,
+      isFavorite: false,
+    };
+
+    setBoards((boards) => [...boards, newBoard]);
+    setCreateTitle("");
+  };
+  const handleCreateTitle = (event) => {
+    setCreateTitle(event.target.value);
+  };
   return (
     <MainBlock open={open} onClose={onClose}>
       {!openImage && !openColors && (
         <MainContainer>
           <h6>Create new board</h6>
           <BgStyle>
-            <Input placeholder="Board title*" />
+            <Input
+              placeholder="Board title*"
+              onChange={handleCreateTitle}
+              value={createTitle}
+            />
             <p>Add background</p>
             <Block>
               <TextBlock>
@@ -96,8 +116,12 @@ export const Board = ({ open, onClose }) => {
             </Block>
 
             <ButtonBlock>
-              <StyledBtn variant="cancel">Cancel</StyledBtn>
-              <StyledBtn variant="contained">Create board</StyledBtn>
+              <StyledBtn variant="cancel" onClick={onClose}>
+                Cancel
+              </StyledBtn>
+              <StyledBtn variant="contained" onClick={handleCreateNewBoardCard}>
+                Create board
+              </StyledBtn>
             </ButtonBlock>
           </BgStyle>
         </MainContainer>

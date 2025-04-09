@@ -4,6 +4,7 @@ import { SideBar } from "../components/UI/sidebar/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../store/sidebar/sideBarSlice";
 import { styled } from "@mui/material";
+import { favourites } from "../utils/constants/favourite";
 
 export const AdminLayout = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ export const AdminLayout = () => {
 
   return (
     <>
-      <Header />
+      <Header favourites={favourites} />
       <SideBar
         isCollapsed={isCollapsed}
         toggleSidebar={() => dispatch(toggleSidebar())}

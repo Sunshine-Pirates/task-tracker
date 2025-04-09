@@ -103,8 +103,8 @@ export const BoardCard = () => {
         <CreateCardModal />
       </Modal>
       <Modal isOpen={newTitle} onClose={() => setNewTitle(false)}>
-             <CreateNewTitle />
-            </Modal>
+        <CreateNewTitle />
+      </Modal>
     </List>
   );
 };

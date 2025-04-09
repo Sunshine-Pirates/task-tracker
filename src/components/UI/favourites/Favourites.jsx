@@ -3,9 +3,9 @@ import Menu from "@mui/material/Menu";
 import { Icons } from "../../../assets";
 import { favourites } from "../../../utils/constants/favourite";
 
-export const Favourites = ({ open, handleClose }) => {
+export const Favourites = ({ onOpen, handleClose }) => {
   return (
-    <StyledMenu open={open} onClose={handleClose}>
+    <StyledMenu open={onOpen} onClose={handleClose}>
       <p>Favourites</p>
       {favourites.map((item) => (
         <MenuItem key={item.id}>
