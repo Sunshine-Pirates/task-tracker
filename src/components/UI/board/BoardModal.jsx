@@ -1,11 +1,15 @@
 import { keyframes, styled } from "@mui/material";
 
-export const BoardModal = ({ children, onClick }) => {
-  return <ContainerModal onClick={onClick}>{children}</ContainerModal>;
+export const BoardModal = ({ children, onClick, width }) => {
+  return (
+    <ContainerModal onClick={onClick} width={width}>
+      {children}
+    </ContainerModal>
+  );
 };
 
-const ContainerModal = styled("div")(() => ({
-  width: "293px",
+const ContainerModal = styled("div")(({ width }) => ({
+  width: width || "293px",
   backgroundColor: "white",
   display: "flex",
   flexDirection: "column",

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Board } from "../../components/UI/board/Board";
 import { AllBoardCard } from "../../components/UI/board-card/AllBoardCard";
 import { dataBoards } from "../../utils/constants/board";
+import { MenuBoard } from "../../components/UI/board/MenuBoard";
 
 export const AllBoards = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,7 @@ export const AllBoards = () => {
     <MainTagStyled>
       <StyledTopBlock>
         <Heading3Styled>All boards</Heading3Styled>
+        <MenuBoard />
 
         <ButtonStyled
           variant={"contained"}
