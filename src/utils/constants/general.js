@@ -17,7 +17,7 @@ import Foto16 from "../../assets/images/mountain16.avif";
 import User1 from "../../assets/images/Ellipse 2.png";
 import User2 from "../../assets/images/user-2.png";
 import User3 from "../../assets/images/user-3.png";
-import User4 from "../../assets/images/Ellipse 4.png";
+// import User4 from "../../assets/images/Ellipse 4.png";
 
 export const boardImage = [
   { image: Foto1 },
@@ -66,5 +66,12 @@ export const userBoard = [
   { img: User3 },
   { img: User1 },
   { img: User2 },
-  { img: User4, title: "+8" },
+  { img: User3 },
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User3 },
 ];

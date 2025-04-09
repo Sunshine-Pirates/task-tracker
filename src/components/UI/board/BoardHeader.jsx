@@ -20,15 +20,17 @@ export const BoardHeader = () => {
       <Container>
         <Block>
           <ImageBlock>
-            {userBoard.map((item, index) => (
-              <div key={index} className={item.title ? "extra" : ""}>
-                {item.title ? (
-                  <span>{item.title}</span>
-                ) : (
-                  <img src={item.img} alt="" />
-                )}
+            {userBoard.slice(0, 8).map((item, index) => (
+              <div key={index}>
+                <img src={item.img} alt="" />
               </div>
             ))}
+
+            {userBoard.length > 8 && (
+              <div className="extra">
+                <span>{`+${userBoard.length - 8}`}</span>
+              </div>
+            )}
           </ImageBlock>
           <Icon>
             <p>Invite</p>
