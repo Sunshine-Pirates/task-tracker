@@ -64,7 +64,6 @@ import Month from "../assets/icons/Month.svg";
 import ListIcon from "../assets/icons/List.svg";
 import Peopleicon from "../assets/icons/People Icon.svg";
 import UiAndKeyBoard from "../assets/icons/UI and Keyboard Icon.svg";
-import Editt from "../assets/icons/EditText.svg";
 import System from "../assets/icons/System.svg";
 import Memberss from "../assets/icons/State=Member.svg";
 import Estimation from "../assets/icons/System (1).svg";
@@ -74,6 +73,10 @@ import AllIssues from "../assets/icons/All-Issues.svg";
 import Participants from "../assets/icons/Participants.svg";
 import Boards from "../assets/icons/Boards.svg";
 import ArrowToRightNotification from "../assets/icons/arrow-to-right-notification.svg";
+import EditText from "../assets/icons/EditText.svg";
+import BluePlus from "../assets/icons/BluePlus.svg";
+import Filter from "../assets/icons/filter.svg";
+import Menu2 from "../assets/icons/menu-2.svg";
 
 export const Icons = {
   Boards,
@@ -84,7 +87,6 @@ export const Icons = {
   Estimation,
   Memberss,
   System,
-  Editt,
   UiAndKeyBoard,
   Peopleicon,
   ListIcon,
@@ -152,4 +154,8 @@ export const Icons = {
   ArrowDown,
   ArrowUp,
   ArrowToRightNotification,
+  EditText,
+  BluePlus,
+  Filter,
+  Menu2,
 };

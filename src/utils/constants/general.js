@@ -14,6 +14,10 @@ import Foto13 from "../../assets/images/mountain13.jpg";
 import Foto14 from "../../assets/images/mountain14.avif";
 import Foto15 from "../../assets/images/mountain15.avif";
 import Foto16 from "../../assets/images/mountain16.avif";
+import User1 from "../../assets/images/Ellipse 2.png";
+import User2 from "../../assets/images/user-2.png";
+import User3 from "../../assets/images/user-3.png";
+// import User4 from "../../assets/images/Ellipse 4.png";
 
 export const boardImage = [
   { image: Foto1 },
@@ -51,4 +55,23 @@ export const colors = [
   { bg: "#6ED4EB" },
   { bg: "#6E87EB" },
   { bg: "#B76EEB" },
+];
+
+export const userBoard = [
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User1 },
+  { img: User2 },
+  { img: User3 },
+  { img: User3 },
 ];

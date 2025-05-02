@@ -1,9 +1,10 @@
 import { styled } from "@mui/system";
-import { Button } from "../../components/UI/Button";
+// import { Button } from "../../components/UI/Button";
 import { useState } from "react";
 import { Board } from "../../components/UI/board/Board";
 import { AllBoardCard } from "../../components/UI/board-card/AllBoardCard";
 import { dataBoards } from "../../utils/constants/board";
+import { BoardHeader } from "../../components/UI/board/BoardHeader";
 
 export const AllBoards = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,15 +19,17 @@ export const AllBoards = () => {
   return (
     <MainTagStyled>
       <StyledTopBlock>
-        <Heading3Styled>All boards</Heading3Styled>
+        {/* <Heading3Styled>All boards</Heading3Styled> */}
 
-        <ButtonStyled
+        <BoardHeader />
+
+        {/* <ButtonStyled
           variant={"contained"}
           type={"button"}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           Create new board
-        </ButtonStyled>
+        </ButtonStyled> */}
         {isOpen ? (
           <Board
             open={isOpen}
@@ -72,11 +75,9 @@ const StyledSecondBlock = styled("div")(() => ({
   flexWrap: "wrap",
   gap: "10px",
 }));
-const ButtonStyled = styled(Button)(() => ({
-  width: "154px",
-  height: "34px",
-}));
-const Heading3Styled = styled("h3")(() => ({
-  fontWeight: "500",
-  fontSize: "20px",
-}));
+// const ButtonStyled = styled(Button)(() => ({ width: "154px", height: "34px" }));
+
+// const Heading3Styled = styled("h3")(() => ({
+//   fontWeight: "500",
+//   fontSize: "20px",
+// }));
