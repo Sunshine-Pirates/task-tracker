@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { Divider, Menu, MenuItem, styled } from "@mui/material";
 import { title } from "../../../utils/constants/board-card";
 import { Icons } from "../../../assets";
 import { useState } from "react";
@@ -17,6 +17,16 @@ export const BoardCard = () => {
   const [visibleItem, setVisibleItem] = useState(null);
   const [openAddCardModal, setOpenCardModal] = useState(false);
   const [newTitle, setNewTitle] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleNewTite = () => {
     setNewTitle(true);
   };
@@ -34,7 +44,30 @@ export const BoardCard = () => {
 
   return (
     <List>
-      <Text>Title</Text>
+      <WrapperTitle>
+        <Text>Title</Text>
+        <div style={{ position: "relative" }}>
+          <StyledContainerIconss onClick={handleMenuOpen}>
+            <Iconss />
+            <Iconss />
+            <Iconss />
+          </StyledContainerIconss>
+          <StyledMenu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <StyledActions>Actions</StyledActions>
+            <MenuItem>Add card</MenuItem>
+            <MenuItem>Delete a column</MenuItem>
+            <StyledDivider />
+            <MenuItem>Delete all cards in this list</MenuItem>
+            <MenuItem>Archive all cards in this list</MenuItem>
+            <StyledDivider />
+            <MenuItem>Archive this column</MenuItem>
+          </StyledMenu>
+        </div>
+      </WrapperTitle>
       {title.length > 0 ? (
         title.map((item) => (
           <StyledItem key={item.id} onClick={handleNewTite}>
@@ -108,6 +141,42 @@ export const BoardCard = () => {
     </List>
   );
 };
+const StyledDivider = styled(Divider)(() => ({
+  width: "227px",
+  margin: "0 auto",
+}));
+const StyledMenu = styled(Menu)(() => ({
+  "& .css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper": {
+    width: "267px",
+    borderRadius: "8px",
+  },
+}));
+const StyledActions = styled("p")(() => ({
+  textAlign: "center",
+  paddingTop: "12px",
+  paddingBottom: "6px",
+}));
+
+const WrapperTitle = styled("div")(() => ({
+  width: "254px",
+  height: "24px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+const StyledContainerIconss = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "space-around",
+  width: "20px",
+  cursor: "pointer",
+}));
+const Iconss = styled("section")(() => ({
+  width: "4.5px",
+  height: "4.5px",
+  backgroundColor: "#111111",
+  borderRadius: "50%",
+}));
+
 const StyledChecklist = styled("div")(() => ({
   width: "76px",
   fontSize: "12px",
@@ -186,7 +255,7 @@ const StyledItem = styled("li")(() => ({
 const Text = styled("p")(() => ({
   fontWeight: "500",
   color: "#000000",
-  paddingLeft: "16px",
+  paddingLeft: "8px",
 }));
 
 const StyledColors = styled("div")(() => ({

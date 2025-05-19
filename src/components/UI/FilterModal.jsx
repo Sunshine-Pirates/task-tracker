@@ -6,8 +6,7 @@ import { Checkbox } from "./checkbox/Checkbox";
 import { Button } from "./Button";
 import { Icons } from "../../assets";
 import { btn_data, filter_data } from "../../utils/constants/filterModalData";
-export const FilterModal = () => {
-  const [open, setOpen] = useState(false);
+export const FilterModal = ({ handleCloseFilter }) => {
   const [checkStates, setCheckStates] = useState(
     [...filter_data, ...btn_data].map(() => false)
   );
@@ -20,18 +19,13 @@ export const FilterModal = () => {
       console.log(`Text: ${text}`);
     }
   };
-  const handleOpenOrCloseModal = () => {
-    setOpen((prev) => !prev);
-  };
   return (
     <div>
-      <button onClick={handleOpenOrCloseModal}>filter btn</button>
-
-      <BaseModal open={open} onClose={handleOpenOrCloseModal}>
+      <BaseModal open={open} onClose={handleCloseFilter}>
         <StyledHeader>
           <InnerHeaderStyle>
             Filter
-            <IconButton onClick={handleOpenOrCloseModal}>
+            <IconButton onClick={handleCloseFilter}>
               <Icons.Cancel />
             </IconButton>
           </InnerHeaderStyle>
@@ -78,7 +72,7 @@ export const FilterModal = () => {
                         backgroundColor: item.backgrounColor,
                       }}
                     >
-                      {item.text}
+                      {/* {item.text} */}
                     </StyledButton>
                   )}
                 </ListStyled>

@@ -15,5 +15,6 @@ export const PATHS = {
     AllISSUESPAGE: "/admin/all-issues",
     PARTICIPANTS: "/admin/participants",
     ALLBOARDS: "/admin/all-boards",
+    INNERPAGEADMIN: "/admin/inner-page",
   },
 };
