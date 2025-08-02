@@ -1,8 +1,15 @@
-# React + Vite
+# Task Tracker
+A web-based task management application designed to help teams and individuals organize, track, and manage their work efficiently. The system provides two user roles with different access levels:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## User
+Create, edit, and delete personal tasks.
+Set due dates and priorities.
+Track task progress.
+View assigned tasks.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Administrator
+Manage all tasks across the system.
+Assign tasks to users.
+Edit or delete any task.
+Monitor overall project progress.
+Manage user accounts and permissions.
